@@ -20,8 +20,47 @@ module.exports = {
             presets: ['@babel/preset-env']
           }
         }
+      }, {
+        test: /\.module\.s(a|c)ss$/,
+        loader: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[name]__[local]___[hash:base64:5]',
+              camelCase: true,
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
+      },
+      {
+        test: /\.s(a|c)ss$/,
+        exclude: /\.module.(s(a|c)ss)$/,
+        loader: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
       }
     ]
+  },
+  resolve: {
+    alias: {
+      react: path.resolve('./node_modules/react')
+    }
   },
   externals: {
     react: 'commonjs react'

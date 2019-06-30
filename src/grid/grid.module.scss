@@ -1,0 +1,13 @@
+.rowElement {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+  box-sizing: border-box;
+}
+
+.column {
+  flex: 50%;
+  max-width: 50%;
+  padding: 0 4px;
+  box-sizing: border-box;
+}
