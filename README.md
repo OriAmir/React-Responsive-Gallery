@@ -12,6 +12,13 @@ npm install react-responsive-gallery
 
 <br/>
 
+
+<h3>DEMO</h3>
+<a href="https://react-responsive-gallery-demo.herokuapp.com" target="_blank"> Try out the live gallery demo .</a> 
+<i>(it's take few seconds until app is loading)</i><br/>
+* Some of the gallery features are not available in the demo : Cols padding , imagesStyle , image different order in different size groups .
+
+<br/>
 <h3>Basic using example</h3>
  
 ```
@@ -105,11 +112,6 @@ You can change the group sizes by your preferences , the default group values ar
 <br/><br/>
 
 
-<h3>DEMO</h3>
-You can Play with the library HERE . <br/>
-* Some of the gallery features are not available in the demo : Cols padding , imagesStyle , image different order in different size groups .
-
-<br/><br/>
 
 <h3>Author</h4>
 <a href="https://github.com/OriAmir">Ori Amir</a>
