@@ -1,24 +1,25 @@
-# React-Responsive-Gallery
+# React-Responsive-Gallery - Responsive Gallery for react application.
 
-This package is a simple responsive gallery for react applications.<br/>
-The gallery is custom and responsive for different sizes and properties.
-
+<b>Main features</b><br/>
+- Custom for every screen width size.
+- Dynamic properties for every screen width size.
+- Simple to use.
 <br/>
+
 <h3>Getting started</h3>
-
+ 
 ```
-npm install react-responsive-gallery
+ npm install react-responsive-gallery
 ```
 
 <br/>
-
-
 <h3>DEMO</h3>
 <a href="https://react-responsive-gallery-demo.herokuapp.com" target="_blank"> Try out the live gallery demo .</a> 
 <i>(it's take few seconds until app is loading)</i><br/>
-* Some of the gallery features are not available in the demo : Cols padding , imagesStyle , image different order in different size groups .
+* Some of the gallery features are not available in the live demo : cols padding , imagesStyle and images order(s,m,l).
 
-<br/>
+
+<br/><br/>
 <h3>Basic using example</h3>
  
 ```
@@ -65,13 +66,12 @@ render(
       );
 ```
 
-<br/><br/>
-
+<br/>
  
 <h3>Width groups explanation</h3>
 
-The Gallery has 6 different of width groups: <b>xs, s, m, l, xl, xxl</b> <br/>
-The Gallery will be render when the group will change.<br/>
+The Gallery has 6 different of width groups: <b>xs, s, m, l, xl, xxl .</b> <br/>
+The Gallery renders again when the group changes.<br/>
 You can change the group sizes by your preferences , the default group values are:<br/><br/>
 - <b>xs:</b> From 0 to 420px<br/><br/>
 - <b>s:</b> From 420px to 600px<br/><br/>
@@ -88,12 +88,12 @@ You can change the group sizes by your preferences , the default group values ar
 
 | Property  | Type | Description | Default value  | is Required
 | :------------- | :------------- | :------------- | :------------- | :------------- 
-| images |  Array | Array of images to display at the gallery. [Read more here](#images-options) |  None   | <b>Required</b> 
+| images |  Array | Array of images to display in the gallery. [Read more here](#images-options) |  None   | <b>Required</b> 
 | screenWidthSizes  | Object  | Gallery groups width break points. | ``{xs: 420,s: 600,m: 768,l: 992,xl: 1200}`` | Optional
-| numOfImagesPerRow  | Object  | Number of images per by the width groups. | ``{xs: 1,s: 2,m: 3,l: 3,xl: 4 xxl:5}`` | Optinal
-| imageMaxWidth  | Object  | Image max width(<b>in %</b> ) from the place by the width groups.  | ``{xs: 100,s: 100,m: 100,l: 100,xl: 100,xxl:100}`` | Optional
-| colsPadding | Object  | Padding between images cols (<b>in px</b>) by the width groups. | ``{xs: 4,s: 4,m: 4,l: 4,xl: 4,xxl:4}`` | Optional
-| imagesPaddingBottom | Object  | Padding bottom between images(<b>in px</b>) by the width groups. | ``{xs: 4,s: 4,m: 4,l: 4,xl: 4,xxl:4}`` | Optional
+| numOfImagesPerRow  | Object  | Number of images for row by the width groups. | ``{xs: 1,s: 2,m: 3,l: 3,xl: 4 xxl:5}`` | Optinal
+| imageMaxWidth  | Object  | Image max width <b>in %</b> by the width groups.  | ``{xs: 100,s: 100,m: 100,l: 100,xl: 100,xxl:100}`` | Optional
+| colsPadding | Object  | Padding between images cols <b>in px</b> by the width groups. | ``{xs: 4,s: 4,m: 4,l: 4,xl: 4,xxl:4}`` | Optional
+| imagesPaddingBottom | Object  | Padding bottom between images <b>in px</b> by the width groups. | ``{xs: 4,s: 4,m: 4,l: 4,xl: 4,xxl:4}`` | Optional
 | imagesStyle | Object / String  | Style that will apply on all the images on gallery | None | Optional
 
 
@@ -103,20 +103,22 @@ You can change the group sizes by your preferences , the default group values ar
 
 | Property  | Type | Description  | is Required
 | :------------- | :------------- | :------------- | :-------------
-| src | String | Image src url   | <b>Required</b> 
+| src | String | Image source url   | <b>Required</b> 
 | orderS |  Number  | Image order in small group sizes(xs, s)   |  Optional
 | orderM  | Number| Image order in meduim group sizes (m,l) |Optional
 | orderL  |  Number | Image order in large group sizes(xl,xxl) | Optional
 | imgClassName | Object / String | Image style object/string for styling specific image | Optional
 
-<br/><br/>
-
-
+<br/>
 
 <h3>Author</h4>
-<a href="https://github.com/OriAmir">Ori Amir</a>
+<a target="_blank" href="https://github.com/OriAmir">Ori Amir</a>
 
-<br/><br/>
+<br/>
 
+<h3>Bugs and Feedback</h4>
+For bugs, questions and discussions please use the <a href="https://github.com/OriAmir/React-Responsive-Gallery/issues" target="_blank">Github Issues.</a>
+
+<br/>
 <h3>License</h4>
 React Responsive Gallery is free to use for personal and commercial projects under the MIT License. 
