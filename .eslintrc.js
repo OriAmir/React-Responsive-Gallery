@@ -27,7 +27,9 @@ module.exports = {
      "react/require-default-props": 0,
      "react/jsx-uses-react": "error",
      "no-debugger": 0,
-     "react/forbid-prop-types":0
+     "react/forbid-prop-types":0,
+     "import/no-named-as-default": 0,
+     "import/prefer-default-export": 0
   },
 };
 
