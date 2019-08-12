@@ -4,6 +4,7 @@
 - Custom for every screen width size.
 - Dynamic properties for every screen width size.
 - Simple to use.
+- Work with lightbox for image display.
 <br/>
 
 <h3>Getting started</h3>
@@ -95,6 +96,8 @@ You can change the group sizes by your preferences , the default group values ar
 | colsPadding | Object  | Padding between images cols <b>in px</b> by the width groups. | ``{xs: 4,s: 4,m: 4,l: 4,xl: 4,xxl:4}`` | Optional
 | imagesPaddingBottom | Object  | Padding bottom between images <b>in px</b> by the width groups. | ``{xs: 4,s: 4,m: 4,l: 4,xl: 4,xxl:4}`` | Optional
 | imagesStyle | Object / String  | Style that will apply on all the images on gallery | None | Optional
+| useLightBox | Boolean  | Use lightbox when clicking on image | false | Optional
+| lightBoxAdditionalProps | object  | Additional props for the lightbox component. [Read more here](#images-options) | false | Optional
 
 
 <br/><br/>
@@ -108,6 +111,16 @@ You can change the group sizes by your preferences , the default group values ar
 | orderM  | Number| Image order in meduim group sizes (m,l) |Optional
 | orderL  |  Number | Image order in large group sizes(xl,xxl) | Optional
 | imgClassName | Object / String | Image style object/string for styling specific image | Optional
+| lightboxCaption | String | Lightbox image caption | Optional
+| lightboxTitle | String | Lightbox image title | Optional
+
+
+<br/><br/>
+
+<h3>Lightbox </h3>
+You can use lightbox when clicking on one of the images that display on the gallery.
+For the lightbox component library we use the <a target="_blank" href="https://www.npmjs.com/package/react-image-lightbox">react-image-lightbox library</a>.<br/>
+You can use the props from this library and to send them as prop to library called <b>'lightBoxAdditionalProps'</b> ,for image caption and title you can pass that on img props. 
 
 <br/>
 
