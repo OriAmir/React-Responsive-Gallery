@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import shortid from 'shortid';
-// import styles from './app.module.scss';
+import ImagesLightBox from './images-light-box';
+import { lightBoxReducer } from './reducers';
 import { Row } from './grid';
 import useScreenDimensions from './hooks/use-screen-dimensions';
 import {
@@ -13,6 +14,7 @@ import {
   imagesPaddingBottom as defaultImagesPaddingBottom
 } from './constants/responsive';
 import { getGallerySizes, sortImagesArrayByOrder } from './utils/gallery';
+import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
 
 const ImgElment = styled.img.attrs(props => ({
   src: props.imageSrc
@@ -20,6 +22,9 @@ const ImgElment = styled.img.attrs(props => ({
   max-width: ${props => props.imgMaxWidth}%;
   height: auto;
   margin-bottom: ${props => props.paddingBottom || 0}px;
+  ${props => props.useLightBox && css`
+  cursor: pointer; 
+  `}
 `;
 
 const ColElement = styled.div.attrs(props => ({
@@ -33,7 +38,7 @@ padding: ${props => props.colPadding || 0}px;
 
 const ResponsiveGallery = ({
   images, screenWidthSizes, numOfImagesPerRow, imagesMaxWidth,
-  colsPadding, imagesPaddingBottom, imagesStyle
+  colsPadding, imagesPaddingBottom, imagesStyle, useLightBox, lightBoxAdditionalProps
 }) => {
   const { width } = useScreenDimensions(screenWidthSizes);
   const gallerySizes = getGallerySizes(width, {
@@ -43,7 +48,10 @@ const ResponsiveGallery = ({
     colsPadding,
     imagesPaddingBottom
   });
-
+  const [lightBoxVal, lightBoxDispatch] = useReducer(lightBoxReducer, {
+    photoIndex: 0,
+    isOpen: false
+  });
   const sorted = sortImagesArrayByOrder(images, width, screenWidthSizes);
 
   const imagesCols = sorted.reduce((total, cur, index) => (
@@ -56,27 +64,45 @@ const ResponsiveGallery = ({
       : { ...total, [index % gallerySizes.numOfImagePerRow]: [cur] }), {});
 
   return (
-    <Row>
-      {Object.keys(imagesCols).map(key => (
-        <ColElement
-          key={shortid.generate()}
-          colSize={100 / gallerySizes.numOfImagePerRow}
-          colPadding={gallerySizes.colsPadding}
-        >
-          {imagesCols[key].map(img => (
-            <ImgElment
-              key={shortid.generate()}
-              imageSrc={img.src}
-              imgMaxWidth={gallerySizes.imagesMaxWidth}
-              paddingBottom={gallerySizes.imagesPaddingBottom}
-              className={`${imagesStyle} ${img.imgClassName || ''}`}
-            />
-          ))
-          }
-        </ColElement>
-      ))
+    <>
+      {useLightBox && lightBoxVal.isOpen
+     && (
+     <ImagesLightBox
+       imagesLightbox={sorted}
+       photoIndex={lightBoxVal.photoIndex}
+       lightBoxDispatch={lightBoxDispatch}
+       lightBoxAdditionalProps={lightBoxAdditionalProps}
+     />
+     )
       }
-    </Row>
+      <Row>
+        {Object.keys(imagesCols).map((key, colIndex) => (
+          <ColElement
+            key={shortid.generate()}
+            colSize={100 / gallerySizes.numOfImagePerRow}
+            colPadding={gallerySizes.colsPadding}
+          >
+            {imagesCols[key].map((img, imgIndex) => (
+              <ImgElment
+                key={shortid.generate()}
+                imageSrc={img.src}
+                imgMaxWidth={gallerySizes.imagesMaxWidth}
+                paddingBottom={gallerySizes.imagesPaddingBottom}
+                className={`${imagesStyle} ${img.imgClassName || ''}`}
+                useLightBox={useLightBox}
+                onClick={() => useLightBox && lightBoxDispatch({
+                  type: 'photoIndex_Open',
+                  photoIndex: imgIndex === 0
+                    ? colIndex : colIndex + (imgIndex * gallerySizes.numOfImagePerRow)
+                })}
+              />
+            ))
+          }
+          </ColElement>
+        ))
+      }
+      </Row>
+    </>
   );
 };
 
@@ -90,7 +116,9 @@ ResponsiveGallery.propTypes = {
   imagesStyle: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object
-  ])
+  ]),
+  useLightBox: PropTypes.bool,
+  lightBoxAdditionalProps: PropTypes.object
 };
 
 ResponsiveGallery.defaultProps = {
@@ -99,7 +127,8 @@ ResponsiveGallery.defaultProps = {
   imagesMaxWidth: defaultImagesMaxWidth,
   colsPadding: defaultColsPadding,
   imagesPaddingBottom: defaultImagesPaddingBottom,
-  imagesStyle: ''
+  imagesStyle: '',
+  useLightBox: false
 };
 
 export default ResponsiveGallery;

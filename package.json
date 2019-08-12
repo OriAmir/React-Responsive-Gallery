@@ -47,6 +47,7 @@
   },
   "dependencies": {
     "prop-types": "^15.7.2",
+    "react-image-lightbox": "^5.1.0",
     "shortid": "^2.2.14",
     "styled-components": "^4.2.0",
     "webpack": "^4.29.6"
