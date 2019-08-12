@@ -116,13 +116,13 @@ You can change the group sizes by your preferences , the default group values ar
 
 <br/>
 
-<h3>Lightbox </h3>
+<h3>Using Lightbox </h3>
 You can use lightbox when clicking on one of the images that display on the gallery.
 For the lightbox component library we use the <a target="_blank" href="https://www.npmjs.com/package/react-image-lightbox">react-image-lightbox library</a>.<br/>
 You can sent the props from this library and to send them as prop to library called <b>'lightBoxAdditionalProps'</b>.
 If you want to pass image caption and title you can pass that via the img props. 
 
-<br/>
+<br/><br/>
 
 <h3>Author</h4>
 <a target="_blank" href="https://github.com/OriAmir">Ori Amir</a>
