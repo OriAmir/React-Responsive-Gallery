@@ -1,12 +1,19 @@
 
 import React from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types'; // ES6
-import styles from './grid.module.scss';
+
+const StyledDiv = styled.div`
+display: flex;
+flex-wrap: wrap;
+padding: 0 4px;
+box-sizing: border-box;
+`;
 
 const Row = ({ children }) => (
-  <div className={styles.rowElement}>
+  <StyledDiv>
     {children}
-  </div>
+  </StyledDiv>
 );
 
 Row.propTypes = {
