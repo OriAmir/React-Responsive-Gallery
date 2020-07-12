@@ -12,6 +12,11 @@
 ```
  npm install react-responsive-gallery
 ```
+or
+
+```
+ yarn add react-responsive-gallery
+```
 
 <br/>
 <h3>DEMO</h3>
