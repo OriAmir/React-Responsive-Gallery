@@ -3,7 +3,7 @@ const screenWidthSizes = {
   s: 600,
   m: 768,
   l: 992,
-  xl: 1200
+  xl: 1200,
 };
 
 const colsPadding = {
@@ -12,7 +12,7 @@ const colsPadding = {
   m: 4,
   l: 4,
   xl: 4,
-  xxl: 4
+  xxl: 4,
 };
 
 const imagesPaddingBottom = {
@@ -21,7 +21,7 @@ const imagesPaddingBottom = {
   m: 4,
   l: 4,
   xl: 4,
-  xxl: 4
+  xxl: 4,
 };
 
 const imagesMaxWidth = {
@@ -30,7 +30,7 @@ const imagesMaxWidth = {
   m: 100,
   l: 100,
   xl: 100,
-  xxl: 100
+  xxl: 100,
 };
 
 const numOfImagesPerRow = {
@@ -39,9 +39,13 @@ const numOfImagesPerRow = {
   m: 3,
   l: 3,
   xl: 4,
-  xxl: 5
+  xxl: 5,
 };
 
 export {
-  screenWidthSizes, colsPadding, imagesPaddingBottom, imagesMaxWidth, numOfImagesPerRow
+  screenWidthSizes,
+  colsPadding,
+  imagesPaddingBottom,
+  imagesMaxWidth,
+  numOfImagesPerRow,
 };

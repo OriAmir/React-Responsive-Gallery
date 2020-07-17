@@ -1,26 +1,44 @@
-import { getSizeGroup } from './utils/gallery';
+import {
+  getSizeGroup,
+  getOrderGroup,
+  isWidthGroupsDifferents,
+} from "./utils/gallery";
 
+const screenWidthSizes = {
+  xs: 400,
+  s: 550,
+  m: 750,
+  l: 900,
+  xl: 1210,
+};
 
-test('width of 400 to be in xs group', () => {
-  expect(getSizeGroup(400)).toBe('xs');
+test("width size group return correctly", () => {
+  expect(getSizeGroup(screenWidthSizes.xs)).toBe("xs");
+  expect(getSizeGroup(screenWidthSizes.s)).toBe("s");
+  expect(getSizeGroup(screenWidthSizes.m)).toBe("m");
+  expect(getSizeGroup(screenWidthSizes.l)).toBe("l");
+  expect(getSizeGroup(screenWidthSizes.xl)).toBe("xxl");
 });
 
-test('width of 600 to be in s group', () => {
-  expect(getSizeGroup(600)).toBe('s');
+test("width group order return correctly", () => {
+  expect(getOrderGroup(screenWidthSizes.xs)).toBe("orderS");
+  expect(getOrderGroup(screenWidthSizes.s)).toBe("orderS");
+  expect(getOrderGroup(screenWidthSizes.m)).toBe("orderM");
+  expect(getOrderGroup(screenWidthSizes.l)).toBe("orderM");
+  expect(getOrderGroup(screenWidthSizes.xl)).toBe("orderL");
 });
 
-test('size group of 765 to be in m group', () => {
-  expect(getSizeGroup(765)).toBe('m');
-});
-
-test('size group of 800 to be in l group', () => {
-  expect(getSizeGroup(800)).toBe('l');
-});
-
-test('size group of 1199 to be in xl group', () => {
-  expect(getSizeGroup(1190)).toBe('xl');
-});
-
-test('size group of 1250 to be in xxl group', () => {
-  expect(getSizeGroup(1250)).toBe('xxl');
+test("width group different boolean return correctly", () => {
+  expect(
+    isWidthGroupsDifferents(screenWidthSizes.xs, screenWidthSizes.s)
+  ).toBeTruthy();
+  expect(
+    isWidthGroupsDifferents(screenWidthSizes.xs, screenWidthSizes.xs)
+  ).toBeFalsy();
+  expect(
+    isWidthGroupsDifferents(screenWidthSizes.m, screenWidthSizes.l)
+  ).toBeTruthy();
+  expect(
+    isWidthGroupsDifferents(screenWidthSizes.l, screenWidthSizes.xl)
+  ).toBeTruthy();
 });
