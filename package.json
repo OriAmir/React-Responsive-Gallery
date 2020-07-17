@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-gallery",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "React responsive gallery",
   "main": "build/index.js",
   "repository": {
@@ -62,12 +62,13 @@
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0"
+    "webpack-bundle-analyzer": "^3.8.0",
+    "webpack-cli": "^3.3.0",
+    "prop-types": "^15.7.2",
+    "styled-components": "^5.0.1"
   },
   "dependencies": {
-    "prop-types": "^15.7.2",
     "react-image-lightbox": "^5.1.1",
-    "shortid": "^2.2.15",
-    "styled-components": "^5.0.1"
+    "shortid": "^2.2.15"
   }
 }

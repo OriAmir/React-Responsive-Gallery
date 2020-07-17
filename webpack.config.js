@@ -1,6 +1,7 @@
 const path = require("path");
 const PrettierPlugin = require("prettier-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const BrotliPlugin = require("brotli-webpack-plugin");
 
 module.exports = {
@@ -12,6 +13,7 @@ module.exports = {
   },
   plugins: [
     new PrettierPlugin(),
+    new BundleAnalyzerPlugin(),
     new BrotliPlugin({
       asset: "[path].br[query]",
       test: /\.(js|css|html|svg)$/,
