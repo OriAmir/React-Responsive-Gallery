@@ -1,14 +1,18 @@
 import { useState, useLayoutEffect } from "react";
-import { isWidthGroupsDifferents } from "../utils/gallery";
+import { isWidthGroupsDifferences } from "../utils/gallery.utils";
+import { ScreenWidthSizes } from "../gallery.types";
+import { screenWidthSizes } from "../constants/responsive";
 
-const useScreenDimensions = (userScreenWidthValues) => {
+const useScreenDimensions = (
+  userScreenWidthValues: ScreenWidthSizes = screenWidthSizes
+) => {
   const [width, setWidth] = useState(window.innerWidth);
 
   useLayoutEffect(() => {
     const updateDimensions = () => {
       setWidth((oldWidth) => {
         if (
-          isWidthGroupsDifferents(
+          isWidthGroupsDifferences(
             window.innerWidth,
             oldWidth,
             userScreenWidthValues

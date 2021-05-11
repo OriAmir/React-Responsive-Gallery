@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -9,10 +8,8 @@ const StyledDiv = styled.div`
   box-sizing: border-box;
 `;
 
-const Row = ({ children }) => <StyledDiv>{children}</StyledDiv>;
-
-Row.propTypes = {
-  children: PropTypes.node,
-};
+const Row = ({ children }: { children: React.ReactNode }) => (
+  <StyledDiv>{children}</StyledDiv>
+);
 
 export default Row;

@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "sourceMap": true, // allow sourcemap support
+    "strictNullChecks": true, // enable strict null checks as a best practice
+    "module": "esnext", // specify module code generation
+    "jsx": "react-jsx",
+    "target": "es5", // specify ECMAScript target version
+    "allowJs": true, // allow a partial TypeScript and JavaScript codebase
+    "allowSyntheticDefaultImports": true, //Allow 'import x from y' when a module doesn't have a default export.
+    "declaration": true, //Generate .d.ts files from TypeScript and JavaScript files in your project.
+    "baseUrl": "src", //Specify the base directory to resolve non-relative module names.
+    "moduleResolution": "node", //Specify how TypeScript looks up a file from a given module specifier.
+    "outDir": "dist"
+  },
+  "include": ["src"]
+}
