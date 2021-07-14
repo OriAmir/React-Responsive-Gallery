@@ -3,7 +3,6 @@ const path = require("path");
 const PrettierPlugin = require("prettier-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 // const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-const BrotliPlugin = require("brotli-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -16,12 +15,6 @@ module.exports = {
   plugins: [
     new PrettierPlugin(),
     // new BundleAnalyzerPlugin(),
-    new BrotliPlugin({
-      asset: "[path].br[query]",
-      test: /\.(js|css|html|svg|ts)$/,
-      threshold: 10240,
-      minRatio: 0.8,
-    }),
   ],
   optimization: {
     minimizer: [new UglifyJsPlugin()],

@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-gallery",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "React responsive gallery",
   "main": "dist/index.js",
   "repository": {
@@ -50,7 +50,6 @@
     "@typescript-eslint/parser": "^4.21.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^25.1.0",
-    "brotli-webpack-plugin": "^1.1.0",
     "css-loader": "^2.1.1",
     "eslint": "^7.24.0",
     "eslint-config-prettier": "^8.1.0",
