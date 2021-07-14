@@ -6,6 +6,7 @@
 - Simple to use.
 - Work with lightbox for image display.
 - Full typescript support.
+- Tested with React Testing Library
 <br/>
 
 
@@ -121,8 +122,8 @@ You can change the group sizes by your preferences , the default group values ar
 | lightboxCaption | String | Lightbox image caption | Optional
 | lightboxTitle | String | Lightbox image title | Optional
 
-important:
-if you set orderS/orderL/orderM only to part of your images it's first will sort the images with this property and them set the others.
+Note:
+if you set orderS/orderL/orderM property only to part of the images the library first sorts the images with the property and then renders the other images.
 <br/>
 
 <h3>Using Lightbox </h3>
