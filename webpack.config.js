@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path");
 const PrettierPlugin = require("prettier-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
@@ -5,9 +6,10 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const BrotliPlugin = require("brotli-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: "./src/index.tsx",
   output: {
-    path: path.resolve(__dirname, "build"),
+    publicPath: "/dist/",
+    path: path.resolve(__dirname, "dist"),
     filename: "index.js",
     libraryTarget: "commonjs2",
   },
@@ -16,7 +18,7 @@ module.exports = {
     // new BundleAnalyzerPlugin(),
     new BrotliPlugin({
       asset: "[path].br[query]",
-      test: /\.(js|css|html|svg)$/,
+      test: /\.(js|css|html|svg|ts)$/,
       threshold: 10240,
       minRatio: 0.8,
     }),
@@ -24,39 +26,15 @@ module.exports = {
   optimization: {
     minimizer: [new UglifyJsPlugin()],
   },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
+  },
   module: {
     rules: [
       {
-        test: /\.js$/,
-        include: path.resolve(__dirname, "src"),
-        exclude: /(node_modules|bower_components|build)/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env"],
-          },
-        },
-      },
-      {
-        test: /\.module\.s(a|c)ss$/,
-        loader: [
-          "style-loader",
-          {
-            loader: "css-loader",
-            options: {
-              modules: true,
-              localIdentName: "[name]__[local]___[hash:base64:5]",
-              camelCase: true,
-              sourceMap: true,
-            },
-          },
-          {
-            loader: "sass-loader",
-            options: {
-              sourceMap: true,
-            },
-          },
-        ],
+        test: /\.(t|j)sx?$/,
+        use: { loader: "ts-loader" },
+        exclude: /node_modules/,
       },
       {
         test: /\.s(a|c)ss$/,
@@ -81,4 +59,8 @@ module.exports = {
   externals: {
     react: "commonjs react",
   },
+  devServer: {
+    contentBase: "./dist",
+  },
+  devtool: "inline-source-map",
 };

@@ -5,7 +5,9 @@
 - Dynamic properties for every screen width size.
 - Simple to use.
 - Work with lightbox for image display.
+- Full typescript support.
 <br/>
+
 
 <h3>Getting started</h3>
  
@@ -119,6 +121,8 @@ You can change the group sizes by your preferences , the default group values ar
 | lightboxCaption | String | Lightbox image caption | Optional
 | lightboxTitle | String | Lightbox image title | Optional
 
+important:
+if you set orderS/orderL/orderM only to part of your images it's first will sort the images with this property and them set the others.
 <br/>
 
 <h3>Using Lightbox </h3>

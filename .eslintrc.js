@@ -4,33 +4,23 @@ module.exports = {
     es6: true,
     jest: true,
   },
-  extends: ["airbnb", "prettier", "prettier/react"],
+  extends: [
+    "react-app",
+    "react-app/jest",
+    "plugin:@typescript-eslint/recommended", // @typescript-eslint/eslint-plugin(part of react-scripts)
+    "plugin:prettier/recommended", // eslint-plugin-prettier
+    "prettier", // eslint-config-prettier
+  ],
+  plugins: [
+    "prettier", // eslint-plugin-prettier
+    "testing-library", //eslint-plugin-testing-library
+  ],
   globals: {
     Atomics: "readonly",
     SharedArrayBuffer: "readonly",
   },
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 2018,
-    sourceType: "module",
-  },
-  plugins: ["react", "react-hooks", "jest"],
+  parser: "@typescript-eslint/parser",
   rules: {
-    "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
-    "react/require-default-props": 0,
-    "react/jsx-uses-react": "error",
-    "no-debugger": 0,
-    "react/forbid-prop-types": 0,
-    "import/no-named-as-default": 0,
-    "import/prefer-default-export": 0,
-    "jest/no-disabled-tests": "warn",
-    "jest/no-focused-tests": "error",
-    "jest/no-identical-title": "error",
-    "jest/prefer-to-have-length": "warn",
-    "jest/valid-expect": "error",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
   },
 };
