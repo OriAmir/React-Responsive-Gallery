@@ -27,6 +27,9 @@ or
 <i>(it's take few seconds until app is loading)</i><br/>
 * Some of the gallery features are not available in the live demo : cols padding , imagesStyle and images order(s,m,l).
 
+<h3>Playground</h3>
+You can play with the library in 
+<a href="https://codesandbox.io/s/react-responsive-gallery-playground-dpqtg?file=/src/App.js" target="_blank"> this sandbox playground .</a> 
 
 <br/><br/>
 <h3>Basic using example</h3>
