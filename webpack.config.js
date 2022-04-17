@@ -21,6 +21,7 @@ module.exports = {
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"],
+    modules: [path.resolve("./src"), path.resolve("./node_modules")],
   },
   module: {
     rules: [
@@ -51,6 +52,7 @@ module.exports = {
   },
   externals: {
     react: "commonjs react",
+    "react-dom": "commonjs react-dom",
   },
   devServer: {
     contentBase: "./dist",

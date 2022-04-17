@@ -1,7 +1,7 @@
 import React from "react";
 import Lightbox from "react-image-lightbox";
-import { LightboxActionType } from "./reducers/lightBox/light-box-actions-type";
-import { ImageLightBoxProps } from "./gallery.types";
+import { LightboxActionType } from "reducers/lightBox/light-box-actions-type";
+import { ImageLightBoxProps } from "./ImagesLightBox.types";
 
 export const ImagesLightBox = ({
   imagesLightbox,

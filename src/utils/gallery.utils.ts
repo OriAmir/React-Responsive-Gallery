@@ -14,7 +14,7 @@ import {
   GallerySizes,
   ImageElementProps,
   ImagesCols,
-} from "../gallery.types";
+} from "../components/Gallery/Gallery.types";
 
 const getOrderGroup = (
   width: number,
@@ -158,6 +158,19 @@ const getImagesCols = (
   );
   return imagesCols;
 };
+
+const getSelectedImages = () => {
+  const elements = document.querySelectorAll(".select-input");
+  const selectedImages: string[] = [];
+  elements.forEach((e: HTMLInputElement) => {
+    if (e.checked) {
+      selectedImages.push(e?.value);
+    }
+  });
+
+  return selectedImages;
+};
+
 export {
   getGallerySizes,
   getSizeGroup,
@@ -165,4 +178,5 @@ export {
   sortImagesByOrderGroup,
   getOrderGroup,
   getImagesCols,
+  getSelectedImages,
 };

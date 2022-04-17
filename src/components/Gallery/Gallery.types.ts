@@ -30,13 +30,6 @@ export type GallerySizes = {
   imagesPaddingBottom: number;
 };
 
-export type ImageLightBoxProps = {
-  imagesLightbox: Array<ImageElementProps>;
-  photoIndex: number;
-  lightBoxDispatch: (obj: { type: string; payload?: number | string }) => void;
-  lightBoxAdditionalProps?: ILightBoxProps;
-};
-
 export type ImageBasicData = {
   lightboxCaption?: string;
   lightboxTitle?: string;
@@ -48,6 +41,7 @@ export interface ImageElementProps extends ImageBasicData {
   orderM?: number;
   orderL?: number;
   imgClassName?: string | Record<string, unknown>;
+  id?: string;
 }
 
 export type ResponsiveGalleryProps = {
@@ -60,6 +54,9 @@ export type ResponsiveGalleryProps = {
   imagesStyle?: Record<string, unknown> | string;
   useLightBox?: boolean;
   lightBoxAdditionalProps?: ILightBoxProps;
+  selectable?: boolean;
+  selectableItems?: Array<string>;
+  onSelect?: (id: string, val: boolean) => void;
 };
 
 export type ImagesCols = Array<ImageElementProps>;

@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-gallery",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "React responsive gallery",
   "main": "dist/index.js",
   "repository": {
@@ -13,14 +13,9 @@
     "react-gallery",
     "react-responsive-gallery"
   ],
-  "peerDependencies": {
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0"
-  },
   "scripts": {
-    "start": "webpack --watch",
     "build": "webpack --mode production --config ./webpack.config.js",
-    "build-dev": "webpack --mode development --config ./webpack.config.js",
+    "build-dev": "webpack --mode development --watch --config ./webpack.config.js",
     "lint": "eslint './src/**/*.{js,ts,tsx}'",
     "test": "jest",
     "prettier": "./node_modules/.bin/prettier --write 'src/**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
@@ -43,6 +38,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
+    "@testing-library/react-hooks": "^7.0.2",
     "@types/jest": "^26.0.22",
     "@types/shortid": "0.0.29",
     "@types/styled-components": "^5.1.9",
@@ -63,10 +59,10 @@
     "jest": "^26.6.3",
     "lint-staged": "^11.0.0",
     "mini-css-extract-plugin": "^0.5.0",
-    "node-sass": "^4.11.0",
     "prettier": "^2.2.1",
     "prettier-webpack-plugin": "^1.2.0",
     "react-test-renderer": "^16.12.0",
+    "sass": "1.49.7",
     "sass-loader": "^7.1.0",
     "source-map-loader": "^2.0.1",
     "style-loader": "^0.23.1",
@@ -77,13 +73,11 @@
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.29.6",
     "webpack-bundle-analyzer": "^3.8.0",
-    "webpack-cli": "^3.3.0",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "webpack-cli": "^3.3.0"
   },
   "dependencies": {
     "nanoid": "^3.1.23",
-    "react-image-lightbox": "^5.1.3",
+    "react-image-lightbox": "^5.1.4",
     "styled-components": "^5.3.0"
   }
 }

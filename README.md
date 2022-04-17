@@ -108,12 +108,15 @@ You can change the group sizes by your preferences , the default group values ar
 | imagesPaddingBottom | Object  | Padding bottom between images <b>in px</b> by the width groups. | ``{xs: 4,s: 4,m: 4,l: 4,xl: 4,xxl:4}`` | Optional
 | imagesStyle | Object / String  | Style that will apply on all the images on gallery | None | Optional
 | useLightBox | Boolean  | Use lightbox when clicking on image | false | Optional
-| lightBoxAdditionalProps | object  | Additional props for the lightbox component. [Read more here](#images-options) | false | Optional
+| lightBoxAdditionalProps | object  | Additional props for the lightbox component. [Read more here](#using-lightbox) | false | Optional
+| selectable | boolean  | Images could be selectable. [Read more here](#selectable-images) | false | Optional
+| selectableItems | Array  | Chosen images as part of the selectable items. | None | Optional
+| onSelect | Function - (id:string,val:boolean)=>void  | Callback function when image is selected. | None | Optional
 
 
 <br/><br/>
 
-<h3>Images-Options</h3>
+<h3>Images Options</h3>
 
 | Property  | Type | Description  | is Required
 | :------------- | :------------- | :------------- | :-------------
@@ -129,11 +132,26 @@ Note:
 if you set orderS/orderL/orderM property only to part of the images the library first sorts the images with the property and then renders the other images.
 <br/>
 
-<h3>Using Lightbox </h3>
+<br/>
+<h3>Selectable Images</h3>
+Images could be selected via the gallery.<br/><br/>
+The library expose function and hook to manage the images: <br/>
+<b>getSelectedImages</b>- function that return id's array of the selected images.<br/>
+<b>useSelect</b>- hook that return id's array of the selected images , then we could listen to changes in the images if needed. <br/><br/>
+You can control the selected images yourself in your component or just get the images using function/hook.<br/>
+<b>UnControlled </b>- The library will manage the selected images and you will get them using the function `getSelectedImages`. To use that functionally you just need to pass the `selectable` attribute to the library.<br/>
+<b>Controlled </b>- You will manage the selected images yourself using `selectableItems` and `onSelect` functions.
+
+:warning: When passing  the `onSelect` function to the library it's automatically move to <br/>UnControlled mode and  will not manage the selected images any more.
+
+
+<br/>
+<h3>Using Lightbox</h3>
 You can use lightbox when clicking on one of the images that display on the gallery.
 For the lightbox component library we use the <a target="_blank" href="https://www.npmjs.com/package/react-image-lightbox">react-image-lightbox library</a>.<br/>
 You can sent the props from this library and to send them as prop to library called <b>'lightBoxAdditionalProps'</b>.
 If you want to pass image caption and title you can pass that via the img props. 
+
 
 <br/><br/>
 
