@@ -1,5 +1,5 @@
 import { ILightBoxProps } from "react-image-lightbox";
-import { ImageElementProps } from "../../Gallery/gallery.types";
+import { ImageElementProps } from "../../Gallery/Gallery.types";
 
 export type ImageLightBoxProps = {
   imagesLightbox: Array<ImageElementProps>;
