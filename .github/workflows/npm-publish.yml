@@ -4,11 +4,11 @@
 name: React-testing-library Package CI
 
 # on: [push]
-on: workflow_dispatch
-  # push:
-  #   branches:
-  #     - develop
-  #     - master
+on: 
+  workflow_dispatch
+  push:
+    branches: [ master, develop ]
+
 jobs:
   build:
     runs-on: ubuntu-latest
