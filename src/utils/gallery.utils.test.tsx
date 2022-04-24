@@ -13,14 +13,14 @@ import {
   GallerySizes,
   ImagesCols,
   ImageElementProps,
-} from "../components/Gallery/Gallery.types";
+} from "components/Gallery/Gallery.types";
 import {
   numOfImagesPerRow,
   imagesMaxWidth,
   colsPadding,
   imagesPaddingBottom,
   screenWidthSizes as screenWidthSizesObj,
-} from "../constants/responsive";
+} from "constants/responsive";
 
 const screenWidthSizes = {
   xs: 400,
