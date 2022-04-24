@@ -43,7 +43,7 @@ jobs:
       - run: npm lint
 
   publish-npm:
-    needs: [build, test,]
+    needs: [build, test, lint]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
