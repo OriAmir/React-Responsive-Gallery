@@ -17,8 +17,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm run ci
-      - run: npm run build
+      - run: npm ci
+      - run: npm build
 
   test:
     needs: build
@@ -28,11 +28,22 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm run ci
-      - run: npm run test
+      - run: npm ci
+      - run: npm test
+
+    test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm ci
+      - run: npm lint
 
   publish-npm:
-    needs: build
+    needs: [build, test,]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
@@ -47,7 +58,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
           
   publish-npm-beta:
-    needs: build
+    needs: [build, test, lint]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/develop'
     steps:
