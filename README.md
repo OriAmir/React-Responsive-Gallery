@@ -3,10 +3,11 @@
 <b>Main features</b><br/>
 - Custom for every screen width size.
 - Dynamic properties for every screen width size.
+- Images could be selected and controlled/uncontrolled easily.
 - Simple to use.
 - Work with lightbox for image display.
 - Full typescript support.
-- Tested with React Testing Library
+- Tested with React Testing Library.
 <br/>
 
 
@@ -31,7 +32,7 @@ or
 You can play with the library in 
 <a href="https://codesandbox.io/s/react-responsive-gallery-playground-dpqtg?file=/src/App.js" target="_blank"> this sandbox playground .</a> 
 
-<br/><br/>
+<br/>
 <h3>Basic using example</h3>
  
 ```
