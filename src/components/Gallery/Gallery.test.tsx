@@ -45,6 +45,24 @@ describe("Gallery component", () => {
     expect(screen.getAllByRole("img").length).toEqual(2);
   });
 
+  test("Render gallery images as expected in L window size", () => {
+    window = Object.assign(window, { innerWidth: 1000 });
+    render(<ResponsiveGallery images={images} />);
+    const domImagesLSize: HtmlImages = screen.getAllByRole("img");
+    expect(domImagesLSize[0].src).toEqual(images[0].src);
+    expect(domImagesLSize[1].src).toEqual(images[2].src);
+    expect(domImagesLSize[2].src).toEqual(images[1].src);
+  });
+
+  test("Render gallery images as expected in M window size", () => {
+    window = Object.assign(window, { innerWidth: 770 });
+    render(<ResponsiveGallery images={images} />);
+    const domImagesMSize: HtmlImages = screen.getAllByRole("img");
+    expect(domImagesMSize[0].src).toEqual(images[1].src);
+    expect(domImagesMSize[1].src).toEqual(images[0].src);
+    expect(domImagesMSize[2].src).toEqual(images[2].src);
+  });
+
   test("Render gallery images as expected in S window size", () => {
     window = Object.assign(window, { innerWidth: 300 });
     render(<ResponsiveGallery images={images} />);

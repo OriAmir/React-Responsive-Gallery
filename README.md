@@ -139,10 +139,10 @@ The library expose function and hook to manage the images: <br/>
 <b>getSelectedImages</b>- function that return id's array of the selected images.<br/>
 <b>useSelect</b>- hook that return id's array of the selected images , then we could listen to changes in the images if needed. <br/><br/>
 You can control the selected images yourself in your component or just get the images using function/hook.<br/>
-<b>UnControlled </b>- The library will manage the selected images and you will get them using the function `getSelectedImages`. To use that functionally you just need to pass the `selectable` attribute to the library.<br/>
-<b>Controlled </b>- You will manage the selected images yourself using `selectableItems` and `onSelect` functions.
+<b>Uncontrolled</b> - The library will manage the selected images and you will get them using the <i>getSelectedImages</i> function. To use that functionally you just need to pass the <i>selectable</i> boolean attribute to the library.<br/>
+<b>Controlled</b> - You will manage the selected images yourself using <i>selectableItems</i> and <i>onSelect</i> functions.<br/><br/>
 
-:warning: When passing  the `onSelect` function to the library it's automatically move to <br/>UnControlled mode and  will not manage the selected images any more.
+:warning: When passing the `onSelect` function to the library it's automatically move to <b>Uncontrolled</b> mode and will not manage the selected images any more.
 
 
 <br/>
