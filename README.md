@@ -122,6 +122,7 @@ You can change the group sizes by your preferences , the default group values ar
 | Property  | Type | Description  | is Required
 | :------------- | :------------- | :------------- | :-------------
 | src | String | Image source url   | <b>Required</b> 
+| id | String | Image Id([Read more here](#if-you-will-not-pass-the-image))   | Optional 
 | orderS |  Number  | Image order in small group sizes(xs, s)   |  Optional
 | orderM  | Number| Image order in meduim group sizes (m,l) |Optional
 | orderL  |  Number | Image order in large group sizes(xl,xxl) | Optional
@@ -129,8 +130,7 @@ You can change the group sizes by your preferences , the default group values ar
 | lightboxCaption | String | Lightbox image caption | Optional
 | lightboxTitle | String | Lightbox image title | Optional
 
-Note:
-if you set orderS/orderL/orderM property only to part of the images the library first sorts the images with the property and then renders the other images.
+:warning: if you set orderS/orderL/orderM property only to part of the images the library first sorts the images with the property and then renders the other images.
 <br/>
 
 <br/>
@@ -143,6 +143,8 @@ You can control the selected images yourself in your component or just get the i
 <b>Uncontrolled</b> - The library will manage the selected images and you will get them using the <i>getSelectedImages</i> function. To use that functionally you just need to pass the <i>selectable</i> boolean attribute to the library.<br/>
 <b>Controlled</b> - You will manage the selected images yourself using <i>selectableItems</i> and <i>onSelect</i> functions.<br/><br/>
 
+:warning: If you will not pass the image <b>id</b> property to the image element the selected image will return as URL representation instead of id representation. In the case of a duplicate image URL, this feature will not work as expected.
+<br/>
 :warning: When passing the `onSelect` function to the library it's automatically move to <b>Uncontrolled</b> mode and will not manage the selected images any more.
 
 
