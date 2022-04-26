@@ -1,4 +1,4 @@
-import { OptionsWidthSizes } from "../gallery.types";
+import { OptionsWidthSizes } from "components/Gallery/Gallery.types";
 
 const screenWidthSizes: Pick<OptionsWidthSizes, "xs" | "s" | "m" | "l" | "xl"> =
   {

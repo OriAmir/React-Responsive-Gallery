@@ -1,7 +1,7 @@
 import { useState, useLayoutEffect } from "react";
-import { isWidthGroupsDifferences } from "../utils/gallery.utils";
-import { ScreenWidthSizes } from "../gallery.types";
-import { screenWidthSizes } from "../constants/responsive";
+import { isWidthGroupsDifferences } from "utils/gallery.utils";
+import { ScreenWidthSizes } from "components/Gallery/Gallery.types";
+import { screenWidthSizes } from "constants/responsive";
 
 const useScreenDimensions = (
   userScreenWidthValues: ScreenWidthSizes = screenWidthSizes
@@ -30,4 +30,4 @@ const useScreenDimensions = (
   return { width };
 };
 
-export default useScreenDimensions;
+export { useScreenDimensions };

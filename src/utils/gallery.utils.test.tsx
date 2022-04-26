@@ -5,6 +5,7 @@ import {
   sortImagesByOrderGroup,
   getOrderGroup,
   getImagesCols,
+  getSelectedImages,
 } from "./gallery.utils";
 import {
   WidthOptions,
@@ -12,14 +13,14 @@ import {
   GallerySizes,
   ImagesCols,
   ImageElementProps,
-} from "../gallery.types";
+} from "components/Gallery/Gallery.types";
 import {
   numOfImagesPerRow,
   imagesMaxWidth,
   colsPadding,
   imagesPaddingBottom,
   screenWidthSizes as screenWidthSizesObj,
-} from "../constants/responsive";
+} from "constants/responsive";
 
 const screenWidthSizes = {
   xs: 400,
@@ -224,5 +225,18 @@ describe("Gallery utils functions", () => {
       colsPadding: 3,
       imagesPaddingBottom: 3,
     });
+  });
+
+  test("get selected images return correct images", () => {
+    document.body.innerHTML =
+      "<div>" +
+      '<input value="test" id="test" class="select-input" type="checkbox"/>' +
+      '<input value="test1" id="test1" checked class="select-input" type="checkbox"/>' +
+      '<input value="test1" id="test2" class="select-input" type="checkbox"/>' +
+      '<input value="test3" id="test3" checked class="select-input" type="checkbox"/>' +
+      '<label for="test"/>' +
+      "</div>";
+    const res = getSelectedImages();
+    expect(res).toEqual(["test1", "test3"]);
   });
 });

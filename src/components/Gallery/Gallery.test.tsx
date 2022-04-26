@@ -1,5 +1,5 @@
 /* eslint no-native-reassign: 0 */
-import ResponsiveGallery from "./";
+import ResponsiveGallery from "./Gallery";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 
 interface ImageHtmlElement extends HTMLElement {
