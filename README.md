@@ -1,6 +1,7 @@
 # React-Responsive-Gallery - Responsive Gallery for react application.
 
 <b>Main features</b><br/>
+
 - Custom for every screen width size.
 - Dynamic properties for every screen width size.
 - Images could be selected and controlled/uncontrolled easily.
@@ -8,8 +9,7 @@
 - Work with lightbox for image display.
 - Full typescript support.
 - Tested with React Testing Library.
-<br/>
-
+  <br/>
 
 <h3>Getting started</h3>
  
@@ -30,7 +30,7 @@ or
 
 <h3>Playground</h3>
 You can play with the library in 
-<a href="https://codesandbox.io/s/react-responsive-gallery-playground-dpqtg?file=/src/App.js" target="_blank"> this sandbox playground .</a> 
+<a href="https://codesandbox.io/s/react-responsive-gallery-playground-dpqtg?file=/src/App.js" target="_blank"> this sandbox playground .</a>
 
 <br/>
 <h3>Basic using example</h3>
@@ -41,46 +41,47 @@ import { render } from 'react-dom';
 import ResponsiveGallery from 'react-responsive-gallery';
 
 const images=[
-          {
-            src: 'https://cdn.pixabay.com/photo/2017/01/14/12/59/iceland-1979445_960_720.jpg'
-          },
-          {
-            src: 'https://cdn.pixabay.com/photo/2019/06/12/15/07/cat-4269479_960_720.jpg'
-          },
-          {
-            src: 'https://cdn.pixabay.com/photo/2016/12/04/21/58/rabbit-1882699_960_720.jpg'
-          },
-          {
-            src: 'https://cdn.pixabay.com/photo/2014/07/08/12/36/bird-386725_960_720.jpg'
-          },
-          {
-            src: 'https://cdn.pixabay.com/photo/2015/10/12/15/46/fallow-deer-984573_960_720.jpg'
-          },
-          {
-            src: 'https://cdn.pixabay.com/photo/2014/10/01/10/44/hedgehog-468228_960_720.jpg'
-          },
-          {
-            src: 'https://cdn.pixabay.com/photo/2013/09/22/15/29/prairie-dog-184974_960_720.jpg'
-          },
-          {
-            src: 'https://cdn.pixabay.com/photo/2018/03/31/06/31/dog-3277416_960_720.jpg'
-          },
-          {
-            src: 'https://cdn.pixabay.com/photo/2016/12/13/05/15/puppy-1903313_960_720.jpg'
-          },
-          {
-            src: 'https://cdn.pixabay.com/photo/2019/03/09/17/30/horse-4044547_960_720.jpg'
-          }
-        ];
-    
+{
+src: 'https://cdn.pixabay.com/photo/2017/01/14/12/59/iceland-1979445_960_720.jpg'
+},
+{
+src: 'https://cdn.pixabay.com/photo/2019/06/12/15/07/cat-4269479_960_720.jpg'
+},
+{
+src: 'https://cdn.pixabay.com/photo/2016/12/04/21/58/rabbit-1882699_960_720.jpg'
+},
+{
+src: 'https://cdn.pixabay.com/photo/2014/07/08/12/36/bird-386725_960_720.jpg'
+},
+{
+src: 'https://cdn.pixabay.com/photo/2015/10/12/15/46/fallow-deer-984573_960_720.jpg'
+},
+{
+src: 'https://cdn.pixabay.com/photo/2014/10/01/10/44/hedgehog-468228_960_720.jpg'
+},
+{
+src: 'https://cdn.pixabay.com/photo/2013/09/22/15/29/prairie-dog-184974_960_720.jpg'
+},
+{
+src: 'https://cdn.pixabay.com/photo/2018/03/31/06/31/dog-3277416_960_720.jpg'
+},
+{
+src: 'https://cdn.pixabay.com/photo/2016/12/13/05/15/puppy-1903313_960_720.jpg'
+},
+{
+src: 'https://cdn.pixabay.com/photo/2019/03/09/17/30/horse-4044547_960_720.jpg'
+}
+];
+
 render(
-      <ResponsiveGallery images={images}/>,
-      document.getElementById('root')
-      );
+<ResponsiveGallery images={images}/>,
+document.getElementById('root')
+);
+
 ```
 
 <br/>
- 
+
 <h3>Width groups explanation</h3>
 
 The Gallery has 6 different of width groups: <b>xs, s, m, l, xl, xxl .</b> <br/>
@@ -100,8 +101,8 @@ You can change the group sizes by your preferences , the default group values ar
 <h3>Gallery options</h3>
 
 | Property  | Type | Description | Default value  | is Required
-| :------------- | :------------- | :------------- | :------------- | :------------- 
-| images |  Array | Array of images to display in the gallery. [Read more here](#images-options) |  None   | <b>Required</b> 
+| :------------- | :------------- | :------------- | :------------- | :-------------
+| images |  Array | Array of images to display in the gallery. [Read more here](#images-options) |  None   | <b>Required</b>
 | screenWidthSizes  | Object  | Gallery groups width break points. | ``{xs: 420,s: 600,m: 768,l: 992,xl: 1200}`` | Optional
 | numOfImagesPerRow  | Object  | Number of images for row by the width groups. | ``{xs: 1,s: 2,m: 3,l: 3,xl: 4 xxl:5}`` | Optinal
 | imageMaxWidth  | Object  | Image max width <b>in %</b> by the width groups.  | ``{xs: 100,s: 100,m: 100,l: 100,xl: 100,xxl:100}`` | Optional
@@ -121,8 +122,8 @@ You can change the group sizes by your preferences , the default group values ar
 
 | Property  | Type | Description  | is Required
 | :------------- | :------------- | :------------- | :-------------
-| src | String | Image source url   | <b>Required</b> 
-| id | String | Image Id([Read more here](#if-you-will-not-pass-the-image))   | Optional 
+| src | String | Image source url   | <b>Required</b>
+| id | String | Image Id([Read more here](#if-you-will-not-pass-the-image))   | Optional
 | orderS |  Number  | Image order in small group sizes(xs, s)   |  Optional
 | orderM  | Number| Image order in meduim group sizes (m,l) |Optional
 | orderL  |  Number | Image order in large group sizes(xl,xxl) | Optional
@@ -138,7 +139,8 @@ You can change the group sizes by your preferences , the default group values ar
 Images could be selected via the gallery.<br/><br/>
 The library expose function and hook to manage the images: <br/>
 <b>getSelectedImages</b>- function that return id's array of the selected images.<br/>
-<b>useSelect</b>- hook that return id's array of the selected images , then we could listen to changes in the images if needed. <br/><br/>
+<b>useSelect</b>- hook that return id's array of the selected images , then we could listen to changes in the images if needed.<br/>
+This hook will work as expected only AFTER the dom is initialized with the images. <br/><br/>
 You can control the selected images yourself in your component or just get the images using function/hook.<br/>
 <b>Uncontrolled</b> - The library will manage the selected images and you will get them using the <i>getSelectedImages</i> function. To use that functionally you just need to pass the <i>selectable</i> boolean attribute to the library.<br/>
 <b>Controlled</b> - You will manage the selected images yourself using <i>selectableItems</i> and <i>onSelect</i> functions.<br/><br/>
@@ -153,7 +155,7 @@ You can control the selected images yourself in your component or just get the i
 You can use lightbox when clicking on one of the images that display on the gallery.
 For the lightbox component library we use the <a target="_blank" href="https://www.npmjs.com/package/react-image-lightbox">react-image-lightbox library</a>.<br/>
 You can sent the props from this library and to send them as prop to library called <b>'lightBoxAdditionalProps'</b>.
-If you want to pass image caption and title you can pass that via the img props. 
+If you want to pass image caption and title you can pass that via the img props.
 
 
 <br/><br/>
@@ -168,4 +170,5 @@ For bugs, questions and discussions please use the <a href="https://github.com/O
 
 <br/>
 <h3>License</h4>
-React Responsive Gallery is free to use for personal and commercial projects under the MIT License. 
+React Responsive Gallery is free to use for personal and commercial projects under the MIT License.
+```
