@@ -95,6 +95,7 @@ const Gallery = ({
                       id={img?.id || img.src}
                       selectableItems={selectableItems}
                       onSelect={onSelect}
+                      imagesMaxWidth={gallerySizes.imagesMaxWidth}
                     />
                   )}
                   <Image

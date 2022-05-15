@@ -19,13 +19,20 @@ const StyledCheckbox = styled.input.attrs<CheckboxProps>(
   })
 )<CheckboxProps>``;
 
-const StyledDiv = styled.div`
+const StyledDiv = styled.div<{ imagesMaxWidth: number }>`
   position: absolute;
   top: 5px;
-  right: 15px;
+  ${(props) =>
+    props.imagesMaxWidth &&
+    `left: calc(${props.imagesMaxWidth}% - 28px - 5px);`}
 `;
 
-const Select = ({ id, selectableItems, onSelect }: SelectProps) => {
+const Select = ({
+  id,
+  selectableItems,
+  onSelect,
+  imagesMaxWidth,
+}: SelectProps) => {
   const [selectedValues, selectDispatch] = useReducer(
     selectReducer,
     convertSelectableItems(selectableItems) || selectInitialState
@@ -41,7 +48,7 @@ const Select = ({ id, selectableItems, onSelect }: SelectProps) => {
   };
 
   return (
-    <StyledDiv>
+    <StyledDiv imagesMaxWidth={imagesMaxWidth}>
       <StyledSelect>
         <StyledCheckbox
           className="select-input"

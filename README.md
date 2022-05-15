@@ -27,10 +27,12 @@ or
 <a href="https://react-responsive-gallery-demo.herokuapp.com" target="_blank"> Try out the live gallery demo .</a> 
 <i>(it's take few seconds until app is loading)</i><br/>
 * Some of the gallery features are not available in the live demo : cols padding , imagesStyle and images order(s,m,l).
+<br/><br/>
 
 <h3>Playground</h3>
 You can play with the library in 
-<a href="https://codesandbox.io/s/react-responsive-gallery-playground-dpqtg?file=/src/App.js" target="_blank"> this sandbox playground .</a>
+<a href="https://codesandbox.io/s/react-responsive-gallery-playground-dpqtg" target="_blank"> Codesandbox</a> or in
+<a href="https://stackblitz.com/edit/react-responsive-gallery" target="_blank"> Stackblitz</a> .
 
 <br/>
 <h3>Basic using example</h3>
