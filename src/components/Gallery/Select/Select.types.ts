@@ -10,4 +10,5 @@ export type SelectProps = {
   id: string;
   selectableItems?: Array<string>;
   onSelect?: (id: string, val: boolean) => void;
+  imagesMaxWidth: number;
 };
