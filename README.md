@@ -1,5 +1,7 @@
 # React-Responsive-Gallery - Responsive Gallery for react application.
 
+![example workflow](https://github.com/OriAmir/react-responsive-gallery/actions/workflows/npm-publish.yml/badge.svg)
+
 <b>Main features</b><br/>
 
 - Custom for every screen width size.
