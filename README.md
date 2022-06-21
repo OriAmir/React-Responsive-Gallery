@@ -1,4 +1,4 @@
-# React-Responsive-Gallery - Responsive Gallery for react application.
+# React-Responsive-Gallery - Responsive Gallery for react application. 
 
 ![example workflow](https://github.com/OriAmir/react-responsive-gallery/actions/workflows/npm-publish.yml/badge.svg)
 
