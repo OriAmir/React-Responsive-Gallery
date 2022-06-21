@@ -17,6 +17,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+      - run: npm config set legacy-peer-deps true
       - run: npm ci
       - run: npm run build
 
@@ -28,6 +29,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+      - run: npm config set legacy-peer-deps true
       - run: npm ci
       - run: npm run test
 
@@ -39,6 +41,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+      - run: npm config set legacy-peer-deps true
       - run: npm ci
       - run: npm run lint
 
@@ -52,6 +55,7 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
+      - run: npm config set legacy-peer-deps true
       - run: npm ci
       - run: npm run build
       - run: npm publish
@@ -68,6 +72,7 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
+      - run: npm config set legacy-peer-deps true
       - run: npm ci
       - run: npm run build
       - run: npm publish --tag beta

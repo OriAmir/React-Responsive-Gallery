@@ -6,7 +6,7 @@
 - Dynamic properties for every screen width size.
 - Images could be selected and controlled/uncontrolled easily.
 - Simple to use.
-- Work with lightbox for image display.
+- Work with `Lightbox` for image display.
 - Full typescript support.
 - Tested with React Testing Library.
   <br/>
@@ -125,9 +125,10 @@ You can change the group sizes by your preferences , the default group values ar
 | Property  | Type | Description  | is Required
 | :------------- | :------------- | :------------- | :-------------
 | src | String | Image source url   | <b>Required</b>
-| id | String | Image Id([Read more here](#if-you-will-not-pass-the-image))   | Optional
+| id | String | Image Id ([Read more here](#if-you-will-not-pass-the-image))   | Optional
+| alt | String | Image alternate text  | Optional
 | orderS |  Number  | Image order in small group sizes(xs, s)   |  Optional
-| orderM  | Number| Image order in meduim group sizes (m,l) |Optional
+| orderM  | Number| Image order in medium group sizes (m,l) |Optional
 | orderL  |  Number | Image order in large group sizes(xl,xxl) | Optional
 | imgClassName | Object / String | Image style object/string for styling specific image | Optional
 | lightboxCaption | String | Lightbox image caption | Optional

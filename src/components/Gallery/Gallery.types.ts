@@ -30,18 +30,16 @@ export type GallerySizes = {
   imagesPaddingBottom: number;
 };
 
-export type ImageBasicData = {
+export interface ImageElementProps {
+  src: string;
+  id?: string;
+  alt?: string;
+  imgClassName?: string | Record<string, unknown>;
   lightboxCaption?: string;
   lightboxTitle?: string;
-  src: string;
-};
-
-export interface ImageElementProps extends ImageBasicData {
   orderS?: number;
   orderM?: number;
   orderL?: number;
-  imgClassName?: string | Record<string, unknown>;
-  id?: string;
 }
 
 export type ResponsiveGalleryProps = {

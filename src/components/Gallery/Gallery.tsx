@@ -1,4 +1,4 @@
-import { useMemo, useReducer } from "react";
+import { useMemo, useReducer, useCallback } from "react";
 import { nanoid } from "nanoid";
 import ImagesLightBox from "./ImagesLightBox/ImagesLightBox";
 import {
@@ -70,6 +70,21 @@ const Gallery = ({
     [gallerySizes, sortedImages]
   );
 
+  const onImageClick = useCallback(
+    (imgIndex: number, colIndex: number) => {
+      if (useLightBox) {
+        lightBoxDispatch({
+          type: LightboxActionType.LIGHT_BOX_OPEN_BY_PHOTO_INDEX,
+          payload:
+            imgIndex === 0
+              ? colIndex
+              : colIndex + imgIndex * gallerySizes.numOfImagesPerRow,
+        });
+      }
+    },
+    [gallerySizes.numOfImagesPerRow, useLightBox]
+  );
+
   return (
     <>
       {useLightBox && lightBoxValues.isOpen && (
@@ -87,39 +102,27 @@ const Gallery = ({
             colSize={100 / gallerySizes.numOfImagesPerRow}
             colPadding={gallerySizes.colsPadding}
           >
-            {imagesCols[key].map((img: ImageElementProps, imgIndex: number) => {
-              return (
-                <ImageWrapper key={img.id || nanoid()}>
-                  {selectable && (
-                    <Select
-                      id={img?.id || img.src}
-                      selectableItems={selectableItems}
-                      onSelect={onSelect}
-                      imagesMaxWidth={gallerySizes.imagesMaxWidth}
-                    />
-                  )}
-                  <Image
-                    imageSrc={img.src}
-                    imgMaxWidth={gallerySizes.imagesMaxWidth}
-                    paddingBottom={gallerySizes.imagesPaddingBottom}
-                    className={`${imagesStyle} ${img.imgClassName || ""}`}
-                    useLightBox={useLightBox}
-                    onClick={() => {
-                      if (useLightBox) {
-                        lightBoxDispatch({
-                          type: LightboxActionType.LIGHT_BOX_OPEN_BY_PHOTO_INDEX,
-                          payload:
-                            imgIndex === 0
-                              ? colIndex
-                              : colIndex +
-                                imgIndex * gallerySizes.numOfImagesPerRow,
-                        });
-                      }
-                    }}
+            {imagesCols[key].map((img: ImageElementProps, imgIndex: number) => (
+              <ImageWrapper key={img.id || nanoid()}>
+                {selectable && (
+                  <Select
+                    id={img?.id || img.src}
+                    selectableItems={selectableItems}
+                    onSelect={onSelect}
+                    imagesMaxWidth={gallerySizes.imagesMaxWidth}
                   />
-                </ImageWrapper>
-              );
-            })}
+                )}
+                <Image
+                  src={img.src}
+                  maxWidth={gallerySizes.imagesMaxWidth}
+                  alt={img.alt}
+                  paddingBottom={gallerySizes.imagesPaddingBottom}
+                  className={`${imagesStyle} ${img.imgClassName || ""}`}
+                  useLightBox={useLightBox}
+                  onClick={() => onImageClick(imgIndex, colIndex)}
+                />
+              </ImageWrapper>
+            ))}
           </Col>
         ))}
       </Row>
