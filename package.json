@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-gallery",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "React responsive gallery",
   "main": "dist/index.js",
   "repository": {
