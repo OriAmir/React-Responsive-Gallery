@@ -42,10 +42,17 @@ export interface ImageElementProps {
   orderL?: number;
 }
 
-interface AdditionalILightBoxProps extends Omit<ILightBoxProps, "mainSrc" | "onCloseRequest"> { 
-    mainSrc?: string;
-    onCloseRequest?(): void;
-}
+export type AdditionalILightBoxProps = Omit<
+  ILightBoxProps,
+  | "mainSrc"
+  | "nextSrc"
+  | "prevSrc"
+  | "onCloseRequest"
+  | "onMovePrevRequest"
+  | "onMoveNextRequest"
+  | "imageTitle"
+  | "imageCaption"
+>;
 
 export type ResponsiveGalleryProps = {
   images: Array<ImageElementProps>;
