@@ -160,9 +160,9 @@ You can control the selected images yourself in your component or just get the i
 You can use lightbox when clicking on one of the images that display on the gallery.
 For the lightbox component library we use the <a target="_blank" href="https://www.npmjs.com/package/react-image-lightbox">react-image-lightbox library</a>.<br/>
 You can sent the props from this library and to send them as prop to library called <b>'lightBoxAdditionalProps'</b>.</br>
-These properties not available to send as additional props: `mainSrc , nextSrc, prevSrc , onCloseRequest , onMovePrevRequest , onMoveNextRequest` because we already using them internally.<br/>
-If you want to pass `imageTitle` or `imageCaption` you can pass that via the img props.
-
+* These properties are not available to send as additional props (because we already using them internally):
+```mainSrc , nextSrc, prevSrc , onCloseRequest , onMovePrevRequest , onMoveNextRequest ``` <br/>
+* If you want to pass ```imageTitle``` or ```imageCaption``` you can pass that via the img props.
 
 <br/><br/>
 
@@ -177,4 +177,3 @@ For bugs, questions and discussions please use the <a href="https://github.com/O
 <br/>
 <h3>License</h4>
 React Responsive Gallery is free to use for personal and commercial projects under the MIT License.
-```
