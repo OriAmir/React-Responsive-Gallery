@@ -159,8 +159,9 @@ You can control the selected images yourself in your component or just get the i
 <h3>Using Lightbox</h3>
 You can use lightbox when clicking on one of the images that display on the gallery.
 For the lightbox component library we use the <a target="_blank" href="https://www.npmjs.com/package/react-image-lightbox">react-image-lightbox library</a>.<br/>
-You can sent the props from this library and to send them as prop to library called <b>'lightBoxAdditionalProps'</b>.
-If you want to pass image caption and title you can pass that via the img props.
+You can sent the props from this library and to send them as prop to library called <b>'lightBoxAdditionalProps'</b>.</br>
+These properties not available to send as additional props: `mainSrc , nextSrc, prevSrc , onCloseRequest , onMovePrevRequest , onMoveNextRequest` because we already using them internally.<br/>
+If you want to pass `imageTitle` or `imageCaption` you can pass that via the img props.
 
 
 <br/><br/>
