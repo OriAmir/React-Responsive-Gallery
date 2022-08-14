@@ -152,17 +152,17 @@ You can control the selected images yourself in your component or just get the i
 
 :warning: If you will not pass the image <b>id</b> property to the image element the selected image will return as URL representation instead of id representation. In the case of a duplicate image URL, this feature will not work as expected.
 <br/>
-:warning: When passing the `onSelect` function to the library it's automatically move to <b>Uncontrolled</b> mode and will not manage the selected images any more.
+:warning: When passing the `onSelect` function to the library it's automatically move to <b>Uncontrolled</b> mode and will not manage the selected images any more.<br/>
 
 
-<br/>
 <h3>Using Lightbox</h3>
 You can use lightbox when clicking on one of the images that display on the gallery.
 For the lightbox component library we use the <a target="_blank" href="https://www.npmjs.com/package/react-image-lightbox">react-image-lightbox library</a>.<br/>
 You can sent the props from this library and to send them as prop to library called <b>'lightBoxAdditionalProps'</b>.</br>
-* These properties are not available to send as additional props (because we already using them internally):
-```mainSrc , nextSrc, prevSrc , onCloseRequest , onMovePrevRequest , onMoveNextRequest ``` <br/>
-* If you want to pass ```imageTitle``` or ```imageCaption``` you can pass that via the img props.
+
+:warning: These properties are not available to send as additional props (because we already using them internally):
+`mainSrc , nextSrc, prevSrc , onCloseRequest , onMovePrevRequest , onMoveNextRequest` <br/>
+:warning: If you want to pass `imageTitle` or `imageCaption` you can pass that via the img props.
 
 <br/><br/>
 
