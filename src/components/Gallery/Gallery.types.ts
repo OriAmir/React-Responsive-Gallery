@@ -42,6 +42,11 @@ export interface ImageElementProps {
   orderL?: number;
 }
 
+interface AdditionalILightBoxProps extends Omit<ILightBoxProps, "mainSrc" | "onCloseRequest"> { 
+    mainSrc?: string;
+    onCloseRequest?(): void;
+}
+
 export type ResponsiveGalleryProps = {
   images: Array<ImageElementProps>;
   screenWidthSizes?: ScreenWidthSizes;
@@ -51,7 +56,7 @@ export type ResponsiveGalleryProps = {
   imagesPaddingBottom?: OptionsWidthSizes;
   imagesStyle?: Record<string, unknown> | string;
   useLightBox?: boolean;
-  lightBoxAdditionalProps?: ILightBoxProps;
+  lightBoxAdditionalProps?: AdditionalILightBoxProps;
   selectable?: boolean;
   selectableItems?: Array<string>;
   onSelect?: (id: string, val: boolean) => void;
