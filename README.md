@@ -161,7 +161,7 @@ For the lightbox component library we use the <a target="_blank" href="https://w
 You can sent the props from this library and to send them as prop to library called <b>'lightBoxAdditionalProps'</b>.</br>
 
 :warning: These properties are not available to send as additional props (because we already using them internally):
-`mainSrc , nextSrc, prevSrc , onCloseRequest , onMovePrevRequest , onMoveNextRequest` <br/>
+`mainSrc, nextSrc, prevSrc, onCloseRequest, onMovePrevRequest, onMoveNextRequest` <br/>
 :warning: If you want to pass `imageTitle` or `imageCaption` you can pass that via the img props.
 
 <br/><br/>
