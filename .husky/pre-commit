@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npm run pre-commit
+
+# the command npx lint-staged in the pre-commit file means that on every commit git will
+# run scripts in the lint-staged command in package.json

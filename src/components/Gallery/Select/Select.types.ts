@@ -7,8 +7,8 @@ export type CheckboxProps = {
 };
 
 export type SelectProps = {
+  value: boolean;
   id: string;
-  selectableItems?: Array<string>;
   onSelect?: (id: string, val: boolean) => void;
   imagesMaxWidth: number;
 };

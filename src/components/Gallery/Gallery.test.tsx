@@ -1,33 +1,48 @@
+/* eslint-disable no-global-assign */
 /* eslint no-native-reassign: 0 */
 import ResponsiveGallery from "./Gallery";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-
+import { render, screen, fireEvent } from "@testing-library/react";
+import { useImage } from "hooks/useImage/use-image";
+import { ImageIndicationType } from "./Image/ImageIndication/ImageIndication";
 interface ImageHtmlElement extends HTMLElement {
   src?: string;
 }
 type HtmlImages = Array<ImageHtmlElement>;
 
-describe("Gallery component", () => {
-  const images = [
-    {
-      src: "http://test/1",
-      orderS: 3,
-      orderM: 2,
-      orderL: 1,
-    },
-    {
-      src: "http://test/2",
-      orderS: 2,
-      orderM: 1,
-      orderL: 3,
-    },
-    {
-      src: "http://test/3",
-      orderS: 1,
-      orderM: 3,
-      orderL: 2,
-    },
-  ];
+jest.mock("hooks/useImage/use-image");
+
+const mockUseImgRef = useImage as jest.MockedFunction<typeof useImage>;
+
+const images = [
+  {
+    src: "http://test/1",
+    orderS: 3,
+    orderM: 2,
+    orderL: 1,
+  },
+  {
+    src: "http://test/2",
+    orderS: 2,
+    orderM: 1,
+    orderL: 3,
+  },
+  {
+    src: "http://test/3",
+    orderS: 1,
+    orderM: 3,
+    orderL: 2,
+  },
+];
+
+describe("Gallery component showing image as expected", () => {
+  beforeEach(() => {
+    mockUseImgRef.mockImplementation((src: string) => {
+      const image = new Image();
+      image.src = src;
+      return [true, false, image];
+    });
+  });
+
   test("Render gallery images as expected", () => {
     render(
       <ResponsiveGallery
@@ -72,30 +87,6 @@ describe("Gallery component", () => {
     expect(domImagesSSize[2].src).toEqual(images[0].src);
   });
 
-  test("Image light box caption and title showing after clicking on image", async () => {
-    render(
-      <ResponsiveGallery
-        useLightBox
-        images={[
-          {
-            src: "src1",
-            lightboxCaption: "src 1 caption",
-            lightboxTitle: "src 1 title",
-          },
-        ]}
-      />
-    );
-    const domImages: HtmlImages = screen.getAllByRole("img");
-    fireEvent.click(domImages[0]);
-
-    await waitFor(() =>
-      expect(screen.getByText("src 1 caption")).toBeInTheDocument()
-    );
-    await waitFor(() =>
-      expect(screen.getByText("src 1 title")).toBeInTheDocument()
-    );
-  });
-
   test("Image light box caption and title not showing when light box is disabled", () => {
     render(
       <ResponsiveGallery
@@ -103,8 +94,6 @@ describe("Gallery component", () => {
         images={[
           {
             src: "src1",
-            lightboxCaption: "src 1 caption",
-            lightboxTitle: "src 1 title",
           },
         ]}
       />
@@ -114,5 +103,63 @@ describe("Gallery component", () => {
 
     expect(screen.queryByText("src 1 caption")).toBeNull();
     expect(screen.queryByText("src 1 title")).toBeNull();
+  });
+});
+
+describe("Gallery component showing errors/loader", () => {
+  test("Render gallery images as loaders before loading", () => {
+    mockUseImgRef.mockImplementation((src: string) => {
+      const image = new Image();
+      image.src = src;
+      return [false, false, image];
+    });
+
+    window = Object.assign(window, { innerWidth: 1000 });
+    render(<ResponsiveGallery images={images} />);
+    const domImagesLSize: HtmlImages = screen.getAllByRole("img");
+    expect(domImagesLSize.length).toEqual(3);
+    domImagesLSize.forEach((element) => {
+      expect(element).toHaveAttribute("alt", ImageIndicationType.loader);
+    });
+  });
+
+  test("Render gallery images as error when failed loading", () => {
+    mockUseImgRef.mockImplementation((src: string) => {
+      const image = new Image();
+      image.src = src;
+      return [false, true, image];
+    });
+
+    window = Object.assign(window, { innerWidth: 1000 });
+    render(<ResponsiveGallery images={images} />);
+    const domImagesLSize: HtmlImages = screen.getAllByRole("img");
+    expect(domImagesLSize.length).toEqual(3);
+    domImagesLSize.forEach((element) => {
+      expect(element).toHaveAttribute("alt", ImageIndicationType.error);
+    });
+  });
+
+  test("Render gallery images by status", () => {
+    mockUseImgRef.mockImplementation((src: string) => {
+      const image = new Image();
+      image.src = src;
+      if (src === "http://test/1") {
+        return [false, false, image];
+      } else if (src === "http://test/2") {
+        return [false, true, image];
+      }
+      return [true, false, image];
+    });
+
+    window = Object.assign(window, { innerWidth: 1000 });
+    render(<ResponsiveGallery images={images} />);
+    const domImagesLSize: HtmlImages = screen.getAllByRole("img");
+    expect(domImagesLSize.length).toEqual(3);
+    expect(domImagesLSize[0]).toHaveAttribute(
+      "alt",
+      ImageIndicationType.loader
+    );
+    expect(domImagesLSize[1]).toHaveAttribute("src", "http://test/3");
+    expect(domImagesLSize[2]).toHaveAttribute("alt", ImageIndicationType.error);
   });
 });

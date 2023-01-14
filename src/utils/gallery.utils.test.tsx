@@ -6,6 +6,8 @@ import {
   getOrderGroup,
   getImagesCols,
   getSelectedImages,
+  isImageSelected,
+  memoImage,
 } from "./gallery.utils";
 import {
   WidthOptions,
@@ -238,5 +240,99 @@ describe("Gallery utils functions", () => {
       "</div>";
     const res = getSelectedImages();
     expect(res).toEqual(["test1", "test3"]);
+  });
+
+  test("isImageSelected should return true when an image is selected by id", () => {
+    const img = { id: "1", src: "path/to/image" };
+    const selectabletestems = ["1"];
+    expect(isImageSelected(img, selectabletestems)).toBe(true);
+  });
+
+  test("isImageSelected should return true when an image is selected by src", () => {
+    const img = { id: "1", src: "path/to/image" };
+    const selectabletestems = ["path/to/image"];
+    expect(isImageSelected(img, selectabletestems)).toBe(true);
+  });
+
+  test("isImageSelected should return false when an image is not selected", () => {
+    const img = { id: "1", src: "path/to/image" };
+    const selectabletestems = ["2"];
+    expect(isImageSelected(img, selectabletestems)).toBe(false);
+  });
+
+  test("memoImage should return true when only the selected property changes", () => {
+    const prev = {
+      img: { src: "path/to/prev" },
+      maxWidth: 100,
+      paddingBottom: 20,
+      selected: true,
+    };
+    const next = {
+      img: { src: "path/to/prev" },
+      maxWidth: 100,
+      paddingBottom: 20,
+      selected: false,
+    };
+    expect(memoImage(prev, next)).toBe(true);
+  });
+  test("memoImage should return false when img.src changes", () => {
+    const prev = {
+      img: { src: "path/to/prev" },
+      maxWidth: 100,
+      paddingBottom: 20,
+      selected: true,
+    };
+    const next = {
+      img: { src: "path/to/next" },
+      maxWidth: 100,
+      paddingBottom: 20,
+      selected: true,
+    };
+    expect(memoImage(prev, next)).toBe(false);
+  });
+  test("memoImage should return false when maxWidth changes", () => {
+    const prev = {
+      img: { src: "path/to/prev" },
+      maxWidth: 100,
+      paddingBottom: 20,
+      selected: true,
+    };
+    const next = {
+      img: { src: "path/to/prev" },
+      maxWidth: 200,
+      paddingBottom: 20,
+      selected: true,
+    };
+    expect(memoImage(prev, next)).toBe(false);
+  });
+  test("memoImage should return false when paddingBottom changes", () => {
+    const prev = {
+      img: { src: "path/to/prev" },
+      maxWidth: 100,
+      paddingBottom: 20,
+      selected: true,
+    };
+    const next = {
+      img: { src: "path/to/prev" },
+      maxWidth: 100,
+      paddingBottom: 30,
+      selected: true,
+    };
+    expect(memoImage(prev, next)).toBe(false);
+  });
+  test("memoImage should return true when no properties change", () => {
+    const prev = {
+      img: { src: "path/to/prev" },
+      maxWidth: 100,
+      paddingBottom: 20,
+      selected: true,
+    };
+    const next = {
+      img: { src: "path/to/prev" },
+      maxWidth: 100,
+      paddingBottom: 20,
+      selected: true,
+    };
+    expect(memoImage(prev, next)).toBe(true);
   });
 });

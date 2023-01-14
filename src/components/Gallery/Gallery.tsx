@@ -1,11 +1,4 @@
-import { useMemo, useReducer, useCallback } from "react";
-import { nanoid } from "nanoid";
-import ImagesLightBox from "./ImagesLightBox/ImagesLightBox";
-import {
-  lightBoxReducer,
-  initialState,
-} from "../../reducers/lightBox/light-box-reducer";
-import { LightboxActionType } from "../../reducers/lightBox/light-box-actions-type";
+import { useMemo, useCallback, useRef, lazy, Suspense } from "react";
 import Row from "../Grid/Row";
 import Col from "../Grid/Col";
 import Image from "./Image/Image";
@@ -21,6 +14,7 @@ import {
   getGallerySizes,
   sortImagesByOrderGroup,
   getImagesCols,
+  isImageSelected,
 } from "../../utils/gallery.utils";
 import {
   ResponsiveGalleryProps,
@@ -29,9 +23,14 @@ import {
   ImageElementProps,
   ImagesCols,
 } from "./Gallery.types";
-import Select from "./Select/Select";
 import ImageWrapper from "./ImageWrapper/ImageWrapper";
-import "react-image-lightbox/style.css";
+import { ImagesLightBoxHandle } from "./ImagesLightBox/ImagesLightBox.types";
+
+const ImagesLightBoxComponent = lazy(() =>
+  import("./ImagesLightBox/ImagesLightBox").then((module) => ({
+    default: module.ImagesLightBox,
+  }))
+);
 
 const Gallery = ({
   images,
@@ -46,6 +45,8 @@ const Gallery = ({
   selectable,
   selectableItems,
   onSelect,
+  customLoader,
+  customError,
 }: ResponsiveGalleryProps) => {
   const { width } = useScreenDimensions(screenWidthSizes);
   const userGalleryOptions: GalleryWidthOptions = {
@@ -56,10 +57,7 @@ const Gallery = ({
     imagesPaddingBottom,
   };
   const gallerySizes: GallerySizes = getGallerySizes(width, userGalleryOptions);
-  const [lightBoxValues, lightBoxDispatch] = useReducer(
-    lightBoxReducer,
-    initialState
-  );
+  const lightboxRef = useRef<ImagesLightBoxHandle>(null);
 
   const sortedImages: Array<ImageElementProps> = useMemo(
     () => sortImagesByOrderGroup(images, width, screenWidthSizes),
@@ -73,53 +71,49 @@ const Gallery = ({
   const onImageClick = useCallback(
     (imgIndex: number, colIndex: number) => {
       if (useLightBox) {
-        lightBoxDispatch({
-          type: LightboxActionType.LIGHT_BOX_OPEN_BY_PHOTO_INDEX,
-          payload:
-            imgIndex === 0
-              ? colIndex
-              : colIndex + imgIndex * gallerySizes.numOfImagesPerRow,
-        });
+        lightboxRef?.current?.openImageByIndex(imgIndex, colIndex);
       }
     },
-    [gallerySizes.numOfImagesPerRow, useLightBox]
+    [useLightBox]
   );
 
   return (
     <>
-      {useLightBox && lightBoxValues.isOpen && (
-        <ImagesLightBox
-          imagesLightbox={sortedImages}
-          photoIndex={lightBoxValues.photoIndex}
-          lightBoxDispatch={lightBoxDispatch}
-          lightBoxAdditionalProps={lightBoxAdditionalProps}
-        />
+      {useLightBox && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <ImagesLightBoxComponent
+            imagesLightbox={sortedImages}
+            ref={lightboxRef}
+            lightBoxAdditionalProps={lightBoxAdditionalProps}
+            numOfImagesPerRow={gallerySizes.numOfImagesPerRow}
+          />
+        </Suspense>
       )}
       <Row>
         {Object.keys(imagesCols).map((key, colIndex) => (
           <Col
-            key={nanoid()}
+            key={`col-${key}`}
             colSize={100 / gallerySizes.numOfImagesPerRow}
             colPadding={gallerySizes.colsPadding}
           >
             {imagesCols[key].map((img: ImageElementProps, imgIndex: number) => (
-              <ImageWrapper key={img.id || nanoid()}>
-                {selectable && (
-                  <Select
-                    id={img?.id || img.src}
-                    selectableItems={selectableItems}
-                    onSelect={onSelect}
-                    imagesMaxWidth={gallerySizes.imagesMaxWidth}
-                  />
-                )}
+              <ImageWrapper key={img.id || img.src}>
                 <Image
-                  src={img.src}
+                  img={img}
                   maxWidth={gallerySizes.imagesMaxWidth}
-                  alt={img.alt}
                   paddingBottom={gallerySizes.imagesPaddingBottom}
                   className={`${imagesStyle} ${img.imgClassName || ""}`}
                   useLightBox={useLightBox}
                   onClick={() => onImageClick(imgIndex, colIndex)}
+                  customLoader={customLoader}
+                  customError={customError}
+                  selectable={selectable}
+                  selected={
+                    selectableItems
+                      ? isImageSelected(img, selectableItems)
+                      : false
+                  }
+                  onSelect={onSelect}
                 />
               </ImageWrapper>
             ))}
@@ -139,6 +133,8 @@ Gallery.defaultProps = {
   imagesStyle: "",
   useLightBox: false,
   selectable: false,
+  customLoader: null,
+  customError: null,
 };
 
 export default Gallery;

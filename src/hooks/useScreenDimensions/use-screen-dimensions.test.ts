@@ -1,5 +1,5 @@
 import { fireEvent } from "@testing-library/react";
-import { act, renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 import { useScreenDimensions } from "./use-screen-dimensions";
 
 describe("use screen dimensions hook", () => {
@@ -7,10 +7,8 @@ describe("use screen dimensions hook", () => {
     window.innerWidth = oldWidth;
     const { result } = renderHook(() => useScreenDimensions());
     expect(result.current.width).toEqual(oldWidth);
-    act(() => {
-      window.innerWidth = newWidth;
-      fireEvent(window, new Event("resize"));
-    });
+    window.innerWidth = newWidth;
+    fireEvent(window, new Event("resize"));
     return result.current.width;
   };
 

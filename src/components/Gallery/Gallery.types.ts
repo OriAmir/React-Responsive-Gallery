@@ -1,4 +1,4 @@
-import { ILightBoxProps } from "react-image-lightbox";
+import { LightboxProps } from "yet-another-react-lightbox";
 
 export type OptionsWidthSizes = {
   xs: number;
@@ -35,23 +35,16 @@ export interface ImageElementProps {
   id?: string;
   alt?: string;
   imgClassName?: string | Record<string, unknown>;
-  lightboxCaption?: string;
-  lightboxTitle?: string;
+  title?: string;
+  description?: string;
   orderS?: number;
   orderM?: number;
   orderL?: number;
 }
 
 export type AdditionalILightBoxProps = Omit<
-  ILightBoxProps,
-  | "mainSrc"
-  | "nextSrc"
-  | "prevSrc"
-  | "onCloseRequest"
-  | "onMovePrevRequest"
-  | "onMoveNextRequest"
-  | "imageTitle"
-  | "imageCaption"
+  LightboxProps,
+  "open" | "close" | "slides" | "index"
 >;
 
 export type ResponsiveGalleryProps = {
@@ -67,6 +60,8 @@ export type ResponsiveGalleryProps = {
   selectable?: boolean;
   selectableItems?: Array<string>;
   onSelect?: (id: string, val: boolean) => void;
+  customLoader?: React.ReactElement;
+  customError?: React.ReactElement;
 };
 
 export type ImagesCols = Array<ImageElementProps>;
