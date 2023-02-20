@@ -1,13 +1,19 @@
 {
   "name": "react-responsive-gallery",
   "type": "module",
-  "version": "3.0.0-beta.4",
+  "version": "3.0.0-beta.5",
   "description": "React responsive gallery",
   "files": [
     "dist"
   ],
-  "main": "./dist/react-responsive-gallery.js",
+  "main": "./dist/react-responsive-gallery.umd.cjs",
   "module": "./dist/react-responsive-gallery.js",
+  "exports": {
+    ".": {
+      "import": "./dist/react-responsive-gallery.js",
+      "require": "./dist/react-responsive-gallery.umd.cjs"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/OriAmir/React-Responsive-Gallery"
@@ -70,6 +76,7 @@
     "ts-node": "^10.9.1",
     "typescript": "^4.9.4",
     "vite": "^4.0.4",
+    "vite-plugin-css-injected-by-js": "^2.3.1",
     "vite-plugin-dts": "1.7.1",
     "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-libcss": "^1.0.5",
