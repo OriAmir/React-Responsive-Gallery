@@ -3,8 +3,8 @@ import { resolve } from "node:path";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 import tsConfigPaths from "vite-tsconfig-paths";
-import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 import eslint from "vite-plugin-eslint";
+import libCss from "vite-plugin-libcss";
 
 export default defineConfig((configEnv) => ({
   define: {
@@ -20,7 +20,7 @@ export default defineConfig((configEnv) => ({
       outputDir: "dist/declarations",
       insertTypesEntry: true,
     }),
-    cssInjectedByJsPlugin(),
+    libCss(),
   ],
   build: {
     cssCodeSplit: true,
