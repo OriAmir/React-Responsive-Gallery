@@ -28,7 +28,7 @@ or
 
 <h3>Playground</h3>
 You can play with the library in 
-<a href="https://codesandbox.io/s/react-responsive-gallery-playground-dpqtg" target="_blank"> Codesandbox</a> or in
+<a href="https://codesandbox.io/s/react-responsive-gallery-pt5d4g?file=/src/App.tsx" target="_blank"> Codesandbox</a> or in
 <a href="https://stackblitz.com/edit/react-responsive-gallery" target="_blank"> Stackblitz</a> .
 
 <br/>
