@@ -26,7 +26,6 @@ export default defineConfig((configEnv) => ({
     cssCodeSplit: true,
     // sourcemap: true --> for dev debug,
     lib: {
-      formats: ["es"],
       entry: resolve("src", "index.tsx"),
       fileName: "react-responsive-gallery",
       name: "ReactResponsiveGallery",
