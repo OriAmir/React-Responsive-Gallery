@@ -72,10 +72,10 @@
     "vite-plugin-dts": "1.7.1",
     "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-libcss": "^1.0.5",
-    "vite-tsconfig-paths": "^4.0.3"
+    "vite-tsconfig-paths": "^4.0.3",
+    "@types/node": "^18.13.0"
   },
   "dependencies": {
-    "@types/node": "^18.13.0",
     "styled-components": "^5.3.6",
     "yet-another-react-lightbox": "^2.2.7"
   }
