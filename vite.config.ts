@@ -3,8 +3,8 @@ import { resolve } from "node:path";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 import tsConfigPaths from "vite-tsconfig-paths";
-import libCss from "vite-plugin-libcss";
 import eslint from "vite-plugin-eslint";
+import libCss from "vite-plugin-libcss";
 
 export default defineConfig((configEnv) => ({
   define: {
@@ -14,18 +14,19 @@ export default defineConfig((configEnv) => ({
     eslint({
       failOnWarning: true,
     }),
-    libCss(),
     react(),
     tsConfigPaths(),
     dts({
       outputDir: "dist/declarations",
       insertTypesEntry: true,
     }),
+    libCss(),
   ],
   build: {
-    // sourcemap: true --> for dev debug,
     cssCodeSplit: true,
+    // sourcemap: true --> for dev debug,
     lib: {
+      formats: ["es"],
       entry: resolve("src", "index.tsx"),
       fileName: "react-responsive-gallery",
       name: "ReactResponsiveGallery",
