@@ -6,14 +6,8 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/react-responsive-gallery.umd.cjs",
+  "main": "./dist/react-responsive-gallery.js",
   "module": "./dist/react-responsive-gallery.js",
-  "exports": {
-    ".": {
-      "import": "./dist/react-responsive-gallery.js",
-      "require": "./dist/react-responsive-gallery.umd.cjs"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/OriAmir/React-Responsive-Gallery"
@@ -83,6 +77,7 @@
     "@types/node": "^18.13.0"
   },
   "dependencies": {
+    "@types/node": "^18.13.0",
     "styled-components": "^5.3.6",
     "yet-another-react-lightbox": "^2.2.7"
   }
