@@ -1,12 +1,12 @@
 {
   "name": "react-responsive-gallery",
   "type": "module",
-  "version": "3.0.2",
+  "version": "3.0.0-beta.2",
   "description": "React responsive gallery",
   "files": [
     "dist"
   ],
-  "main": "./dist/react-responsive-gallery.umd.cjs",
+  "main": "./dist/react-responsive-gallery.js",
   "module": "./dist/react-responsive-gallery.js",
   "exports": {
     ".": {
