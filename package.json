@@ -1,7 +1,7 @@
 {
   "name": "react-responsive-gallery",
   "type": "module",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "React responsive gallery",
   "files": [
     "dist"
@@ -79,6 +79,7 @@
     "vite-plugin-css-injected-by-js": "^2.3.1",
     "vite-plugin-dts": "1.7.1",
     "vite-plugin-eslint": "^1.8.1",
+    "vite-plugin-libcss": "^1.0.5",
     "vite-tsconfig-paths": "^4.0.3"
   },
   "dependencies": {
