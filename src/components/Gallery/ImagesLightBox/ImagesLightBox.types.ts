@@ -5,7 +5,10 @@ import {
 
 export type ImageLightBoxProps = {
   imagesLightbox: Array<ImageElementProps>;
-  photoIndex: number;
-  lightBoxDispatch: (obj: { type: string; payload?: number | string }) => void;
   lightBoxAdditionalProps?: AdditionalILightBoxProps;
+  numOfImagesPerRow: number;
+};
+
+export type ImagesLightBoxHandle = {
+  openImageByIndex: (imgIndex: number, colIndex: number) => void;
 };

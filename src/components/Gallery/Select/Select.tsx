@@ -1,11 +1,5 @@
-import {
-  selectReducer,
-  initialState as selectInitialState,
-} from "reducers/select/select-reducer";
-import { SelectActionType } from "reducers/select/select-action-types";
-import { useReducer } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import { convertSelectableItems } from "./Select.utils";
 import { CheckboxProps, SelectProps } from "./Select.types";
 import { StyledSelect } from "./StyledSelect";
 
@@ -28,23 +22,17 @@ const StyledDiv = styled.div<{ imagesMaxWidth: number }>`
 `;
 
 const Select = ({
+  value = false,
   id,
-  selectableItems,
   onSelect,
   imagesMaxWidth,
 }: SelectProps) => {
-  const [selectedValues, selectDispatch] = useReducer(
-    selectReducer,
-    convertSelectableItems(selectableItems) || selectInitialState
-  );
-
+  const [check, setCheck] = useState(value);
   const onSelectChange = (id: string, val: boolean) => {
-    selectDispatch({
-      type: val
-        ? SelectActionType.SELECT_SET_IMAGE
-        : SelectActionType.DESELECT_IMAGE,
-      payload: id,
-    });
+    if (onSelect) {
+      onSelect(id, val);
+    }
+    setCheck(val);
   };
 
   return (
@@ -52,14 +40,10 @@ const Select = ({
       <StyledSelect>
         <StyledCheckbox
           className="select-input"
-          onChange={(e) => {
-            onSelect
-              ? onSelect(id, e.target.checked)
-              : onSelectChange(id, e.target.checked);
-          }}
+          onChange={(e) => onSelectChange(id, e.target.checked)}
           value={id}
           id={`checkbox-${id}`}
-          checked={selectedValues?.[id] || false}
+          checked={check}
         />
         <label htmlFor={`checkbox-${id}`}></label>
       </StyledSelect>

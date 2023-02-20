@@ -1,4 +1,4 @@
-# React-Responsive-Gallery - Responsive Gallery for react application. 
+# React-Responsive-Gallery - Responsive Gallery for react application.
 
 ![example workflow](https://github.com/OriAmir/react-responsive-gallery/actions/workflows/npm-publish.yml/badge.svg)
 
@@ -25,11 +25,6 @@ or
 ```
 
 <br/>
-<h3>DEMO</h3>
-<a href="https://react-responsive-gallery-demo.herokuapp.com" target="_blank"> Try out the live gallery demo .</a> 
-<i>(it's take few seconds until app is loading)</i><br/>
-* Some of the gallery features are not available in the live demo : cols padding , imagesStyle and images order(s,m,l).
-<br/><br/>
 
 <h3>Playground</h3>
 You can play with the library in 
@@ -118,6 +113,8 @@ You can change the group sizes by your preferences , the default group values ar
 | selectable | boolean  | Images could be selectable. [Read more here](#selectable-images) | false | Optional
 | selectableItems | Array  | Chosen images as part of the selectable items. | None | Optional
 | onSelect | Function - (id:string,val:boolean)=>void  | Callback function when image is selected. | None | Optional
+| customLoader | React component   | Loader show when image is loading | <img src="./src/assets/images/loader.svg" alt="loader" width="50"  height="50"/> | Optional
+| customError | React component  | Error show when image failed to load| <img src="./src/assets/images/error.svg" alt="error" width="50"  height="50"/> | Optional
 
 
 <br/><br/>
@@ -127,17 +124,21 @@ You can change the group sizes by your preferences , the default group values ar
 | Property  | Type | Description  | is Required
 | :------------- | :------------- | :------------- | :-------------
 | src | String | Image source url   | <b>Required</b>
-| id | String | Image Id ([Read more here](#if-you-will-not-pass-the-image))   | Optional
+| id | String | Image Id ([Read more here](#if-you-will-not-pass-the-image-id))   | Optional (is src is unique)
 | alt | String | Image alternate text  | Optional
 | orderS |  Number  | Image order in small group sizes(xs, s)   |  Optional
 | orderM  | Number| Image order in medium group sizes (m,l) |Optional
 | orderL  |  Number | Image order in large group sizes(xl,xxl) | Optional
 | imgClassName | Object / String | Image style object/string for styling specific image | Optional
-| lightboxCaption | String | Lightbox image caption | Optional
-| lightboxTitle | String | Lightbox image title | Optional
+| title | String | Lightbox image title | Optional
+| description | String | Lightbox image caption | Optional
 
 :warning: if you set orderS/orderL/orderM property only to part of the images the library first sorts the images with the property and then renders the other images.
 <br/>
+
+<h4>If you will not pass the image id</h4>
+We need some unique identifier for every image. Usually we use the `src` attribute but it's will be valid only if the `src` is unique. The image `id` is required if the image src is not unique.<br/>
+If `src` property is not unique and image `id` is not supply the library will not work as expected.
 
 <br/>
 <h3>Selectable Images</h3>
@@ -157,12 +158,11 @@ You can control the selected images yourself in your component or just get the i
 
 <h3>Using Lightbox</h3>
 You can use lightbox when clicking on one of the images that display on the gallery.
-For the lightbox component library we use the <a target="_blank" href="https://www.npmjs.com/package/react-image-lightbox">react-image-lightbox library</a>.<br/>
+For the lightbox component library we use the <a target="_blank" href="https://github.com/igordanchenko/yet-another-react-lightbox">yet-another-react-lightbox library</a>.<br/>
 You can sent the props from this library and to send them as prop to library called <b>'lightBoxAdditionalProps'</b>.</br>
 
 :warning: These properties are not available to send as additional props (because we already using them internally):
-`mainSrc, nextSrc, prevSrc, onCloseRequest, onMovePrevRequest, onMoveNextRequest` <br/>
-:warning: If you want to pass `imageTitle` or `imageCaption` you can pass that via the img props.
+`open, close, slides` <br/>
 
 <br/><br/>
 

@@ -15,6 +15,7 @@ import {
   ImageElementProps,
   ImagesCols,
 } from "../components/Gallery/Gallery.types";
+import { ImageProps } from "components/Gallery/Image/Image.types";
 
 const getOrderGroup = (
   width: number,
@@ -171,6 +172,30 @@ const getSelectedImages = () => {
   return selectedImages;
 };
 
+const isImageSelected = (
+  img: ImageElementProps,
+  selectableItems: Array<string>
+): boolean => {
+  const id = img?.id && selectableItems?.indexOf(img.id) !== -1;
+  const src = selectableItems?.indexOf(img.src) !== -1;
+  return id || src;
+};
+
+const memoImage = (prev: ImageProps, next: ImageProps): boolean => {
+  const src = prev.img.src !== next.img.src;
+  const maxWidth = prev.maxWidth !== next.maxWidth;
+  const padding = prev.paddingBottom !== next.paddingBottom;
+  const lightBox = prev.useLightBox !== next.useLightBox;
+
+  //don't memo,we need to render since image data is change
+  if (src || maxWidth || padding || lightBox) {
+    return false;
+  }
+
+  //memo since only the selected value changed
+  return true;
+};
+
 export {
   getGallerySizes,
   getSizeGroup,
@@ -179,4 +204,6 @@ export {
   getOrderGroup,
   getImagesCols,
   getSelectedImages,
+  isImageSelected,
+  memoImage,
 };
