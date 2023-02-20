@@ -1,19 +1,13 @@
 {
   "name": "react-responsive-gallery",
   "type": "module",
-  "version": "3.0.0-beta.5",
+  "version": "3.0.0-beta.6",
   "description": "React responsive gallery",
   "files": [
     "dist"
   ],
-  "main": "./dist/react-responsive-gallery.umd.cjs",
+  "main": "./dist/react-responsive-gallery.js",
   "module": "./dist/react-responsive-gallery.js",
-  "exports": {
-    ".": {
-      "import": "./dist/react-responsive-gallery.js",
-      "require": "./dist/react-responsive-gallery.umd.cjs"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/OriAmir/React-Responsive-Gallery"
@@ -49,7 +43,6 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@types/jest": "^29.2.5",
-    "@types/node": "^18.13.0",
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.48.1",
     "@typescript-eslint/parser": "^5.48.1",
@@ -79,10 +72,10 @@
     "vite-plugin-css-injected-by-js": "^2.3.1",
     "vite-plugin-dts": "1.7.1",
     "vite-plugin-eslint": "^1.8.1",
-    "vite-plugin-libcss": "^1.0.5",
     "vite-tsconfig-paths": "^4.0.3"
   },
   "dependencies": {
+    "@types/node": "^18.13.0",
     "styled-components": "^5.3.6",
     "yet-another-react-lightbox": "^2.2.7"
   }
