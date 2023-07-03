@@ -6,7 +6,7 @@ import tsConfigPaths from "vite-tsconfig-paths";
 import eslint from "vite-plugin-eslint";
 import libCss from "vite-plugin-libcss";
 
-export default defineConfig((configEnv) => ({
+export default defineConfig(() => ({
   define: {
     global: {},
   },
@@ -17,14 +17,14 @@ export default defineConfig((configEnv) => ({
     react(),
     tsConfigPaths(),
     dts({
-      outputDir: "dist/declarations",
+      outDir: "dist/declarations",
       insertTypesEntry: true,
     }),
     libCss(),
   ],
   build: {
     cssCodeSplit: true,
-    // sourcemap: true --> for dev debug,
+    sourcemap: true, // --> for dev debug,
     lib: {
       formats: ["es"],
       entry: resolve("src", "index.tsx"),

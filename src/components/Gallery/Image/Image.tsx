@@ -1,12 +1,11 @@
 import Select from "../Select/Select";
 import { useImage } from "hooks/useImage/use-image";
-import ImageIndication, {
-  ImageIndicationType,
-} from "./ImageIndication/ImageIndication";
-import StyledImage from "./StyledImage";
+import MediaIndication from "../MediaIndication/MediaIndication";
+import { StyledImage, StyledButtonImage } from "./StyledImage";
 import { memo } from "react";
 import { memoImage } from "utils/gallery.utils";
 import { ImageProps } from "./Image.types";
+import { MediaIndicationType } from "../MediaIndication/Mediaindication.types";
 
 const Image = ({
   img,
@@ -20,42 +19,49 @@ const Image = ({
   selectable,
   selected = false,
   onSelect,
+  style,
 }: ImageProps) => {
   const [loaded, err, image] = useImage(img.src);
   return (
     <>
+      <StyledButtonImage
+        $maxWidth={maxWidth}
+        onClick={onClick}
+        $paddingBottom={paddingBottom}
+        $useLightBox={useLightBox}
+        style={{
+          display: !err && loaded ? "block" : "none",
+        }}
+      >
+        <StyledImage
+          className={className}
+          style={style}
+          src={image?.src || ""}
+          alt={img.alt || ""}
+        />
+      </StyledButtonImage>
       {selectable && loaded && !err && (
         <Select
           id={img.id || img.src}
           value={selected}
           onSelect={onSelect}
-          imagesMaxWidth={maxWidth}
+          mediaMaxWidth={maxWidth}
         />
       )}
       {!loaded && !err && (
-        <ImageIndication
+        <MediaIndication
           paddingBottom={paddingBottom}
           custom={customLoader}
-          type={ImageIndicationType.loader}
+          type={MediaIndicationType.loader}
         />
       )}
       {err && (
-        <ImageIndication
+        <MediaIndication
           paddingBottom={paddingBottom}
           custom={customError}
-          type={ImageIndicationType.error}
+          type={MediaIndicationType.error}
         />
       )}
-      <StyledImage
-        className={className}
-        src={image?.src || ""}
-        show={!err && loaded}
-        alt={img.alt || ""}
-        maxWidth={maxWidth}
-        paddingBottom={paddingBottom}
-        useLightBox={useLightBox}
-        onClick={onClick}
-      />
     </>
   );
 };

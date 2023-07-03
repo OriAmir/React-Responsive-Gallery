@@ -2,25 +2,25 @@ import {
   getGallerySizes,
   getSizeGroup,
   isWidthGroupsDifferences,
-  sortImagesByOrderGroup,
+  sortMediaByOrderGroup,
   getOrderGroup,
-  getImagesCols,
-  getSelectedImages,
-  isImageSelected,
+  getMediaCols,
+  getSelectedMedia,
+  isMediaSelected,
   memoImage,
 } from "./gallery.utils";
 import {
   WidthOptions,
-  ImageOrderOptions,
+  MediaOrderOptions,
   GallerySizes,
-  ImagesCols,
-  ImageElementProps,
+  MediaCols,
+  MediaElementProps,
 } from "components/Gallery/Gallery.types";
 import {
-  numOfImagesPerRow,
-  imagesMaxWidth,
+  numOfMediaPerRow,
+  mediaMaxWidth,
   colsPadding,
-  imagesPaddingBottom,
+  mediaPaddingBottom,
   screenWidthSizes as screenWidthSizesObj,
 } from "constants/responsive";
 
@@ -42,11 +42,11 @@ describe("Gallery utils functions", () => {
   });
 
   test("width group order return correctly", () => {
-    expect(getOrderGroup(screenWidthSizes.xs)).toBe(ImageOrderOptions.s);
-    expect(getOrderGroup(screenWidthSizes.s)).toBe(ImageOrderOptions.s);
-    expect(getOrderGroup(screenWidthSizes.m)).toBe(ImageOrderOptions.m);
-    expect(getOrderGroup(screenWidthSizes.l)).toBe(ImageOrderOptions.m);
-    expect(getOrderGroup(screenWidthSizes.xl)).toBe(ImageOrderOptions.l);
+    expect(getOrderGroup(screenWidthSizes.xs)).toBe(MediaOrderOptions.s);
+    expect(getOrderGroup(screenWidthSizes.s)).toBe(MediaOrderOptions.s);
+    expect(getOrderGroup(screenWidthSizes.m)).toBe(MediaOrderOptions.m);
+    expect(getOrderGroup(screenWidthSizes.l)).toBe(MediaOrderOptions.m);
+    expect(getOrderGroup(screenWidthSizes.xl)).toBe(MediaOrderOptions.l);
   });
 
   test("width group different boolean return correctly", () => {
@@ -64,96 +64,87 @@ describe("Gallery utils functions", () => {
     ).toBeTruthy();
   });
 
-  test("images cols return correctly", () => {
-    expect(getImagesCols([], 0)).toMatchObject({});
-    expect(getImagesCols([], 1)).toMatchObject({});
+  test("media cols return correctly", () => {
+    expect(getMediaCols([], 0)).toMatchObject({});
+    expect(getMediaCols([], 1)).toMatchObject({});
 
-    const imgData: ImageElementProps = { src: "http://test" };
-    const images: Array<ImageElementProps> = [
-      imgData,
-      imgData,
-      imgData,
-      imgData,
-      imgData,
+    const mediaData: MediaElementProps = { src: "http://test" };
+    const media: Array<MediaElementProps> = [
+      mediaData,
+      mediaData,
+      mediaData,
+      mediaData,
+      mediaData,
     ];
 
-    const oneCol: ImagesCols | Record<string, never> = getImagesCols(images, 1);
-    expect(oneCol).toMatchObject({ 0: images });
+    const oneCol: MediaCols | Record<string, never> = getMediaCols(media, 1);
+    expect(oneCol).toMatchObject({ 0: media });
 
-    const twoCols: ImagesCols | Record<string, never> = getImagesCols(
-      images,
-      2
-    );
+    const twoCols: MediaCols | Record<string, never> = getMediaCols(media, 2);
     expect(twoCols).toMatchObject({
-      0: [imgData, imgData, imgData],
-      1: [imgData, imgData],
+      0: [mediaData, mediaData, mediaData],
+      1: [mediaData, mediaData],
     });
 
-    const threeCols: ImagesCols | Record<string, never> = getImagesCols(
-      images,
-      3
-    );
+    const threeCols: MediaCols | Record<string, never> = getMediaCols(media, 3);
     expect(threeCols).toMatchObject({
-      0: [imgData, imgData],
-      1: [imgData, imgData],
-      2: [imgData],
+      0: [mediaData, mediaData],
+      1: [mediaData, mediaData],
+      2: [mediaData],
     });
 
-    const fourCols: ImagesCols | Record<string, never> = getImagesCols(
-      images,
-      4
-    );
+    const fourCols: MediaCols | Record<string, never> = getMediaCols(media, 4);
     expect(fourCols).toMatchObject({
-      0: [imgData, imgData],
-      1: [imgData],
-      2: [imgData],
-      3: [imgData],
+      0: [mediaData, mediaData],
+      1: [mediaData],
+      2: [mediaData],
+      3: [mediaData],
     });
   });
 
-  test("sort array of images return correctly", () => {
-    expect(sortImagesByOrderGroup([], 200)).toEqual([]);
+  test("sort array of media return correctly", () => {
+    expect(sortMediaByOrderGroup([], 200)).toEqual([]);
 
-    const imgS1: ImageElementProps = { src: "img1", orderS: 4 };
-    const imgS2: ImageElementProps = { src: "img2", orderS: 1 };
-    const imgS3: ImageElementProps = { src: "img3", orderS: 3 };
-    const imgS4: ImageElementProps = { src: "img4", orderS: 2 };
-    const images = [imgS1, imgS2, imgS3, imgS4];
-    expect(sortImagesByOrderGroup(images, 200)).toEqual([
+    const imgS1: MediaElementProps = { src: "img1", orderS: 4 };
+    const imgS2: MediaElementProps = { src: "img2", orderS: 1 };
+    const imgS3: MediaElementProps = { src: "img3", orderS: 3 };
+    const imgS4: MediaElementProps = { src: "img4", orderS: 2 };
+    const media = [imgS1, imgS2, imgS3, imgS4];
+    expect(sortMediaByOrderGroup(media, 200)).toEqual([
       imgS2,
       imgS4,
       imgS3,
       imgS1,
     ]);
-    const sameOrder = sortImagesByOrderGroup([imgS1, imgS2, imgS3, imgS4], 769);
-    expect(sameOrder).toEqual(images);
+    const sameOrder = sortMediaByOrderGroup([imgS1, imgS2, imgS3, imgS4], 769);
+    expect(sameOrder).toEqual(media);
 
-    const sameOrder1 = sortImagesByOrderGroup(
+    const sameOrder1 = sortMediaByOrderGroup(
       [imgS1, imgS2, imgS3, imgS4],
       1201
     );
-    expect(sameOrder1).toEqual(images);
+    expect(sameOrder1).toEqual(media);
 
-    const imgML1: ImageElementProps = { src: "img1", orderM: 4, orderL: 2 };
-    const imgML2: ImageElementProps = { src: "img2", orderM: 1, orderL: 1 };
-    const imgML3: ImageElementProps = { src: "img3", orderM: 3, orderL: 4 };
-    const imgML4: ImageElementProps = { src: "img4", orderM: 2, orderL: 3 };
+    const imgML1: MediaElementProps = { src: "img1", orderM: 4, orderL: 2 };
+    const imgML2: MediaElementProps = { src: "img2", orderM: 1, orderL: 1 };
+    const imgML3: MediaElementProps = { src: "img3", orderM: 3, orderL: 4 };
+    const imgML4: MediaElementProps = { src: "img4", orderM: 2, orderL: 3 };
 
     const images1 = [imgML1, imgML2, imgML3, imgML4];
-    expect(sortImagesByOrderGroup(images1, 1201)).toEqual([
+    expect(sortMediaByOrderGroup(images1, 1201)).toEqual([
       imgML2,
       imgML1,
       imgML4,
       imgML3,
     ]);
-    expect(sortImagesByOrderGroup(images1, 750)).toEqual([
+    expect(sortMediaByOrderGroup(images1, 750)).toEqual([
       imgML2,
       imgML4,
       imgML3,
       imgML1,
     ]);
 
-    expect(sortImagesByOrderGroup(images1, 500)).toEqual(images1);
+    expect(sortMediaByOrderGroup(images1, 500)).toEqual(images1);
   });
 
   test("gallery sizes return correctly", () => {
@@ -161,10 +152,10 @@ describe("Gallery utils functions", () => {
       const widthGroup = getSizeGroup(widthSize);
       const obj: GallerySizes = {
         screenWidthSizes: screenWidthSizesObj[widthGroup],
-        numOfImagesPerRow: numOfImagesPerRow[widthGroup],
-        imagesMaxWidth: imagesMaxWidth[widthGroup],
+        numOfMediaPerRow: numOfMediaPerRow[widthGroup],
+        mediaMaxWidth: mediaMaxWidth[widthGroup],
         colsPadding: colsPadding[widthGroup],
-        imagesPaddingBottom: imagesPaddingBottom[widthGroup],
+        mediaPaddingBottom: mediaPaddingBottom[widthGroup],
       };
       return obj;
     };
@@ -174,7 +165,7 @@ describe("Gallery utils functions", () => {
     expect(getGallerySizes(1250)).toMatchObject(getGallerySizesObj(1250));
 
     const userValues = {
-      numOfImagesPerRow: {
+      numOfMediaPerRow: {
         xs: 1,
         s: 2,
         m: 3,
@@ -185,18 +176,18 @@ describe("Gallery utils functions", () => {
     };
     expect(getGallerySizes(200, userValues)).toMatchObject({
       screenWidthSizes: 420,
-      numOfImagesPerRow: 1,
-      imagesMaxWidth: 100,
+      numOfMediaPerRow: 1,
+      mediaMaxWidth: 100,
       colsPadding: 4,
-      imagesPaddingBottom: 4,
+      mediaPaddingBottom: 4,
     });
 
     expect(getGallerySizes(1000, userValues)).toMatchObject({
       screenWidthSizes: 1200,
-      numOfImagesPerRow: 5,
-      imagesMaxWidth: 100,
+      numOfMediaPerRow: 5,
+      mediaMaxWidth: 100,
       colsPadding: 4,
-      imagesPaddingBottom: 4,
+      mediaPaddingBottom: 4,
     });
 
     const userValues1defaultSizes = {
@@ -215,21 +206,21 @@ describe("Gallery utils functions", () => {
         l: 400,
         xl: 500,
       },
-      numOfImagesPerRow: userValues1defaultSizes,
-      imagesMaxWidth: userValues1defaultSizes,
+      numOfMediaPerRow: userValues1defaultSizes,
+      mediaMaxWidth: userValues1defaultSizes,
       colsPadding: userValues1defaultSizes,
-      imagesPaddingBottom: userValues1defaultSizes,
+      mediaPaddingBottom: userValues1defaultSizes,
     };
     expect(getGallerySizes(250, userValues1)).toMatchObject({
       screenWidthSizes: 300,
-      numOfImagesPerRow: 3,
-      imagesMaxWidth: 3,
+      numOfMediaPerRow: 3,
+      mediaMaxWidth: 3,
       colsPadding: 3,
-      imagesPaddingBottom: 3,
+      mediaPaddingBottom: 3,
     });
   });
 
-  test("get selected images return correct images", () => {
+  test("get selected media return correct media", () => {
     document.body.innerHTML =
       "<div>" +
       '<input value="test" id="test" class="select-input" type="checkbox"/>' +
@@ -238,26 +229,26 @@ describe("Gallery utils functions", () => {
       '<input value="test3" id="test3" checked class="select-input" type="checkbox"/>' +
       '<label for="test"/>' +
       "</div>";
-    const res = getSelectedImages();
+    const res = getSelectedMedia();
     expect(res).toEqual(["test1", "test3"]);
   });
 
-  test("isImageSelected should return true when an image is selected by id", () => {
+  test("isMediaSelected should return true when an image is selected by id", () => {
     const img = { id: "1", src: "path/to/image" };
     const selectabletestems = ["1"];
-    expect(isImageSelected(img, selectabletestems)).toBe(true);
+    expect(isMediaSelected(img, selectabletestems)).toBe(true);
   });
 
-  test("isImageSelected should return true when an image is selected by src", () => {
+  test("isMediaSelected should return true when an image is selected by src", () => {
     const img = { id: "1", src: "path/to/image" };
     const selectabletestems = ["path/to/image"];
-    expect(isImageSelected(img, selectabletestems)).toBe(true);
+    expect(isMediaSelected(img, selectabletestems)).toBe(true);
   });
 
-  test("isImageSelected should return false when an image is not selected", () => {
+  test("isMediaSelected should return false when an image is not selected", () => {
     const img = { id: "1", src: "path/to/image" };
     const selectabletestems = ["2"];
-    expect(isImageSelected(img, selectabletestems)).toBe(false);
+    expect(isMediaSelected(img, selectabletestems)).toBe(false);
   });
 
   test("memoImage should return true when only the selected property changes", () => {
