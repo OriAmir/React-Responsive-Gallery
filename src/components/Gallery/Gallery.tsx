@@ -8,7 +8,7 @@ import {
   numOfMediaPerRow as defaultNumOfMediaPerRow,
   mediaMaxWidth as defaultMediaMaxWidth,
   colsPadding as defaultColsPadding,
-  mediaPaddingBottom as defaultMediaPaddingBottom,
+  mediaMarginBottom as defaultMediaMarginBottom,
 } from "../../constants/responsive";
 import {
   getGallerySizes,
@@ -41,7 +41,7 @@ const Gallery = ({
   numOfMediaPerRow,
   mediaMaxWidth,
   colsPadding,
-  mediaPaddingBottom,
+  mediaMarginBottom,
   mediaStyle,
   mediaClassName,
   useLightBox,
@@ -59,7 +59,7 @@ const Gallery = ({
     numOfMediaPerRow,
     mediaMaxWidth,
     colsPadding,
-    mediaPaddingBottom,
+    mediaMarginBottom,
   };
   const gallerySizes: GallerySizes = getGallerySizes(width, userGalleryOptions);
   const lightboxRef = useRef<MediaLightBoxHandle>(null);
@@ -108,7 +108,7 @@ const Gallery = ({
               (media: MediaElementProps, mediaIndex: number) => {
                 const eleProps: MediaComponentProps = {
                   maxWidth: gallerySizes.mediaMaxWidth,
-                  paddingBottom: gallerySizes.mediaPaddingBottom,
+                  marginBottom: gallerySizes.mediaMarginBottom,
                   useLightBox,
                   className: `${media?.mediaClassName || ""} ${
                     mediaClassName || ""
@@ -151,7 +151,7 @@ Gallery.defaultProps = {
   numOfMediaPerRow: defaultNumOfMediaPerRow,
   mediaMaxWidth: defaultMediaMaxWidth,
   colsPadding: defaultColsPadding,
-  mediaPaddingBottom: defaultMediaPaddingBottom,
+  mediaMarginBottom: defaultMediaMarginBottom,
   mediaStyle: null,
   mediaClassName: "",
   useLightBox: false,

@@ -4,13 +4,13 @@ export enum MediaIndicationType {
 }
 
 export type MediaIndicationProps = {
-  paddingBottom: number;
+  marginBottom: number;
   custom?: React.ReactElement;
   type: MediaIndicationType;
 };
 
 export type StyledMediaIndicationProps = {
-  $paddingBottom: number;
+  $marginBottom: number;
   src: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
   alt?: string;
 };

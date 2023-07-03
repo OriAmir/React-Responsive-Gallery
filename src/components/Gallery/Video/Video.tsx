@@ -12,14 +12,14 @@ const StyledVideo = styled.video.attrs({
 })<StyledVideoProps>`
   display: block;
   height: auto;
-  max-width: ${({ maxWidth }) => maxWidth}%;
-  margin-bottom: ${({ paddingBottom }) => paddingBottom || 0}px;
+  max-width: ${({ $maxWidth }) => $maxWidth}%;
+  margin-bottom: ${({ $marginBottom }) => $marginBottom || 0}px;
 `;
 
 const Video = ({
   video,
   maxWidth = 100,
-  paddingBottom,
+  marginBottom,
   className,
   useLightBox,
   onClick,
@@ -56,9 +56,9 @@ const Video = ({
       {loaded && !error && (
         <StyledVideo
           ref={videoRef}
-          maxWidth={maxWidth}
+          $maxWidth={maxWidth}
           onClick={handleVideoClick}
-          paddingBottom={paddingBottom}
+          $marginBottom={marginBottom}
           className={className}
           style={style}
           {...additionalProps}
@@ -77,14 +77,14 @@ const Video = ({
       )}
       {!loaded && !error && (
         <MediaIndication
-          paddingBottom={paddingBottom}
+        marginBottom={marginBottom}
           custom={customLoader}
           type={MediaIndicationType.loader}
         />
       )}
       {error && (
         <MediaIndication
-          paddingBottom={paddingBottom}
+        marginBottom={marginBottom}
           custom={customError}
           type={MediaIndicationType.error}
         />

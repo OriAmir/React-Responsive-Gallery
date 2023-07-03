@@ -19,7 +19,7 @@ export type GalleryWidthOptions = {
   numOfMediaPerRow?: OptionsWidthSizes | undefined;
   mediaMaxWidth?: OptionsWidthSizes | undefined;
   colsPadding?: OptionsWidthSizes | undefined;
-  mediaPaddingBottom?: OptionsWidthSizes | undefined;
+  mediaMarginBottom?: OptionsWidthSizes | undefined;
 };
 
 export type GallerySizes = {
@@ -27,10 +27,9 @@ export type GallerySizes = {
   numOfMediaPerRow: number;
   mediaMaxWidth: number;
   colsPadding: number;
-  mediaPaddingBottom: number;
+  mediaMarginBottom: number;
 };
 
-// export type MediaType = "video" | "image";
 export type VideoType = "video/mp4" | "video/webm" | "video/ogg";
 
 export enum MediaType {
@@ -51,7 +50,7 @@ export type ResponsiveGalleryProps = {
   numOfMediaPerRow?: OptionsWidthSizes;
   mediaMaxWidth?: OptionsWidthSizes;
   colsPadding?: OptionsWidthSizes;
-  mediaPaddingBottom?: OptionsWidthSizes;
+  mediaMarginBottom?: OptionsWidthSizes;
   mediaStyle?: Record<string, unknown>;
   mediaClassName?: string;
   useLightBox?: boolean;
@@ -103,7 +102,7 @@ export interface MediaElementProps {
 
 export type MediaComponentProps = {
   maxWidth: number;
-  paddingBottom: number;
+  marginBottom: number;
   className?: string;
   useLightBox?: boolean;
   onClick?: () => void;

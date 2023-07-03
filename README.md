@@ -104,17 +104,17 @@ You can change the group sizes by your preferences , the default group values ar
 | numOfMediaPerRow  | Object  | Number of media elements for row by the width groups. | ``{xs: 1,s: 2,m: 3,l: 3,xl: 4 xxl:5}`` | Optinal
 | mediaMaxWidth  | Object  | Media max width <b>in %</b> by the width groups.  | ``{xs: 100,s: 100,m: 100,l: 100,xl: 100,xxl:100}`` | Optional
 | colsPadding | Object  | Padding between media cols <b>in px</b> by the width groups. | ``{xs: 4,s: 4,m: 4,l: 4,xl: 4,xxl:4}`` | Optional
-| mediaPaddingBottom | Object  | Padding bottom between media <b>in px</b> by the width groups. | ``{xs: 4,s: 4,m: 4,l: 4,xl: 4,xxl:4}`` | Optional
-| mediaClassName | Object  | Class name that will apply on all the media on gallery | None | Optional
-| mediaStyle | String  | Object Style that will apply on all the media on gallery | None | Optional
+| mediaMarginBottom | Object  | Margin bottom between media <b>in px</b> by the width groups. | ``{xs: 4,s: 4,m: 4,l: 4,xl: 4,xxl:4}`` | Optional
+| mediaClassName | string  | Class name that will apply on all the media on gallery | None | Optional
+| mediaStyle | Object  | Object Style that will apply on all the media on gallery | None | Optional
 | useLightBox | Boolean  | Use lightbox when clicking on media | false | Optional
 | lightBoxAdditionalProps | object  | Additional props for the lightbox component. [Read more here](#using-lightbox) | false | Optional
 | selectable | boolean  | Media could be selectable. [Read more here](#selectable-media) | false | Optional
 | selectableMedia | Array  | Chosen media as part of the selectable items. | None | Optional
 | onSelect | Function - (id:string,val:boolean)=>void  | Callback function when media is selected. | None | Optional
+| onClick | Function - (id:string)=>void  | Callback function when media is clicked. | None | Optional
 | customLoader | React component   | Loader show when media is loading | <img src="./src/assets/images/loader.svg" alt="loader" width="50"  height="50"/> | Optional
 | customError | React component  | Error show when media failed to load| <img src="./src/assets/images/error.svg" alt="error" width="50"  height="50"/> | Optional
-
 
 <br/><br/>
 
@@ -124,16 +124,16 @@ You can change the group sizes by your preferences , the default group values ar
 | :------------- | :------------- | :------------- | :------------- | :-------------
 | src | String | Media source url   | <b>Required</b> | Image / Video
 | type | String("image"/"video") | Image/Video source url   | Optional, default is "image" | Image / Video
-| id | String | Media Id ([Read more here](#if-you-will-not-pass-the-media-id))   | Optional (only if src is unique) | Image / Video
-| alt | String | Image alternate text,not relevant to   | Optional | Image
-| orderS |  Number  | Media order in small group sizes(xs, s)   |  Optional | Image / Video
-| orderM  | Number| Media order in medium group sizes (m,l) | Optional | Image / Video
-| orderL  |  Number | Media order in large group sizes(xl,xxl) | Optional | Image / Video
+| id | String | Media Id ([Read more here](#if-you-will-not-pass-the-media-id))   | Optional (only if src is unique) | Image,Video
+| alt | String | Image alternate text  | Optional | Image
+| orderS |  Number  | Media order in small group sizes(xs, s)   |  Optional | Image,Video
+| orderM  | Number| Media order in medium group sizes (m,l) | Optional | Image,Video
+| orderL  |  Number | Media order in large group sizes(xl,xxl) | Optional | Image,Video
 | mediaClassName | String | Media className for styling specific media element | Optional | Image / Video
 | mediaStyle | Object | Media object style for styling specific media element | Optional | Image / Video
 | title | String | Lightbox media title | Optional | Image
 | videoType |  "video/mp4" / "video/webm" / "video/ogg" | Type of the video element | Optional, default is "video/mp4" |  Video
-| additionalVideoProps | Object | Video element additional attributes ,as describe <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#attributes">here</a> | Optional | Video
+| additionalVideoProps | Object | Additional attributes for video as describe <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#attributes">here</a> | Optional | Video
 
 :warning: if you set orderS/orderL/orderM property only to part of the media elements the library first sorts the media elements with the property and then renders the other media elements.
 <br/>
