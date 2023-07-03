@@ -13,19 +13,20 @@ const StyledCheckbox = styled.input.attrs<CheckboxProps>(
   })
 )<CheckboxProps>``;
 
-const StyledDiv = styled.div<{ imagesMaxWidth: number }>`
+const StyledDiv = styled.div<{ $mediaMaxWidth: number }>`
   position: absolute;
+  z-index: 100;
   top: 5px;
   ${(props) =>
-    props.imagesMaxWidth &&
-    `left: calc(${props.imagesMaxWidth}% - 28px - 5px);`}
+    props.$mediaMaxWidth &&
+    `left: calc(${props.$mediaMaxWidth}% - 22px - 5px);`}
 `;
 
 const Select = ({
   value = false,
   id,
   onSelect,
-  imagesMaxWidth,
+  mediaMaxWidth,
 }: SelectProps) => {
   const [check, setCheck] = useState(value);
   const onSelectChange = (id: string, val: boolean) => {
@@ -34,18 +35,19 @@ const Select = ({
     }
     setCheck(val);
   };
-
+  const uniqueId = `checkbox-${id}`;
   return (
-    <StyledDiv imagesMaxWidth={imagesMaxWidth}>
+    <StyledDiv $mediaMaxWidth={mediaMaxWidth}>
       <StyledSelect>
         <StyledCheckbox
           className="select-input"
           onChange={(e) => onSelectChange(id, e.target.checked)}
           value={id}
-          id={`checkbox-${id}`}
+          id={uniqueId}
+          data-testid={uniqueId}
           checked={check}
         />
-        <label htmlFor={`checkbox-${id}`}></label>
+        <label htmlFor={uniqueId}></label>
       </StyledSelect>
     </StyledDiv>
   );

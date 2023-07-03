@@ -18,7 +18,7 @@ const colsPadding: OptionsWidthSizes = {
   xxl: 4,
 };
 
-const imagesPaddingBottom: OptionsWidthSizes = {
+const mediaPaddingBottom: OptionsWidthSizes = {
   xs: 4,
   s: 4,
   m: 4,
@@ -27,7 +27,7 @@ const imagesPaddingBottom: OptionsWidthSizes = {
   xxl: 4,
 };
 
-const imagesMaxWidth: OptionsWidthSizes = {
+const mediaMaxWidth: OptionsWidthSizes = {
   xs: 100,
   s: 100,
   m: 100,
@@ -36,7 +36,7 @@ const imagesMaxWidth: OptionsWidthSizes = {
   xxl: 100,
 };
 
-const numOfImagesPerRow: OptionsWidthSizes = {
+const numOfMediaPerRow: OptionsWidthSizes = {
   xs: 1,
   s: 2,
   m: 3,
@@ -48,7 +48,7 @@ const numOfImagesPerRow: OptionsWidthSizes = {
 export {
   screenWidthSizes,
   colsPadding,
-  imagesPaddingBottom,
-  imagesMaxWidth,
-  numOfImagesPerRow,
+  mediaPaddingBottom,
+  mediaMaxWidth,
+  numOfMediaPerRow,
 };

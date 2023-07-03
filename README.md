@@ -4,11 +4,13 @@
 
 <b>Main features</b><br/>
 
+- Support both types of media: image and video.
 - Custom for every screen width size.
 - Dynamic properties for every screen width size.
-- Images could be selected and controlled/uncontrolled easily.
+- Media could be selected and controlled/uncontrolled easily.
+- Accessibility support.
 - Simple to use.
-- Work with `Lightbox` for image display.
+- Work with `Lightbox` for media display.
 - Full typescript support.
 - Tested with React Testing Library.
   <br/>
@@ -35,11 +37,10 @@ You can play with the library in
 <h3>Basic using example</h3>
  
 ```
-import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import ResponsiveGallery from 'react-responsive-gallery';
 
-const images=[
+const media=[
 {
 src: 'https://cdn.pixabay.com/photo/2017/01/14/12/59/iceland-1979445_960_720.jpg'
 },
@@ -72,11 +73,8 @@ src: 'https://cdn.pixabay.com/photo/2019/03/09/17/30/horse-4044547_960_720.jpg'
 }
 ];
 
-render(
-<ResponsiveGallery images={images}/>,
-document.getElementById('root')
-);
-
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<ResponsiveGallery media={media}/>);
 ```
 
 <br/>
@@ -101,63 +99,67 @@ You can change the group sizes by your preferences , the default group values ar
 
 | Property  | Type | Description | Default value  | is Required
 | :------------- | :------------- | :------------- | :------------- | :-------------
-| images |  Array | Array of images to display in the gallery. [Read more here](#images-options) |  None   | <b>Required</b>
+| media |  Array | Array of media elements to display in the gallery. [Read more here](#media-options) |  None   | <b>Required</b>
 | screenWidthSizes  | Object  | Gallery groups width break points. | ``{xs: 420,s: 600,m: 768,l: 992,xl: 1200}`` | Optional
-| numOfImagesPerRow  | Object  | Number of images for row by the width groups. | ``{xs: 1,s: 2,m: 3,l: 3,xl: 4 xxl:5}`` | Optinal
-| imageMaxWidth  | Object  | Image max width <b>in %</b> by the width groups.  | ``{xs: 100,s: 100,m: 100,l: 100,xl: 100,xxl:100}`` | Optional
-| colsPadding | Object  | Padding between images cols <b>in px</b> by the width groups. | ``{xs: 4,s: 4,m: 4,l: 4,xl: 4,xxl:4}`` | Optional
-| imagesPaddingBottom | Object  | Padding bottom between images <b>in px</b> by the width groups. | ``{xs: 4,s: 4,m: 4,l: 4,xl: 4,xxl:4}`` | Optional
-| imagesStyle | Object / String  | Style that will apply on all the images on gallery | None | Optional
-| useLightBox | Boolean  | Use lightbox when clicking on image | false | Optional
+| numOfMediaPerRow  | Object  | Number of media elements for row by the width groups. | ``{xs: 1,s: 2,m: 3,l: 3,xl: 4 xxl:5}`` | Optinal
+| mediaMaxWidth  | Object  | Media max width <b>in %</b> by the width groups.  | ``{xs: 100,s: 100,m: 100,l: 100,xl: 100,xxl:100}`` | Optional
+| colsPadding | Object  | Padding between media cols <b>in px</b> by the width groups. | ``{xs: 4,s: 4,m: 4,l: 4,xl: 4,xxl:4}`` | Optional
+| mediaPaddingBottom | Object  | Padding bottom between media <b>in px</b> by the width groups. | ``{xs: 4,s: 4,m: 4,l: 4,xl: 4,xxl:4}`` | Optional
+| mediaClassName | Object  | Class name that will apply on all the media on gallery | None | Optional
+| mediaStyle | String  | Object Style that will apply on all the media on gallery | None | Optional
+| useLightBox | Boolean  | Use lightbox when clicking on media | false | Optional
 | lightBoxAdditionalProps | object  | Additional props for the lightbox component. [Read more here](#using-lightbox) | false | Optional
-| selectable | boolean  | Images could be selectable. [Read more here](#selectable-images) | false | Optional
-| selectableItems | Array  | Chosen images as part of the selectable items. | None | Optional
-| onSelect | Function - (id:string,val:boolean)=>void  | Callback function when image is selected. | None | Optional
-| customLoader | React component   | Loader show when image is loading | <img src="./src/assets/images/loader.svg" alt="loader" width="50"  height="50"/> | Optional
-| customError | React component  | Error show when image failed to load| <img src="./src/assets/images/error.svg" alt="error" width="50"  height="50"/> | Optional
+| selectable | boolean  | Media could be selectable. [Read more here](#selectable-media) | false | Optional
+| selectableMedia | Array  | Chosen media as part of the selectable items. | None | Optional
+| onSelect | Function - (id:string,val:boolean)=>void  | Callback function when media is selected. | None | Optional
+| customLoader | React component   | Loader show when media is loading | <img src="./src/assets/images/loader.svg" alt="loader" width="50"  height="50"/> | Optional
+| customError | React component  | Error show when media failed to load| <img src="./src/assets/images/error.svg" alt="error" width="50"  height="50"/> | Optional
 
 
 <br/><br/>
 
-<h3>Images Options</h3>
+<h3>Media Options</h3>
 
-| Property  | Type | Description  | is Required
-| :------------- | :------------- | :------------- | :-------------
-| src | String | Image source url   | <b>Required</b>
-| id | String | Image Id ([Read more here](#if-you-will-not-pass-the-image-id))   | Optional (is src is unique)
-| alt | String | Image alternate text  | Optional
-| orderS |  Number  | Image order in small group sizes(xs, s)   |  Optional
-| orderM  | Number| Image order in medium group sizes (m,l) |Optional
-| orderL  |  Number | Image order in large group sizes(xl,xxl) | Optional
-| imgClassName | Object / String | Image style object/string for styling specific image | Optional
-| title | String | Lightbox image title | Optional
-| description | String | Lightbox image caption | Optional
+| Property  | Type | Description  | Required  | Relevant to
+| :------------- | :------------- | :------------- | :------------- | :-------------
+| src | String | Media source url   | <b>Required</b> | Image / Video
+| type | String("image"/"video") | Image/Video source url   | Optional, default is "image" | Image / Video
+| id | String | Media Id ([Read more here](#if-you-will-not-pass-the-media-id))   | Optional (only if src is unique) | Image / Video
+| alt | String | Image alternate text,not relevant to   | Optional | Image
+| orderS |  Number  | Media order in small group sizes(xs, s)   |  Optional | Image / Video
+| orderM  | Number| Media order in medium group sizes (m,l) | Optional | Image / Video
+| orderL  |  Number | Media order in large group sizes(xl,xxl) | Optional | Image / Video
+| mediaClassName | String | Media className for styling specific media element | Optional | Image / Video
+| mediaStyle | Object | Media object style for styling specific media element | Optional | Image / Video
+| title | String | Lightbox media title | Optional | Image
+| videoType |  "video/mp4" / "video/webm" / "video/ogg" | Type of the video element | Optional, default is "video/mp4" |  Video
+| additionalVideoProps | Object | Video element additional attributes ,as describe <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#attributes">here</a> | Optional | Video
 
-:warning: if you set orderS/orderL/orderM property only to part of the images the library first sorts the images with the property and then renders the other images.
+:warning: if you set orderS/orderL/orderM property only to part of the media elements the library first sorts the media elements with the property and then renders the other media elements.
 <br/>
 
-<h4>If you will not pass the image id</h4>
-We need some unique identifier for every image. Usually we use the `src` attribute but it's will be valid only if the `src` is unique. The image `id` is required if the image src is not unique.<br/>
-If `src` property is not unique and image `id` is not supply the library will not work as expected.
+<h4>If you will not pass the media id</h4>
+We need some unique identifier for every media eleemnt. Usually we use the `src` attribute but it's will be valid only if the `src` is unique. The media `id` is required if the media src is not unique.<br/>
+If `src` property is not unique and media `id` is not supply the library will not work as expected.
 
 <br/>
-<h3>Selectable Images</h3>
-Images could be selected via the gallery.<br/><br/>
-The library expose function and hook to manage the images: <br/>
-<b>getSelectedImages</b>- function that return id's array of the selected images.<br/>
-<b>useSelect</b>- hook that return id's array of the selected images , then we could listen to changes in the images if needed.<br/>
-This hook will work as expected only AFTER the dom is initialized with the images. <br/><br/>
-You can control the selected images yourself in your component or just get the images using function/hook.<br/>
-<b>Uncontrolled</b> - The library will manage the selected images and you will get them using the <i>getSelectedImages</i> function. To use that functionally you just need to pass the <i>selectable</i> boolean attribute to the library.<br/>
-<b>Controlled</b> - You will manage the selected images yourself using <i>selectableItems</i> and <i>onSelect</i> functions.<br/><br/>
+<h3>Selectable Media</h3>
+Media could be selected via the gallery.<br/><br/>
+The library expose function and hook to manage the media: <br/>
+<b>getSelectedMedia</b>- function that return id's array of the selected media elements.<br/>
+<b>useSelect</b>- hook that return id's array of the selected media , then we could listen to changes in the media if needed.<br/>
+This hook will work as expected only AFTER the dom is initialized with the media. <br/><br/>
+You can control the selected media yourself in your component or just get the media using function/hook.<br/>
+<b>Uncontrolled</b> - The library will manage the selected media and you will get them using the <i>getSelectedMedia</i> function. To use that functionally you just need to pass the <i>selectable</i> boolean attribute to the library.<br/>
+<b>Controlled</b> - You will manage the selected media yourself using <i>selectableMedia</i> and <i>onSelect</i> functions.<br/><br/>
 
-:warning: If you will not pass the image <b>id</b> property to the image element the selected image will return as URL representation instead of id representation. In the case of a duplicate image URL, this feature will not work as expected.
+:warning: If you will not pass the media <b>id</b> property to the media element the selected media will return as URL representation instead of id representation. In the case of a duplicate media URL, this feature will not work as expected.
 <br/>
-:warning: When passing the `onSelect` function to the library it's automatically move to <b>Uncontrolled</b> mode and will not manage the selected images any more.<br/>
+:warning: When passing the `onSelect` function to the library it's automatically move to <b>Uncontrolled</b> mode and will not manage the selected media any more.<br/>
 
 
 <h3>Using Lightbox</h3>
-You can use lightbox when clicking on one of the images that display on the gallery.
+You can use lightbox when clicking on one of the media that display on the gallery.
 For the lightbox component library we use the <a target="_blank" href="https://github.com/igordanchenko/yet-another-react-lightbox">yet-another-react-lightbox library</a>.<br/>
 You can sent the props from this library and to send them as prop to library called <b>'lightBoxAdditionalProps'</b>.</br>
 

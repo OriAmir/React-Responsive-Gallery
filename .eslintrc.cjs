@@ -1,12 +1,20 @@
+/* eslint-disable no-undef */
+
 module.exports = {
+  settings: {
+    react: {
+      version: "detect",
+    },
+  },
   env: {
     browser: true,
     es6: true,
     jest: true,
   },
   extends: [
-    "react-app",
-    "react-app/jest",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
     "plugin:@typescript-eslint/recommended", // @typescript-eslint/eslint-plugin(part of react-scripts)
     "plugin:prettier/recommended", // eslint-plugin-prettier
     "prettier", // eslint-config-prettier
