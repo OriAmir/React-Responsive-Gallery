@@ -11,7 +11,7 @@ export type StyledImageProps = {
 
 export type StyledButtonImageProps = {
   $maxWidth: number;
-  $paddingBottom: number;
+  $marginBottom: number;
   $useLightBox?: boolean;
   onClick?: () => void;
 };

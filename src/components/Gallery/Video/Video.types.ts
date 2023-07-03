@@ -5,6 +5,6 @@ export type VideoProps = MediaComponentProps & {
 };
 
 export type StyledVideoProps = {
-  maxWidth: number;
-  paddingBottom: number;
+  $maxWidth: number;
+  $marginBottom: number;
 };

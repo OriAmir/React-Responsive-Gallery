@@ -31,8 +31,8 @@ describe("Image Component", () => {
           alt: imgAlt,
           id: "image-1",
         }}
-        maxWidth={100}
-        paddingBottom={10}
+        $maxWidth={100}
+        $marginBottom={10}
         selectable={true}
       />
     );
@@ -49,7 +49,7 @@ describe("Image Component", () => {
           id: "image-1",
         }}
         maxWidth={100}
-        paddingBottom={10}
+        marginBottom={10}
         selectable={false}
       />
     );
@@ -72,7 +72,7 @@ describe("Image Component", () => {
           id: "image-1",
         }}
         maxWidth={100}
-        paddingBottom={10}
+        marginBottom={10}
         customLoader={<div>{customLoaderText}</div>}
       />
     );
@@ -95,7 +95,7 @@ describe("Image Component", () => {
           id: "image-1",
         }}
         maxWidth={100}
-        paddingBottom={10}
+        marginBottom={10}
         customError={<div>{customErrorText}</div>}
       />
     );
@@ -117,7 +117,7 @@ describe("Image Component", () => {
           id: "image-1",
         }}
         maxWidth={100}
-        paddingBottom={10}
+        marginBottom={10}
         selectable={true}
         onSelect={onSelectMock}
       />
@@ -139,7 +139,7 @@ describe("Image Component", () => {
           id: "image-1",
         }}
         maxWidth={100}
-        paddingBottom={10}
+        marginBottom={10}
         onClick={onClickMock}
       />
     );

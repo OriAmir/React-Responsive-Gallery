@@ -10,7 +10,7 @@ import { MediaIndicationType } from "../MediaIndication/Mediaindication.types";
 const Image = ({
   img,
   maxWidth,
-  paddingBottom,
+  marginBottom,
   className,
   useLightBox,
   onClick,
@@ -27,7 +27,7 @@ const Image = ({
       <StyledButtonImage
         $maxWidth={maxWidth}
         onClick={onClick}
-        $paddingBottom={paddingBottom}
+        $marginBottom={marginBottom}
         $useLightBox={useLightBox}
         style={{
           display: !err && loaded ? "block" : "none",
@@ -50,14 +50,14 @@ const Image = ({
       )}
       {!loaded && !err && (
         <MediaIndication
-          paddingBottom={paddingBottom}
+        marginBottom={marginBottom}
           custom={customLoader}
           type={MediaIndicationType.loader}
         />
       )}
       {err && (
         <MediaIndication
-          paddingBottom={paddingBottom}
+        marginBottom={marginBottom}
           custom={customError}
           type={MediaIndicationType.error}
         />

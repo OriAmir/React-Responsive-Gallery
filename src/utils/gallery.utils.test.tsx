@@ -8,6 +8,7 @@ import {
   getSelectedMedia,
   isMediaSelected,
   memoImage,
+  memoVideo
 } from "./gallery.utils";
 import {
   WidthOptions,
@@ -20,7 +21,7 @@ import {
   numOfMediaPerRow,
   mediaMaxWidth,
   colsPadding,
-  mediaPaddingBottom,
+  mediaMarginBottom,
   screenWidthSizes as screenWidthSizesObj,
 } from "constants/responsive";
 
@@ -155,7 +156,7 @@ describe("Gallery utils functions", () => {
         numOfMediaPerRow: numOfMediaPerRow[widthGroup],
         mediaMaxWidth: mediaMaxWidth[widthGroup],
         colsPadding: colsPadding[widthGroup],
-        mediaPaddingBottom: mediaPaddingBottom[widthGroup],
+        mediaMarginBottom: mediaMarginBottom[widthGroup],
       };
       return obj;
     };
@@ -179,7 +180,7 @@ describe("Gallery utils functions", () => {
       numOfMediaPerRow: 1,
       mediaMaxWidth: 100,
       colsPadding: 4,
-      mediaPaddingBottom: 4,
+      mediaMarginBottom: 4,
     });
 
     expect(getGallerySizes(1000, userValues)).toMatchObject({
@@ -187,7 +188,7 @@ describe("Gallery utils functions", () => {
       numOfMediaPerRow: 5,
       mediaMaxWidth: 100,
       colsPadding: 4,
-      mediaPaddingBottom: 4,
+      mediaMarginBottom: 4,
     });
 
     const userValues1defaultSizes = {
@@ -209,14 +210,14 @@ describe("Gallery utils functions", () => {
       numOfMediaPerRow: userValues1defaultSizes,
       mediaMaxWidth: userValues1defaultSizes,
       colsPadding: userValues1defaultSizes,
-      mediaPaddingBottom: userValues1defaultSizes,
+      mediaMarginBottom: userValues1defaultSizes,
     };
     expect(getGallerySizes(250, userValues1)).toMatchObject({
       screenWidthSizes: 300,
       numOfMediaPerRow: 3,
       mediaMaxWidth: 3,
       colsPadding: 3,
-      mediaPaddingBottom: 3,
+      mediaMarginBottom: 3,
     });
   });
 
@@ -255,13 +256,13 @@ describe("Gallery utils functions", () => {
     const prev = {
       img: { src: "path/to/prev" },
       maxWidth: 100,
-      paddingBottom: 20,
+      marginBottom: 20,
       selected: true,
     };
     const next = {
       img: { src: "path/to/prev" },
       maxWidth: 100,
-      paddingBottom: 20,
+      marginBottom: 20,
       selected: false,
     };
     expect(memoImage(prev, next)).toBe(true);
@@ -270,13 +271,13 @@ describe("Gallery utils functions", () => {
     const prev = {
       img: { src: "path/to/prev" },
       maxWidth: 100,
-      paddingBottom: 20,
+      marginBottom: 20,
       selected: true,
     };
     const next = {
       img: { src: "path/to/next" },
       maxWidth: 100,
-      paddingBottom: 20,
+      marginBottom: 20,
       selected: true,
     };
     expect(memoImage(prev, next)).toBe(false);
@@ -285,28 +286,28 @@ describe("Gallery utils functions", () => {
     const prev = {
       img: { src: "path/to/prev" },
       maxWidth: 100,
-      paddingBottom: 20,
+      marginBottom: 20,
       selected: true,
     };
     const next = {
       img: { src: "path/to/prev" },
       maxWidth: 200,
-      paddingBottom: 20,
+      marginBottom: 20,
       selected: true,
     };
     expect(memoImage(prev, next)).toBe(false);
   });
-  test("memoImage should return false when paddingBottom changes", () => {
+  test("memoImage should return false when marginBottom changes", () => {
     const prev = {
       img: { src: "path/to/prev" },
       maxWidth: 100,
-      paddingBottom: 20,
+      marginBottom: 20,
       selected: true,
     };
     const next = {
       img: { src: "path/to/prev" },
       maxWidth: 100,
-      paddingBottom: 30,
+      marginBottom: 30,
       selected: true,
     };
     expect(memoImage(prev, next)).toBe(false);
@@ -321,9 +322,45 @@ describe("Gallery utils functions", () => {
     const next = {
       img: { src: "path/to/prev" },
       maxWidth: 100,
-      paddingBottom: 20,
+      marginBottom: 20,
       selected: true,
     };
     expect(memoImage(prev, next)).toBe(true);
   });
+
+  test('memoVideo should return false if video src is different', () => {
+    const prev = { video: { src: 'video1.mp4' } };
+    const next = { video: { src: 'video2.mp4' } };
+    const result = memoVideo(prev, next);
+    expect(result).toBe(false);
+  });
+
+  test('memoVideo should return false if maxWidth is different', () => {
+    const prev = { maxWidth: 400 };
+    const next = { maxWidth: 600 };
+    const result = memoVideo(prev, next);
+    expect(result).toBe(false);
+  });
+
+  test('memoVideo should return false if paddingBottom is different', () => {
+    const prev = { marginBottom: 10 };
+    const next = { marginBottom: 20 };
+    const result = memoVideo(prev, next);
+    expect(result).toBe(false);
+  });
+
+  test('memoVideo should return false if useLightBox is different', () => {
+    const prev = { useLightBox: true };
+    const next = { useLightBox: false };
+    const result = memoVideo(prev, next);
+    expect(result).toBe(false);
+  });
+
+  test('memoVideo should return true if only selected value changed', () => {
+    const prev = { video: { src: 'video.mp4' }, maxWidth: 400, paddingBottom: 10, useLightBox: true };
+    const next = { video: { src: 'video.mp4' }, maxWidth: 400, paddingBottom: 10, useLightBox: false };
+    const result = memoVideo(prev, next);
+    expect(result).toBe(true);
+  });
+
 });

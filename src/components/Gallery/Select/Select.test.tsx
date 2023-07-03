@@ -13,7 +13,6 @@ describe("Select Component", () => {
     render(<Select {...selectProps} />);
     const checkbox = screen.getByTestId("checkbox-select-1");
     expect(checkbox).toBeInTheDocument();
-    // Add more specific assertions if needed
   });
 
   test("calls onSelect function when the checkbox is checked", () => {

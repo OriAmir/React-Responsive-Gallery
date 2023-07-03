@@ -6,7 +6,7 @@ const StyledButtonImage = styled.button<StyledButtonImageProps>`
   border: none;
   padding: 0;
   background-color: transparent;
-  margin-bottom: ${({ $paddingBottom }) => $paddingBottom || 0}px;
+  margin-bottom: ${({ $marginBottom }) => $marginBottom || 0}px;
   ${({ $useLightBox = false }) =>
     $useLightBox &&
     css`

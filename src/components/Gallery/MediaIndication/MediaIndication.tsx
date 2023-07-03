@@ -10,7 +10,7 @@ import {
 const StyledMediaIndication = styled.img<StyledMediaIndicationProps>`
   height: 100px;
   max-width: 80%;
-  margin-bottom: ${({ $paddingBottom }) => $paddingBottom || 0}px;
+  margin-bottom: ${({ $marginBottom }) => $marginBottom || 0}px;
 `;
 
 const StyledMediaIndicationWrapper = styled.div`
@@ -19,7 +19,7 @@ const StyledMediaIndicationWrapper = styled.div`
 `;
 
 const MediaIndication = ({
-  paddingBottom,
+  marginBottom,
   custom,
   type,
 }: MediaIndicationProps) => {
@@ -27,8 +27,7 @@ const MediaIndication = ({
     <StyledMediaIndicationWrapper>
       {!custom ? (
         <StyledMediaIndication
-          $paddingBottom={paddingBottom}
-          // indicationType={type}
+          $marginBottom={marginBottom}
           alt={
             type === MediaIndicationType.error
               ? MediaIndicationType.error

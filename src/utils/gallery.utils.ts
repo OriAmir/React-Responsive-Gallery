@@ -2,7 +2,7 @@ import {
   numOfMediaPerRow,
   mediaMaxWidth,
   colsPadding,
-  mediaPaddingBottom,
+  mediaMarginBottom,
   screenWidthSizes,
 } from "../constants/responsive";
 import {
@@ -118,17 +118,17 @@ const getGallerySizes = (
   const screenWidthSizesValues: ScreenWidthSizes =
     userValues?.screenWidthSizes || screenWidthSizes;
 
-  const numOfImagesPerRowValues: OptionsWidthSizes =
+  const numOfMediaPerRowValues: OptionsWidthSizes =
     userValues?.numOfMediaPerRow || numOfMediaPerRow;
 
-  const imagesMaxWidthValues: OptionsWidthSizes =
+  const mediaMaxWidthValues: OptionsWidthSizes =
     userValues?.mediaMaxWidth || mediaMaxWidth;
 
   const colsPaddingValues: OptionsWidthSizes =
     userValues?.colsPadding || colsPadding;
 
-  const imagesPaddingBottomValues: OptionsWidthSizes =
-    userValues?.mediaPaddingBottom || mediaPaddingBottom;
+  const mediaMarginBottomValues: OptionsWidthSizes =
+    userValues?.mediaMarginBottom || mediaMarginBottom;
 
   let widthSize = WidthOptions.xxl;
   if (width <= screenWidthSizesValues.xs) {
@@ -145,10 +145,10 @@ const getGallerySizes = (
 
   return {
     screenWidthSizes: screenWidthSizesValues[widthSize],
-    numOfMediaPerRow: numOfImagesPerRowValues[widthSize],
-    mediaMaxWidth: imagesMaxWidthValues[widthSize],
+    numOfMediaPerRow: numOfMediaPerRowValues[widthSize],
+    mediaMaxWidth: mediaMaxWidthValues[widthSize],
     colsPadding: colsPaddingValues[widthSize],
-    mediaPaddingBottom: imagesPaddingBottomValues[widthSize],
+    mediaMarginBottom: mediaMarginBottomValues[widthSize],
   };
 };
 
@@ -156,7 +156,7 @@ const getMediaCols = (
   media: Array<MediaElementProps>,
   numOfMediaPerRow: number
 ): MediaCols | Record<string, never> => {
-  const imagesCols: MediaCols | Record<string, never> = media?.reduce(
+  const mediaCols: MediaCols | Record<string, never> = media?.reduce(
     (
       total: MediaCols | Record<string, never>,
       cur: MediaElementProps,
@@ -173,19 +173,19 @@ const getMediaCols = (
         : { ...total, [index % numOfMediaPerRow]: [cur] },
     {}
   );
-  return imagesCols;
+  return mediaCols;
 };
 
 const getSelectedMedia = () => {
   const elements = document.querySelectorAll(".select-input");
-  const selectedImages: string[] = [];
+  const selectedMedia: string[] = [];
   elements.forEach((e: HTMLInputElement) => {
     if (e.checked) {
-      selectedImages.push(e?.value);
+      selectedMedia.push(e?.value);
     }
   });
 
-  return selectedImages;
+  return selectedMedia;
 };
 
 const isMediaSelected = (
@@ -200,11 +200,11 @@ const isMediaSelected = (
 const memoImage = (prev: ImageProps, next: ImageProps): boolean => {
   const src = prev.img.src !== next.img.src;
   const maxWidth = prev.maxWidth !== next.maxWidth;
-  const padding = prev.paddingBottom !== next.paddingBottom;
+  const margin = prev.marginBottom !== next.marginBottom;
   const lightBox = prev.useLightBox !== next.useLightBox;
 
   //don't memo,we need to render since image data is change
-  if (src || maxWidth || padding || lightBox) {
+  if (src || maxWidth || margin || lightBox) {
     return false;
   }
 
@@ -215,15 +215,11 @@ const memoImage = (prev: ImageProps, next: ImageProps): boolean => {
 const memoVideo = (prev: VideoProps, next: VideoProps): boolean => {
   const src = prev.video.src !== next.video.src;
   const maxWidth = prev.maxWidth !== next.maxWidth;
-  const padding = prev.paddingBottom !== next.paddingBottom;
+  const margin = prev.marginBottom !== next.marginBottom;
   const lightBox = prev.useLightBox !== next.useLightBox;
-  // const additionalProps =
-  //   JSON.stringify(prev.video?.additionalVideoProps || {}) !==
-  //   JSON.stringify(next.video?.additionalVideoProps || {});
-  // eslint-disable-next-line no-debugger
-  debugger;
+
   //don't memo,we need to render since image data is change
-  if (src || maxWidth || padding || lightBox) {
+  if (src || maxWidth || margin || lightBox) {
     return false;
   }
 

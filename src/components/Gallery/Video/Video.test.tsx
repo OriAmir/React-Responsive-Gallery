@@ -23,7 +23,7 @@ const videoProps: VideoProps = {
     src: "path/to/video.mp4",
     type: "video" as const,
   },
-  paddingBottom: 5,
+  marginBottom: 5,
   maxWidth: 100,
 };
 

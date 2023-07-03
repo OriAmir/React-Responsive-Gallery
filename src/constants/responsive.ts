@@ -18,7 +18,7 @@ const colsPadding: OptionsWidthSizes = {
   xxl: 4,
 };
 
-const mediaPaddingBottom: OptionsWidthSizes = {
+const mediaMarginBottom: OptionsWidthSizes = {
   xs: 4,
   s: 4,
   m: 4,
@@ -48,7 +48,7 @@ const numOfMediaPerRow: OptionsWidthSizes = {
 export {
   screenWidthSizes,
   colsPadding,
-  mediaPaddingBottom,
+  mediaMarginBottom,
   mediaMaxWidth,
   numOfMediaPerRow,
 };
