@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 import { StyledImageProps, StyledButtonImageProps } from "./Image.types";
 
 const StyledButtonImage = styled.button<StyledButtonImageProps>`
+  position: relative;
   max-width: ${({ $maxWidth }) => $maxWidth}%;
   border: none;
   padding: 0;
@@ -17,7 +18,6 @@ const StyledButtonImage = styled.button<StyledButtonImageProps>`
 const StyledImage = styled.img<StyledImageProps>`
   max-width: 100%;
   height: auto;
-  loading: lazy;
 `;
 
 export { StyledImage, StyledButtonImage };
