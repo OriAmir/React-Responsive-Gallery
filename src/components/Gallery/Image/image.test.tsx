@@ -31,8 +31,8 @@ describe("Image Component", () => {
           alt: imgAlt,
           id: "image-1",
         }}
-        $maxWidth={100}
-        $marginBottom={10}
+        maxWidth={100}
+        marginBottom={10}
         selectable={true}
       />
     );

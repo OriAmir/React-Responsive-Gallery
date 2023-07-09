@@ -24,7 +24,7 @@ export default defineConfig(() => ({
   ],
   build: {
     cssCodeSplit: true,
-    // sourcemap: true, // --> for dev debug,
+    sourcemap: true, // --> for dev debug,
     lib: {
       formats: ["es"],
       entry: resolve("src", "index.tsx"),

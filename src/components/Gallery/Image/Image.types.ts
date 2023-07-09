@@ -13,5 +13,5 @@ export type StyledButtonImageProps = {
   $maxWidth: number;
   $marginBottom: number;
   $useLightBox?: boolean;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };

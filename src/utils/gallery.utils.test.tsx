@@ -8,7 +8,7 @@ import {
   getSelectedMedia,
   isMediaSelected,
   memoImage,
-  memoVideo
+  memoVideo,
 } from "./gallery.utils";
 import {
   WidthOptions,
@@ -316,7 +316,7 @@ describe("Gallery utils functions", () => {
     const prev = {
       img: { src: "path/to/prev" },
       maxWidth: 100,
-      paddingBottom: 20,
+      marginBottom: 20,
       selected: true,
     };
     const next = {
@@ -328,39 +328,65 @@ describe("Gallery utils functions", () => {
     expect(memoImage(prev, next)).toBe(true);
   });
 
-  test('memoVideo should return false if video src is different', () => {
-    const prev = { video: { src: 'video1.mp4' } };
-    const next = { video: { src: 'video2.mp4' } };
+  test("memoVideo should return false if video src is different", () => {
+    const prev = {
+      video: { src: "video1.mp4" },
+      maxWidth: 100,
+      marginBottom: 20,
+    };
+    const next = {
+      video: { src: "video2.mp4" },
+      maxWidth: 100,
+      marginBottom: 20,
+    };
     const result = memoVideo(prev, next);
     expect(result).toBe(false);
   });
 
-  test('memoVideo should return false if maxWidth is different', () => {
-    const prev = { maxWidth: 400 };
-    const next = { maxWidth: 600 };
+  test("memoVideo should return false if maxWidth is different", () => {
+    const prev = {
+      video: { src: "video1.mp4" },
+      maxWidth: 400,
+      marginBottom: 20,
+    };
+    const next = {
+      video: { src: "video1.mp4" },
+      maxWidth: 600,
+      marginBottom: 20,
+    };
     const result = memoVideo(prev, next);
     expect(result).toBe(false);
   });
 
-  test('memoVideo should return false if paddingBottom is different', () => {
-    const prev = { marginBottom: 10 };
-    const next = { marginBottom: 20 };
+  test("memoVideo should return false if marginBottom is different", () => {
+    const prev = {
+      video: { src: "video1.mp4" },
+      maxWidth: 400,
+      marginBottom: 10,
+    };
+    const next = {
+      video: { src: "video1.mp4" },
+      maxWidth: 400,
+      marginBottom: 20,
+    };
     const result = memoVideo(prev, next);
     expect(result).toBe(false);
   });
 
-  test('memoVideo should return false if useLightBox is different', () => {
-    const prev = { useLightBox: true };
-    const next = { useLightBox: false };
+  test("memoVideo should return false if useLightBox is different", () => {
+    const prev = {
+      video: { src: "video1.mp4" },
+      maxWidth: 400,
+      marginBottom: 10,
+      useLightBox: true,
+    };
+    const next = {
+      video: { src: "video1.mp4" },
+      maxWidth: 400,
+      marginBottom: 10,
+      useLightBox: false,
+    };
     const result = memoVideo(prev, next);
     expect(result).toBe(false);
   });
-
-  test('memoVideo should return true if only selected value changed', () => {
-    const prev = { video: { src: 'video.mp4' }, maxWidth: 400, paddingBottom: 10, useLightBox: true };
-    const next = { video: { src: 'video.mp4' }, maxWidth: 400, paddingBottom: 10, useLightBox: false };
-    const result = memoVideo(prev, next);
-    expect(result).toBe(true);
-  });
-
 });

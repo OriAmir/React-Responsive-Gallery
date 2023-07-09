@@ -66,7 +66,6 @@ const Video = ({
           <source src={video.src} type={video?.videoType} />
         </StyledVideo>
       )}
-
       {selectable && loaded && !error && (
         <Select
           id={video.id || video.src}
@@ -77,14 +76,14 @@ const Video = ({
       )}
       {!loaded && !error && (
         <MediaIndication
-        marginBottom={marginBottom}
+          marginBottom={marginBottom}
           custom={customLoader}
           type={MediaIndicationType.loader}
         />
       )}
       {error && (
         <MediaIndication
-        marginBottom={marginBottom}
+          marginBottom={marginBottom}
           custom={customError}
           type={MediaIndicationType.error}
         />
