@@ -52,16 +52,16 @@ describe("Gallery utils functions", () => {
 
   test("width group different boolean return correctly", () => {
     expect(
-      isWidthGroupsDifferences(screenWidthSizes.xs, screenWidthSizes.s)
+      isWidthGroupsDifferences(screenWidthSizes.xs, screenWidthSizes.s),
     ).toBeTruthy();
     expect(
-      isWidthGroupsDifferences(screenWidthSizes.xs, screenWidthSizes.xs)
+      isWidthGroupsDifferences(screenWidthSizes.xs, screenWidthSizes.xs),
     ).toBeFalsy();
     expect(
-      isWidthGroupsDifferences(screenWidthSizes.m, screenWidthSizes.l)
+      isWidthGroupsDifferences(screenWidthSizes.m, screenWidthSizes.l),
     ).toBeTruthy();
     expect(
-      isWidthGroupsDifferences(screenWidthSizes.l, screenWidthSizes.xl)
+      isWidthGroupsDifferences(screenWidthSizes.l, screenWidthSizes.xl),
     ).toBeTruthy();
   });
 
@@ -122,7 +122,7 @@ describe("Gallery utils functions", () => {
 
     const sameOrder1 = sortMediaByOrderGroup(
       [imgS1, imgS2, imgS3, imgS4],
-      1201
+      1201,
     );
     expect(sameOrder1).toEqual(media);
 

@@ -37,7 +37,7 @@ const Image = ({
 
       onClick?.();
     },
-    []
+    [],
   );
 
   return (

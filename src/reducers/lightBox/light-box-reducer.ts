@@ -17,7 +17,7 @@ type ActionType =
 
 const lightBoxReducer = (
   state: typeof initialState,
-  action: ActionType
+  action: ActionType,
 ): State => {
   switch (action.type) {
     case LightboxActionType.LIGHT_BOX_OPEN:

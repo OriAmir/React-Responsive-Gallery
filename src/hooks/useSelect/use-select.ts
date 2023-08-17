@@ -33,7 +33,7 @@ const useSelect = () => {
 
     return () =>
       elements.forEach((element) =>
-        element.removeEventListener("change", onChange)
+        element.removeEventListener("change", onChange),
       );
   }, []);
   return data;

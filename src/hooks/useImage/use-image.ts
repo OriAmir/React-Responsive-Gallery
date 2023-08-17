@@ -1,7 +1,7 @@
 import { useState, useLayoutEffect } from "react";
 
 export const useImage = (
-  src: string
+  src: string,
 ): [boolean, boolean, HTMLImageElement | undefined] => {
   const [loaded, setLoaded] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);

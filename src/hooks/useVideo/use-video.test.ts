@@ -9,7 +9,7 @@ describe("useVideo hook", () => {
     act(() => {
       // Simulate the video can play event
       result.current.videoRef.current?.dispatchEvent(
-        new Event("canplay", { bubbles: true })
+        new Event("canplay", { bubbles: true }),
       );
     });
 
@@ -23,7 +23,7 @@ describe("useVideo hook", () => {
     act(() => {
       // Simulate the video error event
       result.current.videoRef.current?.dispatchEvent(
-        new Event("error", { bubbles: true })
+        new Event("error", { bubbles: true }),
       );
     });
 
@@ -51,7 +51,7 @@ describe("useVideo hook", () => {
       (props) => useVideo(props.videoSrc),
       {
         initialProps: { videoSrc: initialVideoSrc },
-      }
+      },
     );
 
     expect(result.current.videoRef.current?.src).toContain(initialVideoSrc);
@@ -68,7 +68,7 @@ describe("useVideo hook", () => {
     const removeEventListenerSpy = jest.spyOn(
       // @ts-ignore
       result.current.videoRef.current,
-      "removeEventListener"
+      "removeEventListener",
     );
 
     act(() => {
@@ -78,11 +78,11 @@ describe("useVideo hook", () => {
     expect(removeEventListenerSpy).toHaveBeenCalledTimes(2);
     expect(removeEventListenerSpy).toHaveBeenCalledWith(
       "canplay",
-      expect.any(Function)
+      expect.any(Function),
     );
     expect(removeEventListenerSpy).toHaveBeenCalledWith(
       "error",
-      expect.any(Function)
+      expect.any(Function),
     );
     // @ts-ignore
     removeEventListenerSpy.mockRestore();

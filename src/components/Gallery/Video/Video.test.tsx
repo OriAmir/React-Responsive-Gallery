@@ -86,7 +86,7 @@ describe("Video Component", () => {
   test("displays the custom error when the video has an error", () => {
     mockUseVideoRef.mockImplementation(mockVideoFunc(false, true));
     render(
-      <Video {...videoProps} customError={<div>error loading video</div>} />
+      <Video {...videoProps} customError={<div>error loading video</div>} />,
     );
     expect(screen.getByText("error loading video")).toBeInTheDocument();
   });

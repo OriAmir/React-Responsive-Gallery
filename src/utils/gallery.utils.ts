@@ -22,7 +22,7 @@ import { VideoProps } from "components/Gallery/Video/Video.types";
 
 const getOrderGroup = (
   width: number,
-  userScreenWidthValues?: ScreenWidthSizes
+  userScreenWidthValues?: ScreenWidthSizes,
 ): MediaOrderOptions => {
   const widthSizes: ScreenWidthSizes =
     userScreenWidthValues || screenWidthSizes;
@@ -40,11 +40,11 @@ const getOrderGroup = (
 const sortMediaByOrderGroup = (
   array: Array<MediaElementProps>,
   width: number,
-  userScreenWidthValues: ScreenWidthSizes = screenWidthSizes
+  userScreenWidthValues: ScreenWidthSizes = screenWidthSizes,
 ): Array<ExpandedMediaElementProps> => {
   const orderGroup: MediaOrderOptions = getOrderGroup(
     width,
-    userScreenWidthValues
+    userScreenWidthValues,
   );
   const arrayUpdated = array.reduce(
     (total: Array<ExpandedMediaElementProps>, cur: MediaElementProps) => {
@@ -66,7 +66,7 @@ const sortMediaByOrderGroup = (
       }
       return [...total, cur];
     },
-    []
+    [],
   );
 
   return arrayUpdated
@@ -82,7 +82,7 @@ const sortMediaByOrderGroup = (
 
 const getSizeGroup = (
   width: number,
-  userScreenWidthValues?: ScreenWidthSizes
+  userScreenWidthValues?: ScreenWidthSizes,
 ): WidthOptions => {
   const widthSizes: ScreenWidthSizes =
     userScreenWidthValues || screenWidthSizes;
@@ -106,14 +106,14 @@ const getSizeGroup = (
 const isWidthGroupsDifferences = (
   oldWidth: number,
   newWidth: number,
-  userScreenWidthValues?: ScreenWidthSizes
+  userScreenWidthValues?: ScreenWidthSizes,
 ): boolean =>
   getSizeGroup(oldWidth, userScreenWidthValues) !==
   getSizeGroup(newWidth, userScreenWidthValues);
 
 const getGallerySizes = (
   width: number,
-  userValues?: GalleryWidthOptions
+  userValues?: GalleryWidthOptions,
 ): GallerySizes => {
   const screenWidthSizesValues: ScreenWidthSizes =
     userValues?.screenWidthSizes || screenWidthSizes;
@@ -154,13 +154,13 @@ const getGallerySizes = (
 
 const getMediaCols = (
   media: Array<MediaElementProps>,
-  numOfMediaPerRow: number
+  numOfMediaPerRow: number,
 ): MediaCols | Record<string, never> => {
   const mediaCols: MediaCols | Record<string, never> = media?.reduce(
     (
       total: MediaCols | Record<string, never>,
       cur: MediaElementProps,
-      index: number
+      index: number,
     ) =>
       total[index % numOfMediaPerRow]
         ? {
@@ -171,7 +171,7 @@ const getMediaCols = (
             ],
           }
         : { ...total, [index % numOfMediaPerRow]: [cur] },
-    {}
+    {},
   );
   return mediaCols;
 };
@@ -190,7 +190,7 @@ const getSelectedMedia = () => {
 
 const isMediaSelected = (
   media: MediaElementProps,
-  selectableMedia: Array<string>
+  selectableMedia: Array<string>,
 ): boolean => {
   const id = media?.id && selectableMedia?.indexOf(media.id) !== -1;
   const src = selectableMedia?.indexOf(media.src) !== -1;
