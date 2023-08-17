@@ -32,7 +32,7 @@ import Video from "./Video/Video";
 const MediaLightBoxComponent = lazy(() =>
   import("./MediaLightBox/MediaLightBox").then((module) => ({
     default: module.MediaLightBox,
-  }))
+  })),
 );
 
 const Gallery = ({
@@ -66,11 +66,11 @@ const Gallery = ({
 
   const sortedMedia: Array<MediaElementProps> = useMemo(
     () => sortMediaByOrderGroup(media, width, screenWidthSizes),
-    [media, screenWidthSizes, width]
+    [media, screenWidthSizes, width],
   );
   const MediaCols: MediaCols | Record<string, never> = useMemo(
     () => getMediaCols(sortedMedia, gallerySizes.numOfMediaPerRow),
-    [gallerySizes, sortedMedia]
+    [gallerySizes, sortedMedia],
   );
 
   const onMediaClick = useCallback(
@@ -82,7 +82,7 @@ const Gallery = ({
         lightboxRef?.current?.openMediaByIndex(mediaIndex, colIndex);
       }
     },
-    [onClick, useLightBox]
+    [onClick, useLightBox],
   );
 
   return (
@@ -137,7 +137,7 @@ const Gallery = ({
                     )}
                   </MediaWrapper>
                 );
-              }
+              },
             )}
           </Col>
         ))}

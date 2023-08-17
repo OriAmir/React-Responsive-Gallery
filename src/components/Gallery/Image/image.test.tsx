@@ -34,7 +34,7 @@ describe("Image Component", () => {
         maxWidth={100}
         marginBottom={10}
         selectable={true}
-      />
+      />,
     );
     const element = screen.getByTestId("checkbox-image-1");
     expect(element).toBeInTheDocument();
@@ -51,7 +51,7 @@ describe("Image Component", () => {
         maxWidth={100}
         marginBottom={10}
         selectable={false}
-      />
+      />,
     );
 
     expect(screen.queryByRole("checkbox")).not.toBeInTheDocument();
@@ -74,7 +74,7 @@ describe("Image Component", () => {
         maxWidth={100}
         marginBottom={10}
         customLoader={<div>{customLoaderText}</div>}
-      />
+      />,
     );
 
     expect(screen.getByText(customLoaderText)).toBeInTheDocument();
@@ -97,7 +97,7 @@ describe("Image Component", () => {
         maxWidth={100}
         marginBottom={10}
         customError={<div>{customErrorText}</div>}
-      />
+      />,
     );
 
     expect(screen.getByText(customErrorText)).toBeInTheDocument();
@@ -120,7 +120,7 @@ describe("Image Component", () => {
         marginBottom={10}
         selectable={true}
         onSelect={onSelectMock}
-      />
+      />,
     );
 
     const element = screen.getByTestId("checkbox-image-1");
@@ -141,7 +141,7 @@ describe("Image Component", () => {
         maxWidth={100}
         marginBottom={10}
         onClick={onClickMock}
-      />
+      />,
     );
 
     const image = screen.getByAltText(imgAlt);

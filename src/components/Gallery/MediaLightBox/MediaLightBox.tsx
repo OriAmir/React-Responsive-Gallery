@@ -18,7 +18,7 @@ export const MediaLightBox = forwardRef<
 >((props, ref) => {
   const [lightBoxValues, lightBoxDispatch] = useReducer(
     lightBoxReducer,
-    initialState
+    initialState,
   );
   const { numOfMediaPerRow, mediaLightbox, lightBoxAdditionalProps } = props;
 
@@ -37,7 +37,7 @@ export const MediaLightBox = forwardRef<
         },
       };
     },
-    [numOfMediaPerRow]
+    [numOfMediaPerRow],
   );
 
   const { mediaIndex, isOpen } = lightBoxValues;

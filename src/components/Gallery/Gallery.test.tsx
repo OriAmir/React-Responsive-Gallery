@@ -7,6 +7,7 @@ import { useVideo } from "hooks/useVideo/use-video";
 import { MediaIndicationType } from "./MediaIndication/Mediaindication.types";
 import { MediaElementProps } from "./Gallery.types";
 import { useRef } from "react";
+
 interface ImageHtmlElement extends HTMLElement {
   src?: string;
 }
@@ -76,7 +77,7 @@ describe("Gallery component showing image as expected", () => {
             src: "src2",
           },
         ]}
-      />
+      />,
     );
 
     expect(screen.getAllByRole("img").length).toEqual(2);
@@ -118,7 +119,7 @@ describe("Gallery component showing image as expected", () => {
             src: "src1",
           },
         ]}
-      />
+      />,
     );
     const domImages: HtmlImages = screen.getAllByRole("img");
     fireEvent.click(domImages[0]);
@@ -180,7 +181,7 @@ describe("Gallery component showing errors/loader", () => {
     expect(domImagesLSize.length).toEqual(3);
     expect(domImagesLSize[0]).toHaveAttribute(
       "alt",
-      MediaIndicationType.loader
+      MediaIndicationType.loader,
     );
     expect(domImagesLSize[1]).toHaveAttribute("src", "http://test/3");
     expect(domImagesLSize[2]).toHaveAttribute("alt", MediaIndicationType.error);
