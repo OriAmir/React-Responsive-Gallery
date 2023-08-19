@@ -35,7 +35,7 @@ describe("Video Component", () => {
 
   test("renders video component with source", () => {
     render(<Video {...videoProps} />);
-    const videoElement = screen.getByRole("video") as HTMLVideoElement;
+    const videoElement = screen.getByRole("video");
     expect(videoElement).toBeInTheDocument();
     // eslint-disable-next-line testing-library/no-node-access
     const sourceElement = videoElement.querySelector("source");
@@ -58,6 +58,7 @@ describe("Video Component", () => {
 
     render(<Video {...videoPropsNew} />);
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     const videoElement = screen.getByRole("video") as HTMLVideoElement;
     expect(videoElement).toBeInTheDocument();
     // eslint-disable-next-line testing-library/no-node-access

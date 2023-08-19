@@ -1,34 +1,34 @@
 import { LightboxProps } from "yet-another-react-lightbox";
 
-export type OptionsWidthSizes = {
+export interface OptionsWidthSizes {
   xs: number;
   s: number;
   m: number;
   l: number;
   xl: number;
   xxl: number;
-};
+}
 
 export type ScreenWidthSizes = Pick<
   OptionsWidthSizes,
   "xs" | "s" | "m" | "l" | "xl"
 >;
 
-export type GalleryWidthOptions = {
+export interface GalleryWidthOptions {
   screenWidthSizes?: ScreenWidthSizes;
   numOfMediaPerRow?: OptionsWidthSizes | undefined;
   mediaMaxWidth?: OptionsWidthSizes | undefined;
   colsPadding?: OptionsWidthSizes | undefined;
   mediaMarginBottom?: OptionsWidthSizes | undefined;
-};
+}
 
-export type GallerySizes = {
+export interface GallerySizes {
   screenWidthSizes: number;
   numOfMediaPerRow: number;
   mediaMaxWidth: number;
   colsPadding: number;
   mediaMarginBottom: number;
-};
+}
 
 export type VideoType = "video/mp4" | "video/webm" | "video/ogg";
 
@@ -44,8 +44,8 @@ export type AdditionalILightBoxProps = Omit<
   "open" | "close" | "slides" | "index"
 >;
 
-export type ResponsiveGalleryProps = {
-  media: Array<MediaElementProps>;
+export interface ResponsiveGalleryProps {
+  media: MediaElementProps[];
   screenWidthSizes?: ScreenWidthSizes;
   numOfMediaPerRow?: OptionsWidthSizes;
   mediaMaxWidth?: OptionsWidthSizes;
@@ -56,14 +56,14 @@ export type ResponsiveGalleryProps = {
   useLightBox?: boolean;
   lightBoxAdditionalProps?: AdditionalILightBoxProps;
   selectable?: boolean;
-  selectableMedia?: Array<string>;
+  selectableMedia?: string[];
   onSelect?: (id: string, val: boolean) => void;
   onClick?: (id: string) => void;
   customLoader?: React.ReactElement;
   customError?: React.ReactElement;
-};
+}
 
-export type MediaCols = Array<MediaElementProps>;
+export type MediaCols = Record<string, MediaElementProps[]>;
 
 export enum WidthOptions {
   xs = "xs",
@@ -80,9 +80,7 @@ export enum MediaOrderOptions {
   l = "orderL",
 }
 
-type LightBoxVideoSourcesType = Array<
-  Record<"src" | "type", VideoType | string>
->;
+type LightBoxVideoSourcesType = Record<"src" | "type", VideoType>[];
 
 export interface MediaElementProps {
   src: string;
@@ -100,7 +98,7 @@ export interface MediaElementProps {
   additionalVideoProps?: AdditionalVideoProps;
 }
 
-export type MediaComponentProps = {
+export interface MediaComponentProps {
   maxWidth: number;
   marginBottom: number;
   className?: string;
@@ -112,7 +110,7 @@ export type MediaComponentProps = {
   selected?: boolean;
   onSelect?: (id: string, val: boolean) => void;
   style?: Record<string, unknown>;
-};
+}
 
 export type ExpandedMediaElementProps = MediaElementProps & {
   sources?: LightBoxVideoSourcesType;

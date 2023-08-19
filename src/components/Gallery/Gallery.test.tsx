@@ -11,7 +11,7 @@ import { useRef } from "react";
 interface ImageHtmlElement extends HTMLElement {
   src?: string;
 }
-type HtmlImages = Array<ImageHtmlElement>;
+type HtmlImages = ImageHtmlElement[];
 
 jest.mock("hooks/useImage/use-image");
 jest.mock("hooks/useVideo/use-video");
@@ -140,7 +140,6 @@ describe("Gallery component showing errors/loader", () => {
     window = Object.assign(window, { innerWidth: 1000 });
     render(<ResponsiveGallery media={media} />);
     const domImagesLSize: HtmlImages = screen.getAllByRole("img");
-    screen.debug();
     expect(domImagesLSize.length).toEqual(3);
     domImagesLSize.forEach((element) => {
       expect(element).toHaveAttribute("alt", MediaIndicationType.loader);

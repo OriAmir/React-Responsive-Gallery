@@ -4,14 +4,14 @@ export type ImageProps = MediaComponentProps & {
   img: MediaElementProps;
 };
 
-export type StyledImageProps = {
+export interface StyledImageProps {
   src: string;
   alt: string;
-};
+}
 
-export type StyledButtonImageProps = {
+export interface StyledButtonImageProps {
   $maxWidth: number;
   $marginBottom: number;
   $useLightBox?: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-};
+}
