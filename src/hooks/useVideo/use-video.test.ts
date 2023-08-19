@@ -2,6 +2,10 @@ import { act, renderHook } from "@testing-library/react";
 import { useVideo } from "./use-video";
 
 describe("useVideo hook", () => {
+  beforeEach(() => {
+    window.HTMLMediaElement.prototype.load = jest.fn();
+  });
+
   test("should set loaded to true when the video can play", () => {
     const videoSrc = "path/to/video.mp4";
     const { result } = renderHook(() => useVideo(videoSrc));
@@ -85,6 +89,7 @@ describe("useVideo hook", () => {
       expect.any(Function),
     );
     // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     removeEventListenerSpy.mockRestore();
   });
 });

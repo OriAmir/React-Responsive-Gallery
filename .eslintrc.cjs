@@ -15,9 +15,11 @@ module.exports = {
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
-    "plugin:@typescript-eslint/recommended", // @typescript-eslint/eslint-plugin(part of react-scripts)
-    "plugin:prettier/recommended", // eslint-plugin-prettier
-    "prettier", // eslint-config-prettier
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-type-checked",
+    "plugin:@typescript-eslint/stylistic-type-checked",
+    "plugin:prettier/recommended",
+    "prettier",
   ],
   plugins: [
     "prettier", // eslint-plugin-prettier
@@ -28,8 +30,13 @@ module.exports = {
     SharedArrayBuffer: "readonly",
   },
   parser: "@typescript-eslint/parser",
+  parserOptions: {
+    project: './tsconfig.json', // Path to your tsconfig.json file
+    tsconfigRootDir: __dirname,
+  },
   rules: {
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/prefer-nullish-coalescing": "off",
   },
 };

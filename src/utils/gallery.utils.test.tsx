@@ -70,7 +70,7 @@ describe("Gallery utils functions", () => {
     expect(getMediaCols([], 1)).toMatchObject({});
 
     const mediaData: MediaElementProps = { src: "http://test" };
-    const media: Array<MediaElementProps> = [
+    const media: MediaElementProps[] = [
       mediaData,
       mediaData,
       mediaData,
@@ -149,10 +149,13 @@ describe("Gallery utils functions", () => {
   });
 
   test("gallery sizes return correctly", () => {
-    const getGallerySizesObj = (widthSize) => {
+    const getGallerySizesObj = (widthSize: number) => {
       const widthGroup = getSizeGroup(widthSize);
       const obj: GallerySizes = {
-        screenWidthSizes: screenWidthSizesObj[widthGroup],
+        screenWidthSizes:
+          widthGroup !== WidthOptions.xxl
+            ? screenWidthSizesObj[widthGroup]
+            : screenWidthSizesObj.xl + 1,
         numOfMediaPerRow: numOfMediaPerRow[widthGroup],
         mediaMaxWidth: mediaMaxWidth[widthGroup],
         colsPadding: colsPadding[widthGroup],

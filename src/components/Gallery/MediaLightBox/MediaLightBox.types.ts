@@ -1,11 +1,11 @@
 import { MediaElementProps, AdditionalILightBoxProps } from "../Gallery.types";
 
-export type MediaLightBoxProps = {
-  mediaLightbox: Array<MediaElementProps>;
+export interface MediaLightBoxProps {
+  mediaLightbox: MediaElementProps[];
   lightBoxAdditionalProps?: AdditionalILightBoxProps;
   numOfMediaPerRow: number;
-};
+}
 
-export type MediaLightBoxHandle = {
+export interface MediaLightBoxHandle {
   openMediaByIndex: (mediaIndex: number, colIndex: number) => void;
-};
+}

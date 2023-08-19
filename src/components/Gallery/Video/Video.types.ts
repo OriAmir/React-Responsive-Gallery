@@ -4,7 +4,7 @@ export type VideoProps = MediaComponentProps & {
   video: MediaElementProps;
 };
 
-export type StyledVideoProps = {
+export interface StyledVideoProps {
   $maxWidth: number;
   $marginBottom: number;
-};
+}

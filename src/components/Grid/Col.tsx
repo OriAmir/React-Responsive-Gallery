@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-type ColProps = {
+interface ColProps {
   $colSize?: number;
   $colPadding?: number;
-};
+}
 
 const Col = styled.div<ColProps>`
   box-sizing: border-box;

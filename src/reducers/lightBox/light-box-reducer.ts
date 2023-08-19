@@ -1,9 +1,10 @@
 import { LightboxActionType } from "./light-box-actions-type";
 
-type State = {
+interface State {
   mediaIndex: number;
   isOpen: boolean;
-};
+}
+
 const initialState = {
   mediaIndex: 0,
   isOpen: false,

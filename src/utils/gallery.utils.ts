@@ -16,6 +16,7 @@ import {
   MediaCols,
   MediaType,
   ExpandedMediaElementProps,
+  VideoType,
 } from "../components/Gallery/Gallery.types";
 import { ImageProps } from "components/Gallery/Image/Image.types";
 import { VideoProps } from "components/Gallery/Video/Video.types";
@@ -38,23 +39,23 @@ const getOrderGroup = (
 };
 
 const sortMediaByOrderGroup = (
-  array: Array<MediaElementProps>,
+  array: MediaElementProps[],
   width: number,
   userScreenWidthValues: ScreenWidthSizes = screenWidthSizes,
-): Array<ExpandedMediaElementProps> => {
+): ExpandedMediaElementProps[] => {
   const orderGroup: MediaOrderOptions = getOrderGroup(
     width,
     userScreenWidthValues,
   );
   const arrayUpdated = array.reduce(
-    (total: Array<ExpandedMediaElementProps>, cur: MediaElementProps) => {
+    (total: ExpandedMediaElementProps[], cur: MediaElementProps) => {
       if (cur.type === MediaType.Video) {
         // this part if for "yet-another-react-lightbox" package in order to support video
         const curWithType: ExpandedMediaElementProps = {
           ...cur,
           sources: [
             {
-              src: cur.src,
+              src: cur.src as VideoType,
               type: cur.videoType || "video/mp4",
             },
           ],
@@ -144,7 +145,10 @@ const getGallerySizes = (
   }
 
   return {
-    screenWidthSizes: screenWidthSizesValues[widthSize],
+    screenWidthSizes:
+      widthSize !== WidthOptions.xxl
+        ? screenWidthSizesValues[widthSize]
+        : screenWidthSizesValues.xl + 1,
     numOfMediaPerRow: numOfMediaPerRowValues[widthSize],
     mediaMaxWidth: mediaMaxWidthValues[widthSize],
     colsPadding: colsPaddingValues[widthSize],
@@ -153,10 +157,10 @@ const getGallerySizes = (
 };
 
 const getMediaCols = (
-  media: Array<MediaElementProps>,
+  media: MediaElementProps[],
   numOfMediaPerRow: number,
-): MediaCols | Record<string, never> => {
-  const mediaCols: MediaCols | Record<string, never> = media?.reduce(
+): MediaCols => {
+  const mediaCols: MediaCols = media?.reduce(
     (
       total: MediaCols | Record<string, never>,
       cur: MediaElementProps,
@@ -190,7 +194,7 @@ const getSelectedMedia = () => {
 
 const isMediaSelected = (
   media: MediaElementProps,
-  selectableMedia: Array<string>,
+  selectableMedia: string[],
 ): boolean => {
   const id = media?.id && selectableMedia?.indexOf(media.id) !== -1;
   const src = selectableMedia?.indexOf(media.src) !== -1;

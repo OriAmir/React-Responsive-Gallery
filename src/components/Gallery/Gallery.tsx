@@ -64,11 +64,11 @@ const Gallery = ({
   const gallerySizes: GallerySizes = getGallerySizes(width, userGalleryOptions);
   const lightboxRef = useRef<MediaLightBoxHandle>(null);
 
-  const sortedMedia: Array<MediaElementProps> = useMemo(
+  const sortedMedia: MediaElementProps[] = useMemo(
     () => sortMediaByOrderGroup(media, width, screenWidthSizes),
     [media, screenWidthSizes, width],
   );
-  const MediaCols: MediaCols | Record<string, never> = useMemo(
+  const mediaCols: MediaCols = useMemo(
     () => getMediaCols(sortedMedia, gallerySizes.numOfMediaPerRow),
     [gallerySizes, sortedMedia],
   );
@@ -98,13 +98,13 @@ const Gallery = ({
         </Suspense>
       )}
       <Row>
-        {Object.keys(MediaCols).map((key, colIndex) => (
+        {Object.keys(mediaCols).map((key, colIndex) => (
           <Col
             key={`col-${key}`}
             $colSize={100 / gallerySizes.numOfMediaPerRow}
             $colPadding={gallerySizes.colsPadding}
           >
-            {MediaCols[key].map(
+            {mediaCols?.[key]?.map(
               (media: MediaElementProps, mediaIndex: number) => {
                 const eleProps: MediaComponentProps = {
                   maxWidth: gallerySizes.mediaMaxWidth,

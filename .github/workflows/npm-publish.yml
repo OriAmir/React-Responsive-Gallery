@@ -16,8 +16,8 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
-      - run: npm ci --legacy-peer-deps
+          node-version: 18
+      - run: npm ci
       - run: npm run build
 
   test:
@@ -27,8 +27,8 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
-      - run: npm ci --legacy-peer-deps
+          node-version: 18
+      - run: npm ci
       - run: npm run test
 
   lint:
@@ -38,8 +38,8 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
-      - run: npm ci --legacy-peer-deps
+          node-version: 18
+      - run: npm ci
       - run: npm run lint
 
   publish-npm:
@@ -50,9 +50,9 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
           registry-url: 'https://registry.npmjs.org'
-      - run: npm ci --legacy-peer-deps
+      - run: npm ci
       - run: npm run build
       - run: npm publish
         env:
@@ -66,9 +66,9 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
           registry-url: 'https://registry.npmjs.org'
-      - run: npm ci --legacy-peer-deps
+      - run: npm ci
       - run: npm run build
       - run: npm publish --tag beta
         env:
