@@ -1,7 +1,7 @@
 {
   "name": "react-responsive-gallery",
   "type": "module",
-  "version": "4.0.0-beta.1",
+  "version": "4.0.0-beta.2",
   "description": "React responsive gallery",
   "files": [
     "dist"
@@ -36,7 +36,7 @@
       "prettier --write"
     ]
   },
-  "typings": "dist/index.d.ts",
+  "typings": "dist/declarations/index.d.ts",
   "license": "MIT",
   "devDependencies": {
     "@babel/preset-env": "^7.22.10",
