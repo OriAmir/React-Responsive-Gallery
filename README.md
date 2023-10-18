@@ -28,10 +28,17 @@ or
 
 <br/>
 
+<h3>Notes</h3>
+
+- Gallery V3 documentation can be found <a href="https://github.com/OriAmir/React-Responsive-Gallery/tree/V3" target="_blank"> here</a> .
+<br/>
+- There are some breaking changes when moving from V3 to V4, you can see them under <a href="https://github.com/OriAmir/React-Responsive-Gallery/tags" target="\_blank"> Tags </a>.
+</br>
+
 <h3>Playground</h3>
 You can play with the library in 
-<a href="https://codesandbox.io/s/react-responsive-gallery-playground-dpqtg" target="_blank"> Codesandbox</a> or in
-<a href="https://stackblitz.com/edit/react-responsive-gallery" target="_blank"> Stackblitz</a> .
+<a href="https://codesandbox.io/s/react-responsive-gallery-v4-h66cq3" target="_blank"> Codesandbox</a> or in
+<a href="https://stackblitz.com/edit/vitejs-vite-tfqeb8?file=src%2FApp.tsx" target="_blank"> Stackblitz</a> .
 
 <br/>
 <h3>Basic using example</h3>
