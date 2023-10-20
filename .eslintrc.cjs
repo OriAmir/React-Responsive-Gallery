@@ -1,5 +1,4 @@
 /* eslint-disable no-undef */
-
 module.exports = {
   settings: {
     react: {
@@ -31,7 +30,7 @@ module.exports = {
   },
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    project: './tsconfig.json', // Path to your tsconfig.json file
+    project: "./tsconfig.json", // Path to your tsconfig.json file
     tsconfigRootDir: __dirname,
   },
   rules: {
