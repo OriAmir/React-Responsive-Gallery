@@ -1,70 +1,69 @@
 import { LightboxProps } from "yet-another-react-lightbox";
 
-export type OptionsWidthSizes = {
+export interface OptionsWidthSizes {
   xs: number;
   s: number;
   m: number;
   l: number;
   xl: number;
   xxl: number;
-};
+}
 
 export type ScreenWidthSizes = Pick<
   OptionsWidthSizes,
   "xs" | "s" | "m" | "l" | "xl"
 >;
 
-export type GalleryWidthOptions = {
+export interface GalleryWidthOptions {
   screenWidthSizes?: ScreenWidthSizes;
-  numOfImagesPerRow?: OptionsWidthSizes | undefined;
-  imagesMaxWidth?: OptionsWidthSizes | undefined;
+  numOfMediaPerRow?: OptionsWidthSizes | undefined;
+  mediaMaxWidth?: OptionsWidthSizes | undefined;
   colsPadding?: OptionsWidthSizes | undefined;
-  imagesPaddingBottom?: OptionsWidthSizes | undefined;
-};
-
-export type GallerySizes = {
-  screenWidthSizes: number;
-  numOfImagesPerRow: number;
-  imagesMaxWidth: number;
-  colsPadding: number;
-  imagesPaddingBottom: number;
-};
-
-export interface ImageElementProps {
-  src: string;
-  id?: string;
-  alt?: string;
-  imgClassName?: string | Record<string, unknown>;
-  title?: string;
-  description?: string;
-  orderS?: number;
-  orderM?: number;
-  orderL?: number;
+  mediaMarginBottom?: OptionsWidthSizes | undefined;
 }
+
+export interface GallerySizes {
+  screenWidthSizes: number;
+  numOfMediaPerRow: number;
+  mediaMaxWidth: number;
+  colsPadding: number;
+  mediaMarginBottom: number;
+}
+
+export type VideoType = "video/mp4" | "video/webm" | "video/ogg";
+
+export enum MediaType {
+  Image = "image",
+  Video = "video",
+}
+
+export type AdditionalVideoProps = Record<string, string | number | boolean>;
 
 export type AdditionalILightBoxProps = Omit<
   LightboxProps,
   "open" | "close" | "slides" | "index"
 >;
 
-export type ResponsiveGalleryProps = {
-  images: Array<ImageElementProps>;
+export interface ResponsiveGalleryProps {
+  media: MediaElementProps[];
   screenWidthSizes?: ScreenWidthSizes;
-  numOfImagesPerRow?: OptionsWidthSizes;
-  imagesMaxWidth?: OptionsWidthSizes;
+  numOfMediaPerRow?: OptionsWidthSizes;
+  mediaMaxWidth?: OptionsWidthSizes;
   colsPadding?: OptionsWidthSizes;
-  imagesPaddingBottom?: OptionsWidthSizes;
-  imagesStyle?: Record<string, unknown> | string;
+  mediaMarginBottom?: OptionsWidthSizes;
+  mediaStyle?: Record<string, unknown>;
+  mediaClassName?: string;
   useLightBox?: boolean;
   lightBoxAdditionalProps?: AdditionalILightBoxProps;
   selectable?: boolean;
-  selectableItems?: Array<string>;
+  selectableMedia?: string[];
   onSelect?: (id: string, val: boolean) => void;
+  onClick?: (id: string) => void;
   customLoader?: React.ReactElement;
   customError?: React.ReactElement;
-};
+}
 
-export type ImagesCols = Array<ImageElementProps>;
+export type MediaCols = Record<string, MediaElementProps[]>;
 
 export enum WidthOptions {
   xs = "xs",
@@ -75,8 +74,44 @@ export enum WidthOptions {
   xxl = "xxl",
 }
 
-export enum ImageOrderOptions {
+export enum MediaOrderOptions {
   s = "orderS",
   m = "orderM",
   l = "orderL",
 }
+
+type LightBoxVideoSourcesType = Record<"src" | "type", VideoType>[];
+
+export interface MediaElementProps {
+  src: string;
+  type?: string;
+  id?: string;
+  alt?: string;
+  mediaClassName?: string;
+  mediaStyle?: Record<string, unknown>;
+  title?: string;
+  description?: string;
+  orderS?: number;
+  orderM?: number;
+  orderL?: number;
+  videoType?: VideoType | ("video/mp4" | "video/webm" | "video/ogg");
+  additionalVideoProps?: AdditionalVideoProps;
+}
+
+export interface MediaComponentProps {
+  maxWidth: number;
+  marginBottom: number;
+  className?: string;
+  useLightBox?: boolean;
+  onClick?: () => void;
+  customLoader?: React.ReactElement;
+  customError?: React.ReactElement;
+  selectable?: boolean;
+  selected?: boolean;
+  onSelect?: (id: string, val: boolean) => void;
+  style?: Record<string, unknown>;
+}
+
+export type ExpandedMediaElementProps = MediaElementProps & {
+  sources?: LightBoxVideoSourcesType;
+};

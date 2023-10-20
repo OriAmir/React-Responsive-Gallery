@@ -1,31 +1,22 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { CheckboxProps, SelectProps } from "./Select.types";
+import { SelectProps } from "./Select.types";
 import { StyledSelect } from "./StyledSelect";
 
-const StyledCheckbox = styled.input.attrs<CheckboxProps>(
-  ({ value, checked, className, id }) => ({
-    type: "checkbox",
-    value,
-    checked,
-    className,
-    id,
-  })
-)<CheckboxProps>``;
-
-const StyledDiv = styled.div<{ imagesMaxWidth: number }>`
+const StyledDiv = styled.div<{ $mediaMaxWidth: number }>`
   position: absolute;
-  top: 5px;
+  z-index: 100;
+  top: 8px;
   ${(props) =>
-    props.imagesMaxWidth &&
-    `left: calc(${props.imagesMaxWidth}% - 28px - 5px);`}
+    props.$mediaMaxWidth &&
+    `left: calc(${props.$mediaMaxWidth}% - 22px - 8px);`}
 `;
 
 const Select = ({
   value = false,
   id,
   onSelect,
-  imagesMaxWidth,
+  mediaMaxWidth,
 }: SelectProps) => {
   const [check, setCheck] = useState(value);
   const onSelectChange = (id: string, val: boolean) => {
@@ -34,18 +25,20 @@ const Select = ({
     }
     setCheck(val);
   };
-
+  const uniqueId = `checkbox-${id}`;
   return (
-    <StyledDiv imagesMaxWidth={imagesMaxWidth}>
+    <StyledDiv $mediaMaxWidth={mediaMaxWidth}>
       <StyledSelect>
-        <StyledCheckbox
+        <input
+          type="checkbox"
           className="select-input"
           onChange={(e) => onSelectChange(id, e.target.checked)}
           value={id}
-          id={`checkbox-${id}`}
+          id={uniqueId}
+          data-testid={uniqueId}
           checked={check}
         />
-        <label htmlFor={`checkbox-${id}`}></label>
+        <label htmlFor={uniqueId}></label>
       </StyledSelect>
     </StyledDiv>
   );

@@ -1,12 +1,13 @@
+/* eslint-disable no-undef */
 import react from "@vitejs/plugin-react";
 import { resolve } from "node:path";
-import { defineConfig } from "vite";
+import { defineConfig, LibraryFormats } from "vite"; // Make sure to import the correct type
 import dts from "vite-plugin-dts";
 import tsConfigPaths from "vite-tsconfig-paths";
 import eslint from "vite-plugin-eslint";
 import libCss from "vite-plugin-libcss";
 
-export default defineConfig((configEnv) => ({
+export default defineConfig(() => ({
   define: {
     global: {},
   },
@@ -17,16 +18,16 @@ export default defineConfig((configEnv) => ({
     react(),
     tsConfigPaths(),
     dts({
-      outputDir: "dist/declarations",
+      outDir: "dist/declarations",
       insertTypesEntry: true,
     }),
     libCss(),
   ],
   build: {
     cssCodeSplit: true,
-    // sourcemap: true --> for dev debug,
+    sourcemap: false, // --> for dev debug,
     lib: {
-      formats: ["es"],
+      formats: ["es"] as LibraryFormats[], // Cast to the expected type
       entry: resolve("src", "index.tsx"),
       fileName: "react-responsive-gallery",
       name: "ReactResponsiveGallery",

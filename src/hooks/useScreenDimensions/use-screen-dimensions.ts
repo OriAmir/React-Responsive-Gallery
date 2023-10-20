@@ -4,7 +4,7 @@ import { ScreenWidthSizes } from "components/Gallery/Gallery.types";
 import { screenWidthSizes } from "constants/responsive";
 
 const useScreenDimensions = (
-  userScreenWidthValues: ScreenWidthSizes = screenWidthSizes
+  userScreenWidthValues: ScreenWidthSizes = screenWidthSizes,
 ) => {
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -15,7 +15,7 @@ const useScreenDimensions = (
           isWidthGroupsDifferences(
             window.innerWidth,
             oldWidth,
-            userScreenWidthValues
+            userScreenWidthValues,
           )
         ) {
           return window.innerWidth;

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { getSelectedImages } from "../../utils/gallery.utils";
+import { getSelectedMedia } from "../../utils/gallery.utils";
 
 const useSelect = () => {
   const [data, setData] = useState<string[] | []>([]);
 
   useEffect(() => {
-    setData(getSelectedImages());
+    setData(getSelectedMedia());
   }, []);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const useSelect = () => {
 
     return () =>
       elements.forEach((element) =>
-        element.removeEventListener("change", onChange)
+        element.removeEventListener("change", onChange),
       );
   }, []);
   return data;

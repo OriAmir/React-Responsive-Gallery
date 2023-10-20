@@ -1,9 +1,6 @@
 import Lightbox from "yet-another-react-lightbox";
 import { LightboxActionType } from "reducers/lightBox/light-box-actions-type";
-import {
-  ImageLightBoxProps,
-  ImagesLightBoxHandle,
-} from "./ImagesLightBox.types";
+import { MediaLightBoxProps, MediaLightBoxHandle } from "./MediaLightBox.types";
 import {
   lightBoxReducer,
   initialState,
@@ -13,48 +10,53 @@ import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/captions.css";
 import Captions from "yet-another-react-lightbox/plugins/captions";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
+import Video from "yet-another-react-lightbox/plugins/video";
 
-export const ImagesLightBox = forwardRef<
-  ImagesLightBoxHandle,
-  ImageLightBoxProps
+export const MediaLightBox = forwardRef<
+  MediaLightBoxHandle,
+  MediaLightBoxProps
 >((props, ref) => {
   const [lightBoxValues, lightBoxDispatch] = useReducer(
     lightBoxReducer,
-    initialState
+    initialState,
   );
-  const { numOfImagesPerRow, imagesLightbox, lightBoxAdditionalProps } = props;
+  const { numOfMediaPerRow, mediaLightbox, lightBoxAdditionalProps } = props;
 
   useImperativeHandle(
     ref,
     () => {
       return {
-        openImageByIndex(imgIndex: number, colIndex: number) {
+        openMediaByIndex(mediaIndex: number, colIndex: number) {
           lightBoxDispatch({
-            type: LightboxActionType.LIGHT_BOX_OPEN_BY_PHOTO_INDEX,
+            type: LightboxActionType.LIGHT_BOX_OPEN_BY_MEDIA_INDEX,
             payload:
-              imgIndex === 0
+              mediaIndex === 0
                 ? colIndex
-                : colIndex + imgIndex * numOfImagesPerRow,
+                : colIndex + mediaIndex * numOfMediaPerRow,
           });
         },
       };
     },
-    [numOfImagesPerRow]
+    [numOfMediaPerRow],
   );
 
-  const { photoIndex, isOpen } = lightBoxValues;
+  const { mediaIndex, isOpen } = lightBoxValues;
+  const additionalPlugins = lightBoxAdditionalProps?.plugins || [];
   return isOpen ? (
     <Lightbox
       close={() =>
         lightBoxDispatch({ type: LightboxActionType.LIGHT_BOX_CLOSE })
       }
       open={isOpen}
-      slides={imagesLightbox}
-      index={photoIndex}
-      plugins={[Captions, Fullscreen]}
+      //@ts-ignore
+      slides={mediaLightbox}
+      index={mediaIndex}
+      plugins={[Captions, Fullscreen, Video, ...additionalPlugins]}
       {...lightBoxAdditionalProps}
     />
   ) : null;
 });
 
-export default ImagesLightBox;
+MediaLightBox.displayName = "MediaLightBox";
+
+export default MediaLightBox;

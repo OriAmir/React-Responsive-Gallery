@@ -1,8 +1,8 @@
 import {
-  numOfImagesPerRow,
-  imagesMaxWidth,
+  numOfMediaPerRow,
+  mediaMaxWidth,
   colsPadding,
-  imagesPaddingBottom,
+  mediaMarginBottom,
   screenWidthSizes,
 } from "../constants/responsive";
 import {
@@ -10,51 +10,68 @@ import {
   ScreenWidthSizes,
   GalleryWidthOptions,
   WidthOptions,
-  ImageOrderOptions,
+  MediaOrderOptions,
   GallerySizes,
-  ImageElementProps,
-  ImagesCols,
+  MediaElementProps,
+  MediaCols,
+  MediaType,
+  ExpandedMediaElementProps,
+  VideoType,
 } from "../components/Gallery/Gallery.types";
 import { ImageProps } from "components/Gallery/Image/Image.types";
+import { VideoProps } from "components/Gallery/Video/Video.types";
 
 const getOrderGroup = (
   width: number,
-  userScreenWidthValues?: ScreenWidthSizes
-): ImageOrderOptions => {
+  userScreenWidthValues?: ScreenWidthSizes,
+): MediaOrderOptions => {
   const widthSizes: ScreenWidthSizes =
     userScreenWidthValues || screenWidthSizes;
 
   switch (true) {
     case width <= widthSizes.s:
-      return ImageOrderOptions.s;
+      return MediaOrderOptions.s;
     case width > widthSizes.s && width < widthSizes.l:
-      return ImageOrderOptions.m;
+      return MediaOrderOptions.m;
     default:
-      return ImageOrderOptions.l;
+      return MediaOrderOptions.l;
   }
 };
 
-const sortImagesByOrderGroup = (
-  array: Array<ImageElementProps>,
+const sortMediaByOrderGroup = (
+  array: MediaElementProps[],
   width: number,
-  userScreenWidthValues: ScreenWidthSizes = screenWidthSizes
-): Array<ImageElementProps> => {
-  const orderGroup: ImageOrderOptions = getOrderGroup(
+  userScreenWidthValues: ScreenWidthSizes = screenWidthSizes,
+): ExpandedMediaElementProps[] => {
+  const orderGroup: MediaOrderOptions = getOrderGroup(
     width,
-    userScreenWidthValues
+    userScreenWidthValues,
   );
   const arrayUpdated = array.reduce(
-    (total: Array<ImageElementProps>, cur: ImageElementProps) => {
+    (total: ExpandedMediaElementProps[], cur: MediaElementProps) => {
+      if (cur.type === MediaType.Video) {
+        // this part if for "yet-another-react-lightbox" package in order to support video
+        const curWithType: ExpandedMediaElementProps = {
+          ...cur,
+          sources: [
+            {
+              src: cur.src as VideoType,
+              type: cur.videoType || "video/mp4",
+            },
+          ],
+        };
+        cur = curWithType;
+      }
       if (cur?.[orderGroup]) {
         return [cur, ...total];
       }
       return [...total, cur];
     },
-    []
+    [],
   );
 
   return arrayUpdated
-    ? arrayUpdated.sort((ele1: ImageElementProps, ele2: ImageElementProps) => {
+    ? arrayUpdated.sort((ele1: MediaElementProps, ele2: MediaElementProps) => {
         if (ele1?.[orderGroup] && ele2?.[orderGroup]) {
           return (ele1[orderGroup] ?? 0) - (ele2[orderGroup] ?? 0);
         } else {
@@ -66,7 +83,7 @@ const sortImagesByOrderGroup = (
 
 const getSizeGroup = (
   width: number,
-  userScreenWidthValues?: ScreenWidthSizes
+  userScreenWidthValues?: ScreenWidthSizes,
 ): WidthOptions => {
   const widthSizes: ScreenWidthSizes =
     userScreenWidthValues || screenWidthSizes;
@@ -90,29 +107,29 @@ const getSizeGroup = (
 const isWidthGroupsDifferences = (
   oldWidth: number,
   newWidth: number,
-  userScreenWidthValues?: ScreenWidthSizes
+  userScreenWidthValues?: ScreenWidthSizes,
 ): boolean =>
   getSizeGroup(oldWidth, userScreenWidthValues) !==
   getSizeGroup(newWidth, userScreenWidthValues);
 
 const getGallerySizes = (
   width: number,
-  userValues?: GalleryWidthOptions
+  userValues?: GalleryWidthOptions,
 ): GallerySizes => {
   const screenWidthSizesValues: ScreenWidthSizes =
     userValues?.screenWidthSizes || screenWidthSizes;
 
-  const numOfImagesPerRowValues: OptionsWidthSizes =
-    userValues?.numOfImagesPerRow || numOfImagesPerRow;
+  const numOfMediaPerRowValues: OptionsWidthSizes =
+    userValues?.numOfMediaPerRow || numOfMediaPerRow;
 
-  const imagesMaxWidthValues: OptionsWidthSizes =
-    userValues?.imagesMaxWidth || imagesMaxWidth;
+  const mediaMaxWidthValues: OptionsWidthSizes =
+    userValues?.mediaMaxWidth || mediaMaxWidth;
 
   const colsPaddingValues: OptionsWidthSizes =
     userValues?.colsPadding || colsPadding;
 
-  const imagesPaddingBottomValues: OptionsWidthSizes =
-    userValues?.imagesPaddingBottom || imagesPaddingBottom;
+  const mediaMarginBottomValues: OptionsWidthSizes =
+    userValues?.mediaMarginBottom || mediaMarginBottom;
 
   let widthSize = WidthOptions.xxl;
   if (width <= screenWidthSizesValues.xs) {
@@ -128,67 +145,85 @@ const getGallerySizes = (
   }
 
   return {
-    screenWidthSizes: screenWidthSizesValues[widthSize],
-    numOfImagesPerRow: numOfImagesPerRowValues[widthSize],
-    imagesMaxWidth: imagesMaxWidthValues[widthSize],
+    screenWidthSizes:
+      widthSize !== WidthOptions.xxl
+        ? screenWidthSizesValues[widthSize]
+        : screenWidthSizesValues.xl + 1,
+    numOfMediaPerRow: numOfMediaPerRowValues[widthSize],
+    mediaMaxWidth: mediaMaxWidthValues[widthSize],
     colsPadding: colsPaddingValues[widthSize],
-    imagesPaddingBottom: imagesPaddingBottomValues[widthSize],
+    mediaMarginBottom: mediaMarginBottomValues[widthSize],
   };
 };
 
-const getImagesCols = (
-  images: Array<ImageElementProps>,
-  numOfImagesPerRow: number
-): ImagesCols | Record<string, never> => {
-  const imagesCols: ImagesCols | Record<string, never> = images?.reduce(
+const getMediaCols = (
+  media: MediaElementProps[],
+  numOfMediaPerRow: number,
+): MediaCols => {
+  const mediaCols: MediaCols = media?.reduce(
     (
-      total: ImagesCols | Record<string, never>,
-      cur: ImageElementProps,
-      index: number
+      total: MediaCols | Record<string, never>,
+      cur: MediaElementProps,
+      index: number,
     ) =>
-      total[index % numOfImagesPerRow]
+      total[index % numOfMediaPerRow]
         ? {
             ...total,
-            [index % numOfImagesPerRow]: [
-              ...total[index % numOfImagesPerRow],
+            [index % numOfMediaPerRow]: [
+              ...total[index % numOfMediaPerRow],
               cur,
             ],
           }
-        : { ...total, [index % numOfImagesPerRow]: [cur] },
-    {}
+        : { ...total, [index % numOfMediaPerRow]: [cur] },
+    {},
   );
-  return imagesCols;
+  return mediaCols;
 };
 
-const getSelectedImages = () => {
+const getSelectedMedia = () => {
   const elements = document.querySelectorAll(".select-input");
-  const selectedImages: string[] = [];
+  const selectedMedia: string[] = [];
   elements.forEach((e: HTMLInputElement) => {
     if (e.checked) {
-      selectedImages.push(e?.value);
+      selectedMedia.push(e?.value);
     }
   });
 
-  return selectedImages;
+  return selectedMedia;
 };
 
-const isImageSelected = (
-  img: ImageElementProps,
-  selectableItems: Array<string>
+const isMediaSelected = (
+  media: MediaElementProps,
+  selectableMedia: string[],
 ): boolean => {
-  const id = img?.id && selectableItems?.indexOf(img.id) !== -1;
-  const src = selectableItems?.indexOf(img.src) !== -1;
+  const id = media?.id && selectableMedia?.indexOf(media.id) !== -1;
+  const src = selectableMedia?.indexOf(media.src) !== -1;
   return id || src;
 };
 
 const memoImage = (prev: ImageProps, next: ImageProps): boolean => {
   const src = prev.img.src !== next.img.src;
   const maxWidth = prev.maxWidth !== next.maxWidth;
-  const padding = prev.paddingBottom !== next.paddingBottom;
+  const margin = prev.marginBottom !== next.marginBottom;
   const lightBox = prev.useLightBox !== next.useLightBox;
 
   //don't memo,we need to render since image data is change
-  if (src || maxWidth || padding || lightBox) {
+  if (src || maxWidth || margin || lightBox) {
+    return false;
+  }
+
+  //memo since only the selected value changed
+  return true;
+};
+
+const memoVideo = (prev: VideoProps, next: VideoProps): boolean => {
+  const src = prev.video.src !== next.video.src;
+  const maxWidth = prev.maxWidth !== next.maxWidth;
+  const margin = prev.marginBottom !== next.marginBottom;
+  const lightBox = prev.useLightBox !== next.useLightBox;
+
+  //don't memo,we need to render since image data is change
+  if (src || maxWidth || margin || lightBox) {
     return false;
   }
 
@@ -200,10 +235,11 @@ export {
   getGallerySizes,
   getSizeGroup,
   isWidthGroupsDifferences,
-  sortImagesByOrderGroup,
+  sortMediaByOrderGroup,
   getOrderGroup,
-  getImagesCols,
-  getSelectedImages,
-  isImageSelected,
+  getMediaCols,
+  getSelectedMedia,
+  isMediaSelected,
   memoImage,
+  memoVideo,
 };

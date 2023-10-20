@@ -13,6 +13,7 @@ describe("useImage hook", () => {
 
     // Use the `createImage` function from the `jest-canvas-mock` library to create a mock image object
     // This will allow us to control the behavior of the `onload` and `onerror` events
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     mockCreateImage = jest.fn().mockImplementation(() => mockImage);
 
     // Replace the `Image` constructor with the mock `createImage` function

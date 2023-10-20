@@ -12,47 +12,47 @@ describe("use screen dimensions hook", () => {
     return result.current.width;
   };
 
-  test("should return same width if it's the same group-XS(0-420)", async () => {
+  test("should return same width if it's the same group-XS(0-420)", () => {
     expect(renderHookWithDiffWidth(50, 419)).toEqual(50);
   });
 
-  test("should return same width if it's the same group-S(420-600)", async () => {
+  test("should return same width if it's the same group-S(420-600)", () => {
     expect(renderHookWithDiffWidth(421, 599)).toEqual(421);
   });
 
-  test("should return same width if it's the same group-M(600-768)", async () => {
+  test("should return same width if it's the same group-M(600-768)", () => {
     expect(renderHookWithDiffWidth(601, 750)).toEqual(601);
   });
 
-  test("should return same width if it's the same group-L(768-992)", async () => {
+  test("should return same width if it's the same group-L(768-992)", () => {
     expect(renderHookWithDiffWidth(770, 990)).toEqual(770);
   });
 
-  test("should return same width if it's the same group-XL(992-1200)", async () => {
+  test("should return same width if it's the same group-XL(992-1200)", () => {
     expect(renderHookWithDiffWidth(993, 1199)).toEqual(993);
   });
 
-  test("should return same width if it's the same group-XLL(1201-Infinity)", async () => {
+  test("should return same width if it's the same group-XLL(1201-Infinity)", () => {
     expect(renderHookWithDiffWidth(1201, 2000)).toEqual(1201);
   });
 
-  test("should return different width if it's diff group-XS(200) to S(500)", async () => {
+  test("should return different width if it's diff group-XS(200) to S(500)", () => {
     expect(renderHookWithDiffWidth(200, 500)).toEqual(500);
   });
 
-  test("should return different width if it's diff group-S(500) to M(700)", async () => {
+  test("should return different width if it's diff group-S(500) to M(700)", () => {
     expect(renderHookWithDiffWidth(500, 700)).toEqual(700);
   });
 
-  test("should return different width if it's diff group-M(700) to L(900)", async () => {
+  test("should return different width if it's diff group-M(700) to L(900)", () => {
     expect(renderHookWithDiffWidth(700, 900)).toEqual(900);
   });
 
-  test("should return different width if it's diff group-L(800) to XL(1000)", async () => {
+  test("should return different width if it's diff group-L(800) to XL(1000)", () => {
     expect(renderHookWithDiffWidth(800, 1000)).toEqual(1000);
   });
 
-  test("should return different width if it's diff group-XL(1100) to XLL(2000)", async () => {
+  test("should return different width if it's diff group-XL(1100) to XLL(2000)", () => {
     expect(renderHookWithDiffWidth(1100, 2000)).toEqual(2000);
   });
 });

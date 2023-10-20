@@ -3,34 +3,43 @@ import styled from "styled-components";
 export const StyledSelect = styled.div`
   position: relative;
 
+  input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    z-index: -1;
+  }
+
   label {
+    position: relative;
+    display: inline-block;
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 50%;
     cursor: pointer;
-    height: 28px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 28px;
+    height: 22px;
+    width: 22px;
   }
 
   label:after {
+    content: "";
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    transform: translate(-50%, -50%);
     border: 2px solid #fff;
     border-top: none;
     border-right: none;
-    content: "";
-    height: 6px;
-    left: 7px;
+    height: 5px;
+    width: 10px;
     opacity: 0;
-    position: absolute;
-    top: 8px;
     transform: rotate(-45deg);
-    width: 12px;
   }
 
-  input[type="checkbox"] {
-    visibility: hidden;
+  input[type="checkbox"]:focus + label {
+    outline: 2px solid blue; /* Add focus outline for accessibility */
   }
 
   input[type="checkbox"]:checked + label {

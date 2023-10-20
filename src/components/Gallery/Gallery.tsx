@@ -5,118 +5,140 @@ import Image from "./Image/Image";
 import { useScreenDimensions } from "../../hooks/useScreenDimensions/use-screen-dimensions";
 import {
   screenWidthSizes as defaultScreenWidthSizes,
-  numOfImagesPerRow as defaultNumOfImagesPerRow,
-  imagesMaxWidth as defaultImagesMaxWidth,
+  numOfMediaPerRow as defaultNumOfMediaPerRow,
+  mediaMaxWidth as defaultMediaMaxWidth,
   colsPadding as defaultColsPadding,
-  imagesPaddingBottom as defaultImagesPaddingBottom,
+  mediaMarginBottom as defaultMediaMarginBottom,
 } from "../../constants/responsive";
 import {
   getGallerySizes,
-  sortImagesByOrderGroup,
-  getImagesCols,
-  isImageSelected,
+  sortMediaByOrderGroup,
+  getMediaCols,
+  isMediaSelected,
 } from "../../utils/gallery.utils";
 import {
   ResponsiveGalleryProps,
   GallerySizes,
   GalleryWidthOptions,
-  ImageElementProps,
-  ImagesCols,
+  MediaCols,
+  MediaType,
+  MediaElementProps,
+  MediaComponentProps,
 } from "./Gallery.types";
-import ImageWrapper from "./ImageWrapper/ImageWrapper";
-import { ImagesLightBoxHandle } from "./ImagesLightBox/ImagesLightBox.types";
+import MediaWrapper from "./MediaWrapper/MediaWrapper";
+import { MediaLightBoxHandle } from "./MediaLightBox/MediaLightBox.types";
+import Video from "./Video/Video";
 
-const ImagesLightBoxComponent = lazy(() =>
-  import("./ImagesLightBox/ImagesLightBox").then((module) => ({
-    default: module.ImagesLightBox,
-  }))
+const MediaLightBoxComponent = lazy(() =>
+  import("./MediaLightBox/MediaLightBox").then((module) => ({
+    default: module.MediaLightBox,
+  })),
 );
 
 const Gallery = ({
-  images,
+  media,
   screenWidthSizes,
-  numOfImagesPerRow,
-  imagesMaxWidth,
+  numOfMediaPerRow,
+  mediaMaxWidth,
   colsPadding,
-  imagesPaddingBottom,
-  imagesStyle,
+  mediaMarginBottom,
+  mediaStyle,
+  mediaClassName,
   useLightBox,
   lightBoxAdditionalProps,
   selectable,
-  selectableItems,
+  selectableMedia,
   onSelect,
   customLoader,
   customError,
+  onClick,
 }: ResponsiveGalleryProps) => {
   const { width } = useScreenDimensions(screenWidthSizes);
   const userGalleryOptions: GalleryWidthOptions = {
     screenWidthSizes,
-    numOfImagesPerRow,
-    imagesMaxWidth,
+    numOfMediaPerRow,
+    mediaMaxWidth,
     colsPadding,
-    imagesPaddingBottom,
+    mediaMarginBottom,
   };
   const gallerySizes: GallerySizes = getGallerySizes(width, userGalleryOptions);
-  const lightboxRef = useRef<ImagesLightBoxHandle>(null);
+  const lightboxRef = useRef<MediaLightBoxHandle>(null);
 
-  const sortedImages: Array<ImageElementProps> = useMemo(
-    () => sortImagesByOrderGroup(images, width, screenWidthSizes),
-    [images, screenWidthSizes, width]
+  const sortedMedia: MediaElementProps[] = useMemo(
+    () => sortMediaByOrderGroup(media, width, screenWidthSizes),
+    [media, screenWidthSizes, width],
   );
-  const imagesCols: ImagesCols | Record<string, never> = useMemo(
-    () => getImagesCols(sortedImages, gallerySizes.numOfImagesPerRow),
-    [gallerySizes, sortedImages]
+  const mediaCols: MediaCols = useMemo(
+    () => getMediaCols(sortedMedia, gallerySizes.numOfMediaPerRow),
+    [gallerySizes, sortedMedia],
   );
 
-  const onImageClick = useCallback(
-    (imgIndex: number, colIndex: number) => {
+  const onMediaClick = useCallback(
+    (mediaIndex: number, colIndex: number, id: string) => {
+      if (onClick) {
+        onClick(id);
+      }
       if (useLightBox) {
-        lightboxRef?.current?.openImageByIndex(imgIndex, colIndex);
+        lightboxRef?.current?.openMediaByIndex(mediaIndex, colIndex);
       }
     },
-    [useLightBox]
+    [onClick, useLightBox],
   );
 
   return (
     <>
       {useLightBox && (
-        <Suspense fallback={<div>Loading...</div>}>
-          <ImagesLightBoxComponent
-            imagesLightbox={sortedImages}
+        <Suspense fallback={<></>}>
+          <MediaLightBoxComponent
+            mediaLightbox={sortedMedia}
             ref={lightboxRef}
             lightBoxAdditionalProps={lightBoxAdditionalProps}
-            numOfImagesPerRow={gallerySizes.numOfImagesPerRow}
+            numOfMediaPerRow={gallerySizes.numOfMediaPerRow}
           />
         </Suspense>
       )}
       <Row>
-        {Object.keys(imagesCols).map((key, colIndex) => (
+        {Object.keys(mediaCols).map((key, colIndex) => (
           <Col
             key={`col-${key}`}
-            colSize={100 / gallerySizes.numOfImagesPerRow}
-            colPadding={gallerySizes.colsPadding}
+            $colSize={100 / gallerySizes.numOfMediaPerRow}
+            $colPadding={gallerySizes.colsPadding}
           >
-            {imagesCols[key].map((img: ImageElementProps, imgIndex: number) => (
-              <ImageWrapper key={img.id || img.src}>
-                <Image
-                  img={img}
-                  maxWidth={gallerySizes.imagesMaxWidth}
-                  paddingBottom={gallerySizes.imagesPaddingBottom}
-                  className={`${imagesStyle} ${img.imgClassName || ""}`}
-                  useLightBox={useLightBox}
-                  onClick={() => onImageClick(imgIndex, colIndex)}
-                  customLoader={customLoader}
-                  customError={customError}
-                  selectable={selectable}
-                  selected={
-                    selectableItems
-                      ? isImageSelected(img, selectableItems)
-                      : false
-                  }
-                  onSelect={onSelect}
-                />
-              </ImageWrapper>
-            ))}
+            {mediaCols?.[key]?.map(
+              (media: MediaElementProps, mediaIndex: number) => {
+                const eleProps: MediaComponentProps = {
+                  maxWidth: gallerySizes.mediaMaxWidth,
+                  marginBottom: gallerySizes.mediaMarginBottom,
+                  useLightBox,
+                  className: `${media?.mediaClassName || ""} ${
+                    mediaClassName || ""
+                  }`,
+                  onClick: () =>
+                    onMediaClick(mediaIndex, colIndex, media?.id || media.src),
+                  selectable,
+                  selected: selectableMedia
+                    ? isMediaSelected(media, selectableMedia)
+                    : false,
+                  style: {
+                    ...(mediaStyle || {}),
+                    ...(media.mediaStyle || {}),
+                  },
+                  customLoader,
+                  customError,
+                  onSelect,
+                };
+
+                return (
+                  <MediaWrapper key={media.id || media.src}>
+                    {media?.type === MediaType.Video ? (
+                      <Video video={media} {...eleProps} />
+                    ) : (
+                      <Image img={media} {...eleProps} />
+                    )}
+                  </MediaWrapper>
+                );
+              },
+            )}
           </Col>
         ))}
       </Row>
@@ -126,11 +148,12 @@ const Gallery = ({
 
 Gallery.defaultProps = {
   screenWidthSizes: defaultScreenWidthSizes,
-  numOfImagesPerRow: defaultNumOfImagesPerRow,
-  imagesMaxWidth: defaultImagesMaxWidth,
+  numOfMediaPerRow: defaultNumOfMediaPerRow,
+  mediaMaxWidth: defaultMediaMaxWidth,
   colsPadding: defaultColsPadding,
-  imagesPaddingBottom: defaultImagesPaddingBottom,
-  imagesStyle: "",
+  mediaMarginBottom: defaultMediaMarginBottom,
+  mediaStyle: null,
+  mediaClassName: "",
   useLightBox: false,
   selectable: false,
   customLoader: null,

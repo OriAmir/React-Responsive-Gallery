@@ -1,17 +1,23 @@
 import styled, { css } from "styled-components";
-import { StyledImageProps } from "./Image.types";
+import { StyledImageProps, StyledButtonImageProps } from "./Image.types";
 
-const StyledImage = styled.img<StyledImageProps>`
-  display: ${({ show }) => (!show ? "none" : "block")};
-  max-width: ${({ maxWidth }) => maxWidth}%;
-  height: auto;
-  loading: lazy;
-  margin-bottom: ${({ paddingBottom }) => paddingBottom || 0}px;
-  ${({ useLightBox = false }) =>
-    useLightBox &&
+const StyledButtonImage = styled.button<StyledButtonImageProps>`
+  position: relative;
+  max-width: ${({ $maxWidth }) => $maxWidth}%;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  margin-bottom: ${({ $marginBottom }) => $marginBottom || 0}px;
+  ${({ $useLightBox = false }) =>
+    $useLightBox &&
     css`
       cursor: pointer;
     `}
 `;
 
-export default StyledImage;
+const StyledImage = styled.img<StyledImageProps>`
+  max-width: 100%;
+  height: auto;
+`;
+
+export { StyledImage, StyledButtonImage };
