@@ -18,6 +18,13 @@
     "skipLibCheck": true,
     "types": ["node", "jest", "@testing-library/jest-dom"]
   },
-  "include": ["src", "src/custom.d.ts","vite.config.ts"],
+  "include": [
+    "src",
+    "src/custom.d.ts",
+    "vite.config.ts",
+    "setupTests.ts",
+    "jest.config.ts",
+    ".eslintrc.cjs"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
